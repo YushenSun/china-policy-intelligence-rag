@@ -21,6 +21,9 @@ class DocumentType(StrEnum):
     POLICY = "policy"
     INDUSTRY_REPORT = "industry_report"
     REGULATION = "regulation"
+    LAW = "law"
+    STRATEGY = "strategy"
+    ACTION_PLAN = "action-plan"
     OTHER = "other"
 
 

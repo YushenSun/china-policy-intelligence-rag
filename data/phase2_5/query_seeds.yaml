@@ -1,0 +1,169 @@
+seed_version: '1.0'
+status: pre-annotation
+important: Expected files are source-level hypotheses, not relevance labels. Relevant chunk IDs must be assigned by human
+  review after ingestion and candidate export.
+queries:
+- query_id: Q01
+  text: 哪些机构研发或应用生成式人工智能技术但未向境内公众提供服务时，不适用《生成式人工智能服务管理暂行办法》？
+  language: zh
+  query_type: direct
+  expected_files:
+  - phase2_5/cn_genai_interim_measures_2023.html
+  notes: Scope exclusion; requires the provision on research or internal use not offered to the public.
+- query_id: Q02
+  text: When does China's interim generative AI regulation not apply to research, institutional use, or internal development?
+  language: en
+  query_type: cross-language
+  expected_files:
+  - phase2_5/cn_genai_interim_measures_2023.html
+  notes: English query should retrieve the Chinese source.
+- query_id: Q03
+  text: 在境外处理中国境内自然人个人信息，哪些情况下《网络数据安全管理条例》适用？
+  language: zh
+  query_type: direct
+  expected_files:
+  - phase2_5/cn_network_data_security_regulation_2024.html
+  notes: Territorial scope of the regulation.
+- query_id: Q04
+  text: Under China’s Personal Information Protection Law, when can processing outside China fall within the law’s territorial
+    scope?
+  language: en
+  query_type: cross-language
+  expected_files:
+  - phase2_5/cn_personal_information_protection_law_2021_zh.html
+  notes: English query should retrieve the Chinese PIPL provisions.
+- query_id: Q05
+  text: 重要数据处理者需要定期开展什么评估，并向主管部门提交哪些内容？
+  language: zh
+  query_type: direct
+  expected_files:
+  - phase2_5/cn_data_security_law_2021_zh.html
+  notes: Risk-assessment duty and report contents.
+- query_id: Q06
+  text: What obligations apply to processors of important data under China’s Data Security Law?
+  language: en
+  query_type: direct
+  expected_files:
+  - phase2_5/cn_data_security_law_2021_en.html
+  notes: Uses the official English parallel text.
+- query_id: Q07
+  text: “十四五”数字经济发展规划如何部署全国一体化算力网络、智能计算中心和人工智能服务？
+  language: zh
+  query_type: direct
+  expected_files:
+  - phase2_5/cn_digital_economy_14th_fyp_2021.html
+  notes: Computing infrastructure and AI-service provisions.
+- query_id: Q08
+  text: What infrastructure does China’s digital economy plan propose for intelligent computing centres and AI services?
+  language: en
+  query_type: cross-language
+  expected_files:
+  - phase2_5/cn_digital_economy_14th_fyp_2021.html
+  notes: English query should retrieve the Chinese plan.
+- query_id: Q09
+  text: “十四五”智能制造发展规划提出到2025年规模以上制造业企业数字化网络化达到什么目标？
+  language: zh
+  query_type: direct
+  expected_files:
+  - phase2_5/cn_intelligent_manufacturing_14th_fyp_2021.pdf
+  notes: Quantified 2025 target.
+- query_id: Q10
+  text: Which industrial software, digital-twin, supply-chain, and smart-manufacturing capabilities does China plan to strengthen?
+  language: en
+  query_type: cross-language
+  expected_files:
+  - phase2_5/cn_intelligent_manufacturing_14th_fyp_2021.pdf
+  notes: English query across several Chinese plan sections.
+- query_id: Q11
+  text: 2024年外资准入负面清单对增值电信、基础电信和医疗机构分别有哪些限制？
+  language: zh
+  query_type: direct
+  expected_files:
+  - phase2_5/cn_foreign_investment_negative_list_2024.pdf
+  notes: Requires retrieving sector entries from the negative list.
+- query_id: Q12
+  text: What restrictions remain for foreign investment in telecommunications and healthcare under China’s 2024 negative list?
+  language: en
+  query_type: cross-language
+  expected_files:
+  - phase2_5/cn_foreign_investment_negative_list_2024.pdf
+  notes: English query should retrieve the Chinese table.
+- query_id: Q13
+  text: 2025年稳外资行动方案计划在哪些服务领域扩大开放试点？
+  language: zh
+  query_type: direct
+  expected_files:
+  - phase2_5/cn_foreign_investment_action_plan_2025.html
+  notes: Targets telecoms, healthcare, education and related opening measures.
+- query_id: Q14
+  text: Which sectors are targeted for expanded foreign-investment pilots in China’s 2025 action plan?
+  language: en
+  query_type: cross-language
+  expected_files:
+  - phase2_5/cn_foreign_investment_action_plan_2025.html
+  notes: English query should retrieve the Chinese action plan.
+- query_id: Q15
+  text: What transparency, technical-documentation, and copyright-policy duties apply to providers of general-purpose AI models
+    under the EU AI Act?
+  language: en
+  query_type: direct
+  expected_files:
+  - phase2_5/eu_ai_act_2024_en.pdf
+  notes: GPAI provider obligations; multiple answer-bearing passages may exist.
+- query_id: Q16
+  text: What rights do users of connected products have to access and share product data under the EU Data Act?
+  language: en
+  query_type: direct
+  expected_files:
+  - phase2_5/eu_data_act_2023_en.pdf
+  notes: User access and third-party sharing rights.
+- query_id: Q17
+  text: How does the EU Chips Act aim to strengthen semiconductor capacity, innovation, and supply-chain resilience?
+  language: en
+  query_type: direct
+  expected_files:
+  - phase2_5/eu_chips_act_2023_en.pdf
+  notes: Objectives and initiative pillars.
+- query_id: Q18
+  text: What are the main pillars of the European Economic Security Strategy, and which categories of risk does it identify?
+  language: en
+  query_type: direct
+  expected_files:
+  - phase2_5/eu_economic_security_strategy_2023_en.pdf
+  notes: Promote, protect, partner and the risk taxonomy.
+- query_id: Q19
+  text: 德国对华战略如何区分“去风险”与“脱钩”，并如何描述中国的伙伴、竞争者和制度性对手三重角色？
+  language: zh
+  query_type: parallel-document
+  expected_files:
+  - phase2_5/de_china_strategy_2023_zh.pdf
+  - phase2_5/de_china_strategy_2023_en.pdf
+  notes: Chinese query should preferably retrieve the official Chinese version; the English parallel text is also relevant.
+- query_id: Q20
+  text: How does Germany’s China Strategy define China as partner, competitor and systemic rival, and how does it distinguish
+    de-risking from decoupling?
+  language: en
+  query_type: parallel-document
+  expected_files:
+  - phase2_5/de_china_strategy_2023_en.pdf
+  - phase2_5/de_china_strategy_2023_zh.pdf
+  notes: English query should preferably retrieve the English version; the Chinese parallel text remains relevant.
+- query_id: Q21
+  text: Compare China’s interim rules for public generative-AI services with the EU AI Act’s obligations for general-purpose
+    AI model providers.
+  language: en
+  query_type: comparative
+  expected_files:
+  - phase2_5/cn_genai_interim_measures_2023.html
+  - phase2_5/eu_ai_act_2024_en.pdf
+  notes: A valid answer requires evidence from both jurisdictions.
+- query_id: Q22
+  text: 比较中国智能制造与数字经济规划和欧盟经济安全、芯片政策在关键技术、供应链韧性与产业能力建设方面的重点。
+  language: zh
+  query_type: comparative
+  expected_files:
+  - phase2_5/cn_digital_economy_14th_fyp_2021.html
+  - phase2_5/cn_intelligent_manufacturing_14th_fyp_2021.pdf
+  - phase2_5/eu_economic_security_strategy_2023_en.pdf
+  - phase2_5/eu_chips_act_2023_en.pdf
+  notes: A valid answer requires evidence from both Chinese and EU sources.

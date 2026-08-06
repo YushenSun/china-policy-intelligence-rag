@@ -5,6 +5,7 @@ import logging
 from collections.abc import Sequence
 from pathlib import Path
 
+from .corpus import validate_corpus
 from .evaluation.runner import run_evaluation, write_evaluation
 from .ingestion.base import ChunkingConfig, IngestionError
 from .ingestion.pipeline import IngestionPipeline
@@ -74,6 +75,12 @@ def build_parser() -> argparse.ArgumentParser:
         default="deterministic",
     )
     evaluate.add_argument("--embedding-model")
+    corpus = subparsers.add_parser("corpus", help="Validate a fixed local authoritative corpus")
+    corpus_subparsers = corpus.add_subparsers(dest="corpus_command", required=True)
+    validate = corpus_subparsers.add_parser("validate", help="Validate files and write hashes")
+    validate.add_argument("--raw-dir", type=Path, required=True)
+    validate.add_argument("--manifest", type=Path, required=True)
+    validate.add_argument("--output", type=Path, required=True)
     return parser
 
 
@@ -127,6 +134,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(
                 f"Evaluated {len(arguments.modes)} mode(s); results written to {arguments.output}."
             )
+            return 0
+        if arguments.command == "corpus":
+            report = validate_corpus(arguments.raw_dir, arguments.manifest, arguments.output)
+            print(f"Validated {report['valid_count']} source file(s).")
             return 0
         config = ChunkingConfig(
             max_chars=arguments.max_chars,

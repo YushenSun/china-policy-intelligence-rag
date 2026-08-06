@@ -1,0 +1,254 @@
+catalog_version: '1.0'
+purpose: Phase 2.5 authoritative bilingual policy corpus for retrieval evaluation
+access_date: '2026-08-06'
+sources:
+- id: cn_genai_interim_measures_2023
+  file_path: phase2_5/cn_genai_interim_measures_2023.html
+  title: 生成式人工智能服务管理暂行办法
+  issuer: 国家互联网信息办公室等七部门
+  publication_date: '2023-07-10'
+  jurisdiction: CN
+  language: zh
+  document_type: regulation
+  sector_tags:
+  - artificial-intelligence
+  - data-governance
+  - digital-services
+  source_url: https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm
+  download_url: https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm
+  access_date: '2026-08-06'
+  notes: Official CAC text. Effective 2023-08-15.
+- id: cn_network_data_security_regulation_2024
+  file_path: phase2_5/cn_network_data_security_regulation_2024.html
+  title: 网络数据安全管理条例
+  issuer: 中华人民共和国国务院
+  publication_date: '2024-09-24'
+  jurisdiction: CN
+  language: zh
+  document_type: regulation
+  sector_tags:
+  - data-governance
+  - cybersecurity
+  - cross-border-data
+  source_url: https://app.www.gov.cn/govdata/gov/202409/30/520076/article.html
+  download_url: https://app.www.gov.cn/govdata/gov/202409/30/520076/article.html
+  access_date: '2026-08-06'
+  notes: Official State Council text. Effective 2025-01-01.
+- id: cn_pipl_2021_zh
+  file_path: phase2_5/cn_personal_information_protection_law_2021_zh.html
+  title: 中华人民共和国个人信息保护法
+  issuer: 全国人民代表大会常务委员会
+  publication_date: '2021-08-20'
+  jurisdiction: CN
+  language: zh
+  document_type: law
+  sector_tags:
+  - privacy
+  - personal-data
+  - cross-border-data
+  source_url: https://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html
+  download_url: https://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html
+  access_date: '2026-08-06'
+  notes: Official NPC text. Effective 2021-11-01.
+- id: cn_data_security_law_2021_zh
+  file_path: phase2_5/cn_data_security_law_2021_zh.html
+  title: 中华人民共和国数据安全法
+  issuer: 全国人民代表大会常务委员会
+  publication_date: '2021-06-10'
+  jurisdiction: CN
+  language: zh
+  document_type: law
+  sector_tags:
+  - data-security
+  - important-data
+  - cross-border-data
+  source_url: https://www.npc.gov.cn/npc/c2/c30834/202106/t20210610_311888.html
+  download_url: https://www.npc.gov.cn/npc/c2/c30834/202106/t20210610_311888.html
+  access_date: '2026-08-06'
+  notes: Official NPC Chinese text. Effective 2021-09-01.
+- id: cn_data_security_law_2021_en
+  file_path: phase2_5/cn_data_security_law_2021_en.html
+  title: Data Security Law of the People's Republic of China
+  issuer: Standing Committee of the National People's Congress
+  publication_date: '2021-06-10'
+  jurisdiction: CN
+  language: en
+  document_type: law
+  sector_tags:
+  - data-security
+  - important-data
+  - cross-border-data
+  source_url: https://www.npc.gov.cn/englishnpc/c2759/c23934/202112/t20211209_385109.html
+  download_url: https://www.npc.gov.cn/englishnpc/c2759/c23934/202112/t20211209_385109.html
+  access_date: '2026-08-06'
+  notes: Official NPC English text. Parallel source for cross-language retrieval checks.
+- id: cn_digital_economy_14th_fyp_2021
+  file_path: phase2_5/cn_digital_economy_14th_fyp_2021.html
+  title: “十四五”数字经济发展规划
+  issuer: 中华人民共和国国务院
+  publication_date: '2021-12-12'
+  jurisdiction: CN
+  language: zh
+  document_type: strategy
+  sector_tags:
+  - digital-economy
+  - computing-infrastructure
+  - artificial-intelligence
+  - data-markets
+  source_url: https://www.miit.gov.cn/xwdt/szyw/art/2022/art_4ecc233a663b44329d0863e60b51192b.html
+  download_url: https://www.miit.gov.cn/xwdt/szyw/art/2022/art_4ecc233a663b44329d0863e60b51192b.html
+  access_date: '2026-08-06'
+  notes: Official government plan, document date 2021-12-12.
+- id: cn_intelligent_manufacturing_14th_fyp_2021
+  file_path: phase2_5/cn_intelligent_manufacturing_14th_fyp_2021.pdf
+  title: “十四五”智能制造发展规划
+  issuer: 工业和信息化部等八部门
+  publication_date: '2021-12-21'
+  jurisdiction: CN
+  language: zh
+  document_type: strategy
+  sector_tags:
+  - advanced-manufacturing
+  - industrial-software
+  - supply-chains
+  - artificial-intelligence
+  source_url: https://www.miit.gov.cn/jgsj/ghs/zlygh/art/2022/art_c201cab037444d5c94921a53614332f9.html
+  download_url: https://www.miit.gov.cn/cms_files/filemanager/1226211233/attach/20226/95c25b0b936d49f1995bd8771599d18a.pdf
+  access_date: '2026-08-06'
+  notes: Official MIIT PDF.
+- id: cn_foreign_investment_negative_list_2024
+  file_path: phase2_5/cn_foreign_investment_negative_list_2024.pdf
+  title: 外商投资准入特别管理措施（负面清单）（2024年版）
+  issuer: 国家发展和改革委员会、商务部
+  publication_date: '2024-09-06'
+  jurisdiction: CN
+  language: zh
+  document_type: regulation
+  sector_tags:
+  - foreign-investment
+  - market-access
+  - telecommunications
+  - healthcare
+  source_url: https://www.ndrc.gov.cn/xxgk/zcfb/fzggwl/202409/t20240907_1392875_ext.html
+  download_url: https://www.ndrc.gov.cn/xxgk/zcfb/fzggwl/202409/P020240907514493057643.pdf
+  access_date: '2026-08-06'
+  notes: Official NDRC PDF. Effective 2024-11-01.
+- id: cn_foreign_investment_action_plan_2025
+  file_path: phase2_5/cn_foreign_investment_action_plan_2025.html
+  title: 2025年稳外资行动方案
+  issuer: 商务部、国家发展和改革委员会（国务院办公厅转发）
+  publication_date: '2025-02-17'
+  jurisdiction: CN
+  language: zh
+  document_type: action-plan
+  sector_tags:
+  - foreign-investment
+  - market-access
+  - telecommunications
+  - healthcare
+  - education
+  source_url: https://www.mofcom.gov.cn/zcfb/zgdwjjmywg/art/2025/art_4a3fe49da8854e60ba50b51950e1429d.html
+  download_url: https://www.mofcom.gov.cn/zcfb/zgdwjjmywg/art/2025/art_4a3fe49da8854e60ba50b51950e1429d.html
+  access_date: '2026-08-06'
+  notes: Official MOFCOM republication of State Council General Office notice.
+- id: eu_ai_act_2024_en
+  file_path: phase2_5/eu_ai_act_2024_en.pdf
+  title: Regulation (EU) 2024/1689 (Artificial Intelligence Act)
+  issuer: European Parliament and Council of the European Union
+  publication_date: '2024-06-13'
+  jurisdiction: EU
+  language: en
+  document_type: regulation
+  sector_tags:
+  - artificial-intelligence
+  - general-purpose-ai
+  - product-safety
+  source_url: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689
+  download_url: https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng/pdf
+  access_date: '2026-08-06'
+  notes: Official Journal text. If automated PDF download is blocked, download manually from EUR-Lex.
+- id: eu_data_act_2023_en
+  file_path: phase2_5/eu_data_act_2023_en.pdf
+  title: Regulation (EU) 2023/2854 (Data Act)
+  issuer: European Parliament and Council of the European Union
+  publication_date: '2023-12-13'
+  jurisdiction: EU
+  language: en
+  document_type: regulation
+  sector_tags:
+  - data-access
+  - connected-products
+  - cloud-switching
+  - interoperability
+  source_url: https://eur-lex.europa.eu/eli/reg/2023/2854/oj/eng
+  download_url: https://eur-lex.europa.eu/eli/reg/2023/2854/oj/eng/pdf
+  access_date: '2026-08-06'
+  notes: Official Journal text. Applies from 2025-09-12, with phased provisions.
+- id: eu_chips_act_2023_en
+  file_path: phase2_5/eu_chips_act_2023_en.pdf
+  title: Regulation (EU) 2023/1781 (Chips Act)
+  issuer: European Parliament and Council of the European Union
+  publication_date: '2023-09-13'
+  jurisdiction: EU
+  language: en
+  document_type: regulation
+  sector_tags:
+  - semiconductors
+  - industrial-policy
+  - supply-chains
+  - research-and-innovation
+  source_url: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R1781
+  download_url: https://eur-lex.europa.eu/eli/reg/2023/1781/oj/eng/pdf
+  access_date: '2026-08-06'
+  notes: Official Journal text. If automated PDF download is blocked, download manually from EUR-Lex.
+- id: eu_economic_security_strategy_2023_en
+  file_path: phase2_5/eu_economic_security_strategy_2023_en.pdf
+  title: European Economic Security Strategy
+  issuer: European Commission and High Representative of the Union for Foreign Affairs and Security Policy
+  publication_date: '2023-06-20'
+  jurisdiction: EU
+  language: en
+  document_type: strategy
+  sector_tags:
+  - economic-security
+  - critical-technologies
+  - supply-chains
+  - investment-screening
+  source_url: https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:52023JC0020
+  download_url: https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:52023JC0020
+  access_date: '2026-08-06'
+  notes: Official Joint Communication JOIN(2023) 20 final.
+- id: de_china_strategy_2023_en
+  file_path: phase2_5/de_china_strategy_2023_en.pdf
+  title: Strategy on China of the Government of the Federal Republic of Germany
+  issuer: Federal Government of Germany
+  publication_date: '2023-07-13'
+  jurisdiction: DE
+  language: en
+  document_type: strategy
+  sector_tags:
+  - china-policy
+  - de-risking
+  - economic-security
+  - foreign-policy
+  source_url: https://www.auswaertiges-amt.de/en/aussenpolitik/regionaleschwerpunkte/asien/strategy-on-china/2608618
+  download_url: https://www.auswaertiges-amt.de/resource/blob/2608580/49d50fecc479304c3da2e2079c55e106/china-strategie-en-data.pdf
+  access_date: '2026-08-06'
+  notes: Official English PDF.
+- id: de_china_strategy_2023_zh
+  file_path: phase2_5/de_china_strategy_2023_zh.pdf
+  title: 德国联邦政府的中国战略
+  issuer: 德国联邦政府
+  publication_date: '2023-07-13'
+  jurisdiction: DE
+  language: zh
+  document_type: strategy
+  sector_tags:
+  - china-policy
+  - de-risking
+  - economic-security
+  - foreign-policy
+  source_url: https://www.auswaertiges-amt.de/en/aussenpolitik/regionaleschwerpunkte/asien/strategy-on-china/2608618
+  download_url: https://www.auswaertiges-amt.de/resource/blob/2609698/0696f358622bc9bfa8fcf962a8444b41/230713china-stategie-chn-data.pdf
+  access_date: '2026-08-06'
+  notes: Official Chinese PDF; parallel to the English strategy.

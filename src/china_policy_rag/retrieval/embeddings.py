@@ -54,10 +54,19 @@ class DeterministicHashEmbeddingProvider:
 class SentenceTransformerEmbeddingProvider:
     """Lazy optional local provider; it never downloads models at import time."""
 
-    def __init__(self, model_id: str, normalize: bool = True, batch_size: int = 32) -> None:
+    def __init__(
+        self,
+        model_id: str,
+        normalize: bool = True,
+        batch_size: int = 32,
+        query_prefix: str = "query: ",
+        passage_prefix: str = "passage: ",
+    ) -> None:
         self.model_id = model_id
         self.normalize = normalize
         self.batch_size = batch_size
+        self.query_prefix = query_prefix
+        self.passage_prefix = passage_prefix
         self._model: Any | None = None
         self.dimension = 0
 
@@ -76,12 +85,27 @@ class SentenceTransformerEmbeddingProvider:
     def embed_documents(self, texts: list[str]) -> NDArray[np.float64]:
         model = self._load()
         return np.asarray(
-            model.encode(texts, batch_size=self.batch_size, normalize_embeddings=self.normalize),
+            model.encode(
+                [f"{self.passage_prefix}{text}" for text in texts],
+                batch_size=self.batch_size,
+                normalize_embeddings=self.normalize,
+            ),
             dtype=np.float64,
         )
 
     def embed_query(self, text: str) -> NDArray[np.float64]:
-        return cast(NDArray[np.float64], self.embed_documents([text])[0])
+        model = self._load()
+        return cast(
+            NDArray[np.float64],
+            np.asarray(
+                model.encode(
+                    [f"{self.query_prefix}{text}"],
+                    batch_size=self.batch_size,
+                    normalize_embeddings=self.normalize,
+                ),
+                dtype=np.float64,
+            )[0],
+        )
 
 
 def _tokens(text: str) -> list[str]:
