@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a planned evidence-based research tool for analysing Chinese and English policy and industry documents. Its purpose is to make strategic analysis more traceable by linking conclusions to identifiable source evidence.
+This project is an offline, source-traceable research prototype for Chinese and English policy and industry documents. It converts authorised local sources into provenance-preserving chunks, retrieves ranked evidence, and records reproducible synthetic evaluation artefacts for future grounded-analysis work.
 
 ## Problem Statement
 
@@ -21,13 +21,13 @@ The intended users are strategy, policy, market-intelligence, and risk-analysis 
 
 ## Current Status
 
-**Phase 1 implements an offline local ingestion foundation.** It supports TXT, Markdown, HTML, and text-based PDF inputs; YAML metadata validation; deterministic identifiers; conservative bilingual normalization; deterministic chunking; JSONL serialization; and offline tests.
+**Phase 2 implements an offline ingestion and evidence-retrieval foundation.** It supports TXT, Markdown, HTML, and text-based PDF inputs; YAML metadata validation; deterministic identifiers; conservative bilingual normalization; deterministic chunking; persistent lexical and vector indexes; hybrid retrieval; metadata filters; source-traceable evidence output; and synthetic offline evaluation.
 
-Embeddings, retrieval, answer generation, risk briefs, agents, MCP, web collection, OCR, and production deployment are not implemented.
+Persistent lexical retrieval, optional local semantic retrieval, deterministic hybrid fusion, metadata filters, evidence output, and synthetic offline evaluation are available. LLM-generated answers, citation verification against generated claims, risk briefs, agents, MCP, web collection, OCR, and production deployment are not implemented.
 
 ## Planned Architecture
 
-The architecture separates local document handling, metadata validation, retrieval, answer generation, citation verification, risk-brief generation, and evaluation. See [the architecture proposal](docs/architecture.md) and the [ingestion guide](docs/ingestion.md). Retrieval and generation components remain planned future work.
+The architecture separates local document handling, metadata validation, retrieval, answer generation, citation verification, risk-brief generation, and evaluation. See [the architecture proposal](docs/architecture.md), [ingestion guide](docs/ingestion.md), [retrieval guide](docs/retrieval.md), and [evaluation guide](docs/evaluation.md). Answer generation remains planned future work.
 
 ## Installation
 
@@ -61,14 +61,14 @@ python -m ruff format .
 ## Roadmap
 
 1. **Phase 0:** repository foundation, configuration, and typed models.
-2. **Phase 1 (current):** local ingestion, metadata validation, provenance-preserving text preparation, and deterministic chunking.
-3. **Phase 2:** offline retrieval baselines and reproducible evaluation fixtures.
+2. **Phase 1:** local ingestion, metadata validation, provenance-preserving text preparation, and deterministic chunking.
+3. **Phase 2 (current):** persistent hybrid retrieval, metadata filtering, evidence bundles, and synthetic offline evaluation.
 4. **Phase 3:** source-grounded answer and structured risk-brief workflows.
 5. **Phase 4:** optional agent and MCP extensions, subject to explicit scope and security review.
 
 ## Limitations
 
-The pipeline accepts only local text, Markdown, HTML, and text-based PDFs. It does not perform OCR, fetch sources, retrieve evidence, call language models, generate answers, or produce risk briefs. Character-based chunking is deterministic but not tokenizer-aware.
+The pipeline accepts only local text, Markdown, HTML, and text-based PDFs. It does not perform OCR or fetch sources. The default offline embedding provider is deterministic but is not a semantic-quality model; sentence-transformers is optional and requires a locally available model. Character-based chunking is deterministic but not tokenizer-aware. Retrieval results are evidence candidates, not generated answers or verified facts.
 
 ## Data Provenance Principles
 

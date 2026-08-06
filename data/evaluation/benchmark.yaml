@@ -1,0 +1,8 @@
+# Synthetic fixture benchmark only; it is not product-performance evidence.
+fixture_only: true
+queries:
+  - query_id: synthetic-local-test
+    query_text: Synthetic local test
+    relevant_chunk_ids:
+      - 6b2c2fcc-7063-519b-a426-b5a73c2f5c30
+    notes: Synthetic relevance judgment for offline CLI verification only.

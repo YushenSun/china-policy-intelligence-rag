@@ -99,6 +99,11 @@ class RetrievalHit(BaseModel):
     chunk: SourceChunk
     score: float = Field(ge=0.0, le=1.0)
     retrieval_method: str = Field(min_length=1)
+    lexical_score: float | None = None
+    semantic_score: float | None = None
+    fused_score: float | None = None
+    lexical_rank: int | None = Field(default=None, ge=1)
+    semantic_rank: int | None = Field(default=None, ge=1)
 
 
 class Citation(BaseModel):

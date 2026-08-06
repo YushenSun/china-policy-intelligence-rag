@@ -19,6 +19,8 @@ class Settings(BaseSettings):
     raw_data_dir: Path = Path("data/raw")
     processed_data_dir: Path = Path("data/processed")
     ingestion_manifest_path: Path = Path("data/raw/manifest.yaml")
+    index_dir: Path = Path("data/indexes/default")
+    embedding_model: str | None = None
     database_url: str | None = None
     embedding_provider: str | None = None
     llm_provider: str | None = None

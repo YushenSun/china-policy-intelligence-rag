@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "china-policy-intelligence-rag"
-version = "0.2.0"
-description = "Offline ingestion foundation for a source-grounded China policy intelligence prototype."
+version = "0.3.0"
+description = "Offline ingestion and retrieval foundation for source-grounded policy analysis."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -16,6 +16,7 @@ dependencies = [
     "beautifulsoup4>=4.12,<5",
     "pypdf>=4.2,<7",
     "PyYAML>=6.0,<7",
+    "numpy>=1.26,<2",
 ]
 
 [project.optional-dependencies]
@@ -25,6 +26,8 @@ dev = [
     "ruff>=0.5,<1",
     "types-PyYAML>=6.0,<7",
 ]
+
+semantic = ["sentence-transformers>=3,<6"]
 
 [project.scripts]
 china-policy-rag = "china_policy_rag.cli:main"
