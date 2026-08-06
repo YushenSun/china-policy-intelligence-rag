@@ -52,6 +52,9 @@ class PolicyDocument(BaseModel):
     source_url: HttpUrl | None = None
     local_file_path: Path | None = None
     text: str = Field(min_length=1)
+    source_file_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    parser_name: str | None = Field(default=None, min_length=1)
+    parser_version: str | None = Field(default=None, min_length=1)
 
     @field_validator("sector_tags")
     @classmethod
@@ -73,6 +76,21 @@ class SourceChunk(BaseModel):
     text: str = Field(min_length=1)
     page_reference: str | None = Field(default=None, min_length=1)
     section_reference: str | None = Field(default=None, min_length=1)
+    character_start: int | None = Field(default=None, ge=0)
+    character_end: int | None = Field(default=None, ge=0)
+    source_file_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    chunking_version: str | None = Field(default=None, min_length=1)
+
+    @model_validator(mode="after")
+    def validate_character_range(self) -> "SourceChunk":
+        """Ensure optional character offsets form a valid half-open range."""
+        if (
+            self.character_start is not None
+            and self.character_end is not None
+            and self.character_end < self.character_start
+        ):
+            raise ValueError("character_end must not be less than character_start")
+        return self
 
 
 class RetrievalHit(BaseModel):

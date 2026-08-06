@@ -21,11 +21,13 @@ The intended users are strategy, policy, market-intelligence, and risk-analysis 
 
 ## Current Status
 
-**Phase 0 provides only repository scaffolding and typed domain models.** Retrieval, RAG, document ingestion, agents, MCP integrations, and risk-brief generation are not implemented.
+**Phase 1 implements an offline local ingestion foundation.** It supports TXT, Markdown, HTML, and text-based PDF inputs; YAML metadata validation; deterministic identifiers; conservative bilingual normalization; deterministic chunking; JSONL serialization; and offline tests.
+
+Embeddings, retrieval, answer generation, risk briefs, agents, MCP, web collection, OCR, and production deployment are not implemented.
 
 ## Planned Architecture
 
-The proposed architecture separates document handling, metadata validation, retrieval, answer generation, citation verification, risk-brief generation, and evaluation. See [the architecture proposal](docs/architecture.md). All pipeline components are planned future work; only configuration and domain-model layers exist today.
+The architecture separates local document handling, metadata validation, retrieval, answer generation, citation verification, risk-brief generation, and evaluation. See [the architecture proposal](docs/architecture.md) and the [ingestion guide](docs/ingestion.md). Retrieval and generation components remain planned future work.
 
 ## Installation
 
@@ -35,7 +37,11 @@ Python 3.11 or newer is required.
 python -m pip install -e ".[dev]"
 ```
 
-For future integrations, copy `.env.example` to `.env` and populate only the settings needed by that integration. No external service is required for Phase 0.
+For local ingestion, create a private `data/raw/manifest.yaml` from `data/raw/manifest.example.yaml` and use only authorised local files. No external service is required.
+
+```powershell
+python -m china_policy_rag.cli ingest --input-dir data/raw --manifest data/raw/manifest.yaml --output-dir data/processed
+```
 
 ## Developer Commands
 
@@ -54,15 +60,15 @@ python -m ruff format .
 
 ## Roadmap
 
-1. **Phase 0 (current):** repository foundation, configuration, and typed models.
-2. **Phase 1:** local document and metadata ingestion with provenance validation.
+1. **Phase 0:** repository foundation, configuration, and typed models.
+2. **Phase 1 (current):** local ingestion, metadata validation, provenance-preserving text preparation, and deterministic chunking.
 3. **Phase 2:** offline retrieval baselines and reproducible evaluation fixtures.
 4. **Phase 3:** source-grounded answer and structured risk-brief workflows.
 5. **Phase 4:** optional agent and MCP extensions, subject to explicit scope and security review.
 
 ## Limitations
 
-This repository does not yet ingest documents, retrieve evidence, call language models, generate answers, or produce risk briefs. The models define contracts for future work but are not evidence of operational capabilities or quality.
+The pipeline accepts only local text, Markdown, HTML, and text-based PDFs. It does not perform OCR, fetch sources, retrieve evidence, call language models, generate answers, or produce risk briefs. Character-based chunking is deterministic but not tokenizer-aware.
 
 ## Data Provenance Principles
 

@@ -6,7 +6,7 @@ This repository is the Phase 0 foundation for the China Policy Intelligence RAG 
 
 ## Current Status
 
-Only repository scaffolding, typed domain models, and configuration defaults are implemented. Ingestion, retrieval, RAG, agents, MCP integration, evaluation, and risk-brief generation are roadmap items.
+Phase 1 implements local TXT, Markdown, HTML, and text-based PDF ingestion; YAML metadata validation; conservative normalization; deterministic chunking; JSONL serialization; and an offline CLI. Retrieval, RAG, agents, MCP integration, evaluation, and risk-brief generation remain roadmap items.
 
 ## Development Commands
 
@@ -16,6 +16,7 @@ python -m pytest
 python -m ruff check .
 python -m ruff format --check .
 python -m mypy src
+python -m china_policy_rag.cli ingest --input-dir data/raw --manifest data/raw/manifest.yaml --output-dir data/processed
 ```
 
 Use `python -m ruff format .` to apply formatting.
@@ -33,5 +34,6 @@ Use `python -m ruff format .` to apply formatting.
 - Never fabricate source documents, citations, API responses, credentials, benchmark results, or evaluation outcomes.
 - Never commit secrets. Use environment variables and `.env.example` placeholders only.
 - Keep future external services behind clear interfaces so local tests remain offline.
+- Do not download sources, implement OCR, or add retrieval/model dependencies during Phase 1 work.
 - State assumptions, limitations, and unimplemented work plainly.
 - Complete only the phase and scope requested; do not begin a later phase without an explicit request.

@@ -1,0 +1,3 @@
+Synthetic local test paragraph in English.
+
+合成的本地测试段落，保留中文标点。

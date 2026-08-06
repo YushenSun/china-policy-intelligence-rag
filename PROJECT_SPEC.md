@@ -8,11 +8,11 @@ Strategic analysts need a reliable way to examine multilingual policy and indust
 
 The final MVP is planned to accept Chinese and English documents, retain traceable source metadata, retrieve relevant evidence, produce source-grounded answers, and create structured risk briefs with explicit uncertainty and reproducible evaluation.
 
-Phase 0 is limited to repository scaffolding, configuration defaults, typed domain models, documentation, and offline validation tests.
+Phase 1 adds local offline ingestion, metadata validation, normalization, provenance tracking, deterministic chunking, JSONL serialization, and a CLI.
 
 ## Non-Goals
 
-Phase 0 does not implement document ingestion, web scraping, PDF parsing, chunking, storage, embeddings, retrieval, reranking, LLM calls, RAG, agents, MCP servers, frontend work, deployment, or benchmark claims.
+Phase 1 does not implement web scraping, OCR, embeddings, retrieval, reranking, LLM calls, RAG, agents, MCP servers, frontend work, deployment, or benchmark claims.
 
 ## Functional Requirements for Later Phases
 
@@ -34,7 +34,7 @@ Phase 0 does not implement document ingestion, web scraping, PDF parsing, chunki
 
 ## Success Criteria
 
-For Phase 0, the success criteria are a clean installable package, validated domain models, environment-based configuration defaults, professional documentation, and passing offline tests, linting, formatting, and type checks.
+For Phase 1, the success criteria are a clean installable package, validated domain models, safe local metadata handling, deterministic processed artifacts, professional documentation, and passing offline tests, linting, formatting, and type checks.
 
 For the planned MVP, success criteria will be defined with an approved evaluation set and include citation traceability, groundedness review, multilingual coverage, structured-output validity, and reproducible evaluation runs. No performance target is asserted before that evaluation is designed and conducted.
 

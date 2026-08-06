@@ -2,7 +2,7 @@
 
 ## Implementation Status
 
-Only the **domain models** and **configuration layer** are implemented in Phase 0. Every other component described below is planned future work. This document is a design proposal, not a claim of current functionality.
+The **domain models**, **configuration layer**, **local document ingestion**, **metadata validation**, **text normalization**, **chunking**, and **JSONL serialization** are implemented in Phase 1. Retrieval and generation components remain planned future work.
 
 ## Design Principles
 
@@ -17,11 +17,12 @@ Only the **domain models** and **configuration layer** are implemented in Phase 
 | --- | --- | --- |
 | Configuration layer | Implemented | Read local defaults and future provider settings from the environment. |
 | Domain models | Implemented | Validate shared records for sources, retrieval, citations, answers, and risk briefs. |
-| Document ingestion | Planned | Import authorised local or connected source documents. |
-| Text normalization | Planned | Produce consistent text while retaining provenance. |
-| Metadata validation | Planned | Check required source metadata before indexing. |
-| Chunking | Planned | Create evidence-addressable text segments. |
-| Storage | Planned | Persist documents, chunks, and metadata. |
+| Document ingestion | Implemented | Import authorised local TXT, Markdown, HTML, and text-based PDF documents. |
+| Text normalization | Implemented | Conservatively normalize Unicode and whitespace while retaining paragraph boundaries. |
+| Metadata validation | Implemented | Validate a YAML manifest and local paths before ingestion. |
+| Chunking | Implemented | Create deterministic paragraph-aware, evidence-addressable text segments. |
+| JSONL serialization | Implemented | Persist processed documents, chunks, and a machine-readable report locally. |
+| Storage | Planned | Add durable indexed storage beyond Phase 1 artifacts. |
 | Embedding provider | Planned | Generate embeddings through an isolated provider interface. |
 | Lexical and vector retrieval | Planned | Retrieve candidate evidence using complementary methods. |
 | Reranking | Planned | Order retrieved evidence for a specific question. |
@@ -33,9 +34,9 @@ Only the **domain models** and **configuration layer** are implemented in Phase 
 
 ```mermaid
 flowchart LR
-    A["Authorised documents"] --> B["Planned: ingestion"]
-    B --> C["Planned: normalization and metadata validation"]
-    C --> D["Planned: chunking and storage"]
+    A["Authorised local documents"] --> B["Implemented: ingestion"]
+    B --> C["Implemented: normalization and metadata validation"]
+    C --> D["Implemented: chunking and JSONL artifacts"]
     D --> E["Planned: lexical and vector retrieval"]
     E --> F["Planned: reranking"]
     F --> G["Planned: grounded answer generation"]

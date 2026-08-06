@@ -1,0 +1,9 @@
+# Synthetic test metadata only; not a production manifest.
+sources:
+  - file_path: sample.txt
+    title: Synthetic CLI test record
+    issuer: Test fixture issuer
+    publication_date: 2025-01-01
+    jurisdiction: Test fixture jurisdiction
+    language: en
+    document_type: policy
