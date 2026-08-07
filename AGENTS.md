@@ -29,6 +29,8 @@ Use `python -m ruff format .` to apply formatting.
 - Target Python 3.11+ and use explicit type annotations.
 - Prefer small, clear modules and Pydantic models over premature abstractions.
 - Keep documentation and code comments in professional English.
+- Keep the GitHub-facing `README.md` fully bilingual Chinese/English: pair every heading,
+  prose paragraph, and explanatory list item in both languages in all future versions.
 - Add or update deterministic, offline tests whenever behaviour changes.
 - Run the test, lint, format, and type-check commands before handing off work.
 
@@ -37,6 +39,8 @@ Use `python -m ruff format .` to apply formatting.
 - Never fabricate source documents, citations, API responses, credentials, benchmark results, or evaluation outcomes.
 - Never commit secrets. Use environment variables and `.env.example` placeholders only.
 - Keep future external services behind clear interfaces so local tests remain offline.
+- Read OpenAI and DeepSeek keys only from `OPENAI_API_KEY` and `DEEPSEEK_API_KEY`;
+  never make provider calls at import time.
 - Keep topic analysis mechanically limited to human labels 1 and 2; never supply label 0.
 - Do not begin a later phase or add monitoring, frontend, deployment, or corpus expansion without an explicit request.
 - State assumptions, limitations, and unimplemented work plainly.

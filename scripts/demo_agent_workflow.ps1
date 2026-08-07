@@ -14,4 +14,5 @@ Write-Host "OFFLINE DETERMINISTIC DEMO (not a real-model quality result)"
 
 Write-Host "Start the optional local MCP server with:"
 Write-Host "$Python -m china_policy_rag.cli mcp serve --transport stdio"
-Write-Host "A real run requires .[openai], OPENAI_API_KEY, and --provider openai --model <model>."
+Write-Host "DeepSeek real run: install .[deepseek], set DEEPSEEK_API_KEY, use --provider deepseek."
+Write-Host "OpenAI real run: install .[openai], set OPENAI_API_KEY, use --provider openai --model <model>."

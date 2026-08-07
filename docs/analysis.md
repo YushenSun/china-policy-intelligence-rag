@@ -13,7 +13,7 @@ The selector searches only the curated label-1/2 universe, deduplicates chunks, 
 
 ## Structured generation
 
-Providers return validated Pydantic models rather than Markdown. Source text is wrapped as untrusted evidence and instructions inside it are explicitly ignored. The optional OpenAI provider reads `OPENAI_API_KEY` from the environment and is not required for tests. The fake provider validates the workflow only.
+Providers return validated Pydantic models rather than Markdown. Source text is wrapped as untrusted evidence and instructions inside it are explicitly ignored. The optional OpenAI Responses provider reads `OPENAI_API_KEY`; the optional DeepSeek JSON-output provider reads `DEEPSEEK_API_KEY` and uses the fixed official API base URL. Neither provider makes calls at import time. The fake provider validates the workflow only, and all automated tests remain offline.
 
 ## Deterministic verification
 
@@ -36,6 +36,13 @@ python -m china_policy_rag.cli analysis brief `
 python -m china_policy_rag.cli analysis verify `
   --analysis-json reports/china_eu_training_data_brief.json `
   --evidence-set data/annotations/phase2_5_topic_relevant.csv
+
+python -m china_policy_rag.cli analysis ask `
+  --question "How do China and the EU differ in training-data transparency?" `
+  --evidence-set data/annotations/phase2_5_topic_relevant.csv `
+  --provider deepseek `
+  --model deepseek-v4-flash `
+  --format markdown
 ```
 
 The JSON model is canonical. Markdown is rendered only after deterministic verification.

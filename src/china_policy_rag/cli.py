@@ -134,14 +134,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     ask.add_argument("--question", required=True)
     ask.add_argument("--evidence-set", type=Path, required=True)
-    ask.add_argument("--provider", choices=["fake", "openai"], default="fake")
+    ask.add_argument("--provider", choices=["fake", "openai", "deepseek"], default="fake")
     ask.add_argument("--model")
     ask.add_argument("--format", choices=["json", "markdown"], default="markdown")
     brief = analysis_subparsers.add_parser(
         "brief", help="Generate the canonical China–EU risk brief"
     )
     brief.add_argument("--evidence-set", type=Path, required=True)
-    brief.add_argument("--provider", choices=["fake", "openai"], default="fake")
+    brief.add_argument("--provider", choices=["fake", "openai", "deepseek"], default="fake")
     brief.add_argument("--model")
     brief.add_argument("--output", type=Path, required=True)
     verify = analysis_subparsers.add_parser("verify", help="Verify a saved analysis or brief JSON")
@@ -152,7 +152,7 @@ def build_parser() -> argparse.ArgumentParser:
     agent_run = agent_subparsers.add_parser("run", help="Run one verified agent workflow")
     agent_run.add_argument("--question", required=True)
     agent_run.add_argument("--evidence-set", type=Path, default=DEFAULT_EVIDENCE_SET)
-    agent_run.add_argument("--provider", choices=["fake", "openai"], default="fake")
+    agent_run.add_argument("--provider", choices=["fake", "openai", "deepseek"], default="fake")
     agent_run.add_argument("--model")
     agent_run.add_argument("--show-tools", action="store_true")
     agent_run.add_argument("--trace-local", action="store_true")
@@ -283,7 +283,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             overwrite=arguments.overwrite,
             report_path=arguments.report_path,
         )
-    except (GroundingFailure, IngestionError, OSError, ValueError) as error:
+    except (GroundingFailure, IngestionError, OSError, RuntimeError, ValueError) as error:
         logging.error("%s", error)
         if getattr(arguments, "debug", False):
             raise

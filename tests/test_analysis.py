@@ -453,6 +453,116 @@ def test_openai_provider_uses_mocked_structured_responses(
     assert result.evidence_set_version == store.version
 
 
+def test_deepseek_provider_requires_explicit_credentials(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
+    from china_policy_rag.analysis.generation import DeepSeekProvider
+
+    with pytest.raises(RuntimeError, match="DEEPSEEK_API_KEY"):
+        DeepSeekProvider()
+
+
+def test_deepseek_provider_uses_mocked_json_output(
+    monkeypatch: pytest.MonkeyPatch, store: TopicEvidenceStore
+) -> None:
+    from china_policy_rag.analysis import generation
+
+    expected = _analysis([])
+    client_arguments: dict[str, object] = {}
+    request_arguments: dict[str, object] = {}
+
+    class FakeCompletions:
+        def create(self, **kwargs: object) -> SimpleNamespace:
+            request_arguments.update(kwargs)
+            message = SimpleNamespace(content=expected.model_dump_json())
+            return SimpleNamespace(choices=[SimpleNamespace(message=message)])
+
+    class FakeClient:
+        chat = SimpleNamespace(completions=FakeCompletions())
+
+    def build_client(**kwargs: object) -> FakeClient:
+        client_arguments.update(kwargs)
+        return FakeClient()
+
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "test-deepseek-key")
+    monkeypatch.setattr(
+        generation,
+        "import_module",
+        lambda _: SimpleNamespace(OpenAI=build_client),
+    )
+    provider = generation.DeepSeekProvider()
+    item = store.core_evidence[0]
+    result = provider.generate_analysis(
+        expected.question,
+        assess_scope(expected.question),
+        assess_sufficiency(
+            assess_scope(expected.question),
+            TopicEvidenceSelector(store).select(expected.question),
+        ),
+        [item],
+        store.version,
+        "mock prompt",
+    )
+
+    assert client_arguments == {
+        "api_key": "test-deepseek-key",
+        "base_url": generation.DEEPSEEK_BASE_URL,
+        "max_retries": 2,
+    }
+    assert request_arguments["model"] == generation.DEFAULT_DEEPSEEK_MODEL
+    assert request_arguments["response_format"] == {"type": "json_object"}
+    assert request_arguments["extra_body"] == {"thinking": {"type": "disabled"}}
+    messages = request_arguments["messages"]
+    assert isinstance(messages, list)
+    assert "JSON Schema" in messages[0]["content"]
+    assert result.model_identifier == generation.DEFAULT_DEEPSEEK_MODEL
+    assert result.evidence_set_version == store.version
+
+
+def test_deepseek_provider_rejects_empty_json_output(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from china_policy_rag.analysis import generation
+
+    class EmptyCompletions:
+        def create(self, **_: object) -> SimpleNamespace:
+            message = SimpleNamespace(content="")
+            return SimpleNamespace(choices=[SimpleNamespace(message=message)])
+
+    fake_client = SimpleNamespace(chat=SimpleNamespace(completions=EmptyCompletions()))
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "test-deepseek-key")
+    monkeypatch.setattr(
+        generation,
+        "import_module",
+        lambda _: SimpleNamespace(OpenAI=lambda **__: fake_client),
+    )
+    provider = generation.DeepSeekProvider()
+    with pytest.raises(ValueError, match="empty JSON"):
+        provider._parse("mock prompt", GroundedAnalysis)
+
+
+def test_deepseek_cli_reports_missing_key_without_traceback(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
+    assert (
+        main(
+            [
+                "analysis",
+                "ask",
+                "--question",
+                "What EU training-data copyright rules apply?",
+                "--evidence-set",
+                str(EVIDENCE_PATH),
+                "--provider",
+                "deepseek",
+            ]
+        )
+        == 1
+    )
+
+
 def test_training_data_risk_brief_schema_rejects_untrusted_json() -> None:
     with pytest.raises(ValidationError):
         TrainingDataRiskBrief.model_validate_json('{"title":"x"}')

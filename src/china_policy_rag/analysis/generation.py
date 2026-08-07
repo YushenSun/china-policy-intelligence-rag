@@ -1,5 +1,6 @@
 """Vendor-neutral structured generation providers."""
 
+import json
 import os
 from importlib import import_module
 from typing import Any, Protocol, TypeVar, cast
@@ -22,6 +23,8 @@ from .models import (
 from .prompts import SYSTEM_PROMPT
 
 StructuredModel = TypeVar("StructuredModel", bound=BaseModel)
+DEEPSEEK_BASE_URL = "https://api.deepseek.com"
+DEFAULT_DEEPSEEK_MODEL = "deepseek-v4-flash"
 
 
 class LLMProvider(Protocol):
@@ -255,6 +258,93 @@ class OpenAIProvider:
         return cast(StructuredModel, parsed)
 
 
+class DeepSeekProvider:
+    """Optional DeepSeek JSON-output adapter over its OpenAI-compatible API."""
+
+    def __init__(
+        self,
+        model: str = DEFAULT_DEEPSEEK_MODEL,
+        temperature: float = 0.0,
+    ) -> None:
+        if not model.strip():
+            raise ValueError("An explicit DeepSeek model is required")
+        api_key = os.getenv("DEEPSEEK_API_KEY")
+        if not api_key:
+            raise RuntimeError("DEEPSEEK_API_KEY is required for the DeepSeek provider")
+        try:
+            module = import_module("openai")
+        except ImportError as error:
+            raise RuntimeError("Install the optional `.[deepseek]` dependency") from error
+        self._client: Any = module.OpenAI(
+            api_key=api_key,
+            base_url=DEEPSEEK_BASE_URL,
+            max_retries=2,
+        )
+        self.model_identifier = model
+        self.temperature = temperature
+
+    def generate_analysis(
+        self,
+        question: str,
+        scope: ScopeAssessment,
+        sufficiency: SufficiencyAssessment,
+        evidence: list[TopicEvidence],
+        evidence_set_version: str,
+        prompt: str,
+    ) -> GroundedAnalysis:
+        del evidence
+        parsed = self._parse(prompt, GroundedAnalysis)
+        return parsed.model_copy(
+            update={
+                "question": question,
+                "scope_status": scope.status,
+                "scope_explanation": scope.explanation,
+                "sufficiency_status": sufficiency.status,
+                "evidence_set_version": evidence_set_version,
+                "model_identifier": self.model_identifier,
+            }
+        )
+
+    def generate_brief(
+        self,
+        evidence: list[TopicEvidence],
+        evidence_set_version: str,
+        prompt: str,
+    ) -> TrainingDataRiskBrief:
+        del evidence
+        parsed = self._parse(prompt, TrainingDataRiskBrief)
+        return parsed.model_copy(
+            update={
+                "evidence_set_version": evidence_set_version,
+                "model_identifier": self.model_identifier,
+            }
+        )
+
+    def _parse(self, prompt: str, schema: type[StructuredModel]) -> StructuredModel:
+        schema_json = json.dumps(schema.model_json_schema(), ensure_ascii=False)
+        json_instructions = (
+            f"{SYSTEM_PROMPT}\nReturn exactly one JSON object matching this JSON Schema. "
+            f"Do not use Markdown fences. JSON Schema:\n{schema_json}"
+        )
+        response = self._client.chat.completions.create(
+            model=self.model_identifier,
+            messages=[
+                {"role": "system", "content": json_instructions},
+                {"role": "user", "content": prompt},
+            ],
+            response_format={"type": "json_object"},
+            temperature=self.temperature,
+            max_tokens=8_192,
+            extra_body={"thinking": {"type": "disabled"}},
+        )
+        if not response.choices:
+            raise ValueError("DeepSeek provider returned no completion choices")
+        content = response.choices[0].message.content
+        if not content or not content.strip():
+            raise ValueError("DeepSeek provider returned empty JSON content")
+        return schema.model_validate_json(content)
+
+
 def provider_for(name: str, model: str | None = None) -> LLMProvider:
     if name == "fake":
         return DeterministicFakeLLM()
@@ -262,7 +352,9 @@ def provider_for(name: str, model: str | None = None) -> LLMProvider:
         if model is None:
             raise ValueError("--model is required for the OpenAI provider")
         return OpenAIProvider(model)
-    raise ValueError("Unsupported analysis provider; use fake or openai")
+    if name == "deepseek":
+        return DeepSeekProvider(model or DEFAULT_DEEPSEEK_MODEL)
+    raise ValueError("Unsupported analysis provider; use fake, openai, or deepseek")
 
 
 def _claim_from_evidence(item: TopicEvidence, number: int) -> AnalysisClaim:

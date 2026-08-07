@@ -40,4 +40,4 @@ python -m pip install -e ".[mcp]"
 python -m china_policy_rag.cli mcp serve --transport stdio
 ```
 
-For real verified generation, install `.[openai]`, set `OPENAI_API_KEY` locally, and supply a model. To experiment with the optional SDK adapter, install `.[agent]`; vendor tracing must be deliberately enabled after considering privacy.
+For real verified generation, choose either `.[deepseek]` with `DEEPSEEK_API_KEY` or `.[openai]` with `OPENAI_API_KEY`. DeepSeek defaults to `deepseek-v4-flash`; OpenAI requires an explicit model. To experiment with the optional OpenAI Agents SDK adapter, install `.[agent]`; vendor tracing must be deliberately enabled after considering privacy.
