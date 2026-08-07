@@ -1,0 +1,398 @@
+﻿query_id,query_text,query_language,query_type,expected_files,chunk_id,document_id,title,issuer,jurisdiction,language,local_file_path,source_url,page_reference,section_reference,lexical_rank,semantic_rank,hybrid_rank,chunk_text,human_label,reviewer_note,origin_query_ids
+Q01,哪些机构研发或应用生成式人工智能技术但未向境内公众提供服务时，不适用《生成式人工智能服务管理暂行办法》？,zh,direct,phase2_5/cn_genai_interim_measures_2023.html,0d6d53f6-4019-5489-892f-573094e945fc,7bfce756-cb53-55d0-bb79-5aa128f1a796,生成式人工智能服务管理暂行办法,国家互联网信息办公室等七部门,CN,zh,phase2_5\cn_genai_interim_measures_2023.html,https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm,,生成式人工智能服务管理暂行办法_中央网络安全和信息化委员会办公室,4,3,4,"害国家形象，煽动分裂国家、破坏国家统一和社会稳定，宣扬恐怖主义、极端主义，宣扬民族仇恨、民族歧视，暴力、淫秽色情，以及虚假有害信息等法律、行政法规禁止的内容；
+（二）在算法设计、训练数据选择、模型生成和优化、提供服务等过程中，采取有效措施防止产生民族、信仰、国别、地域、性别、年龄、职业、健康等歧视；
+（三）尊重知识产权、商业道德，保守商业秘密，不得利用算法、数据、平台等优势，实施垄断和不正当竞争行为；
+（四）尊重他人合法权益，不得危害他人身心健康，不得侵害他人肖像权、名誉权、荣誉权、隐私权和个人信息权益；
+（五）基于服务类型特点，采取有效措施，提升生成式人工智能服务的透明度，提高生成内容的准确性和可靠性。
+第二章 技术发展与治理
+第五条
+鼓励生成式人工智能技术在各行业、各领域的创新应用，生成积极健康、向上向善的优质内容，探索优化应用场景，构建应用生态体系。
+支持行业组织、企业、教育和科研机构、公共文化机构、有关专业机构等在生成式人工智能技术创新、数据资源建设、转化应用、风险防范等方面开展协作。
+第六条
+鼓励生成式人工智能算法、框架、芯片及配套软件平台等基础技术的自主创新，平等互利开展国际交流与合作，参与生成式人工智能相关国际规则制定。
+推动生成式人工智能基础设施和公共训练数据资源平台建设。促进算力资源协同共享，提升算力资源利用效能。推动公共数据分类分级有序开放，扩展高质量的公共训练数据资源。鼓励采用安全可信的芯片、软件、工具、算力和数据资源。
+第七条
+生成式人工智能服务提供者（以下称提供者）应当依法开展预训练、优化训练等训练数据处理活动，遵守以下规定：
+（一）使用具有合法来源的数据和基础模型；
+（二）涉及知识产权的，不得侵害他人依法享有的知识产权；
+（三）涉及个人信息的，应当取得个人同意或者符合法律、行政法规规定的其他情形；
+（四）采取有效措施提高训练数据质量，增强训练数据的真实性、准确性、客观性、多样性；
+（五）《中华人民共和国网络安全法》、《中华人民共和国数据安全法》、《中华人民共和国个人信息保护法》等法律、行政法规的其他有关规定和有关主管部门的相关监管要求。
+第八条
+在生成式人工智能技术研发过程中进行数据标注的，提供者应当制定符合本办法要求的清晰、具体、可操作的标注规则；开展数据标注质量评估，抽样核验标注内容的准确性；对标注人员进行必要培训，提升尊法守法意识，监督指导标注人员规范开展标注工作。
+第三章 服务规范
+第九条
+提供者应当依法承担网络信息内容生产者责任，履行网络信息安全义务。涉及个人信息的，依法承担个人信息处理者责任，履行个人信息保护义务。
+提供者应当与注册其服务的生成式人工智能服务使用者（以下称使用者）签订服务协议，明确双方权利义务。
+第十条",2,核心证据：中国生成式AI规则直接规定训练数据的合法来源、知识产权、个人信息合法基础、数据质量及数据标注要求。,Q01|Q11|Q17
+Q15,"What transparency, technical-documentation, and copyright-policy duties apply to providers of general-purpose AI models under the EU AI Act?",en,direct,phase2_5/eu_ai_act_2024_en.pdf,2a37cca7-d621-5a12-962b-71fa36db494c,e564bfe4-14df-59e7-8194-196f0b7042ed,Regulation (EU) 2024/1689 (Artificial Intelligence Act),European Parliament and Council of the European Union,EU,en,phase2_5\eu_ai_act_2024_en.pdf,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689,Page 27,,,7,,"d open-source AI components. The fact of making AI components availa ble through open
+reposit or ies should not, in itself, constitute a monetisation.
+(104) The provid ers of g eneral-pur pose AI models that are released under a free and open-source licence, and whose
+paramet ers, including the weights, the inf or mation on the model archit ecture, and the inf or mation on model usage,
+are made publicly ava ilable should be subject to ex ceptions as rega rds the transparency-related requirements
+im posed on g eneral-pur pose AI models, unless they can be considered to present a systemic r isk, in which case the
+circumstance that the model is transparent and accompanied by an open-source license should not be considered to
+be a suffi cient reason to exclude compliance with the obligati ons under this Regulation. In any case, given that the
+release of general-pur pose AI models under free and open-source licence does not necessar ily reveal substantial
+inf or mation on the data set used f or the training or fine -tuning of the model and on how compliance of cop yr ight
+la w was thereby ensured, the excep tion provid ed f or g eneral-pur pose AI models from compliance with the",2,核心证据：开源例外不能消除与训练数据集和版权合规有关的关键披露义务，直接界定训练数据透明度义务边界。,Q15
+Q15,"What transparency, technical-documentation, and copyright-policy duties apply to providers of general-purpose AI models under the EU AI Act?",en,direct,phase2_5/eu_ai_act_2024_en.pdf,4d62ef0c-b6e0-5a56-ab9d-36f5717de13e,e564bfe4-14df-59e7-8194-196f0b7042ed,Regulation (EU) 2024/1689 (Artificial Intelligence Act),European Parliament and Council of the European Union,EU,en,phase2_5\eu_ai_act_2024_en.pdf,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689,Page 27,,,1,1,"odel and on how compliance of cop yr ight
+la w was thereby ensured, the excep tion provid ed f or g eneral-pur pose AI models from compliance with the
+transparency-relate d requirements should not concer n the obligati on to produce a summar y about the cont ent used
+f or model training and the obligation to put in place a policy to comply with Union cop yr ight law , in par ticular to
+identify and comply with the reser vation of r ights pursuant to Ar ticle 4(3) of Directive (EU) 2019/790 of the
+European Pa rliament and of the Council (
+40
+).
+(105) General-pur pose AI models, in par ticular larg e g enerative AI models, capable of g enerating text, imag es, and other
+cont ent, present unique innovation oppor tunities but also challeng es to ar tists, authors, and other creators and the
+wa y their creative content is create d, distr ibut ed, used and consumed. The development and training of suc h models
+require access to vast amounts of te xt, images, videos and other data. T ext and data mining te chniques ma y be used
+exte nsively in this context f or the retr ieval and analysis of suc h cont ent, which ma y be protect ed by cop yr ight and",2,核心证据：AI Act明确训练内容摘要与版权合规政策的重要性，并直接讨论大型生成式/GPAI模型训练使用受版权保护内容。,Q15|Q21
+Q21,Compare China’s interim rules for public generative-AI services with the EU AI Act’s obligations for general-purpose AI model providers.,en,comparative,phase2_5/cn_genai_interim_measures_2023.html|phase2_5/eu_ai_act_2024_en.pdf,5392bdc8-3fae-55b2-add8-2d529b6a2e3b,e564bfe4-14df-59e7-8194-196f0b7042ed,Regulation (EU) 2024/1689 (Artificial Intelligence Act),European Parliament and Council of the European Union,EU,en,phase2_5\eu_ai_act_2024_en.pdf,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689,Page 84,,2,,3,"ional law .
+SECTION 2
+Oblig ations f or providers of g ener al-pur pose AI models
+Ar ticle 53
+Obligations for pro viders of general-pur pose AI models
+1. Providers of g eneral-pur pose AI models shall:
+(a) dra w up and keep up-to-da te the te chnical documentation of the model, including its training and testing process and
+the results of its evaluation, which shall contain, at a minimum, the inf or mation set out in Annex XI f or the pur pose of
+provid ing it, upon request, to the AI Office and the national compet ent author ities;
+(b) dra w up, keep up-to-da te and mak e a vailable inf or mation and documentation t o provid ers of AI syste ms who inte nd to
+integrat e the g eneral-pur pose AI model into their AI systems. Without prejudice to the need t o obser ve and prot ect
+intellect ual proper ty r ights and confidential business inf or mation or trade secrets in accordance with Union and
+national law , the inf or mation and documentation shall:
+(i) enable provider s of AI syste ms to hav e a good understanding of the capabilities and limitations of the
+g eneral-pur pose AI model and to comply with their obligations pursuant to this Regulation; and",2,核心证据：AI Act第53条要求GPAI提供者维护覆盖训练/测试过程的技术文档，并向监管机构及下游提供必要信息。,Q21
+Q01,哪些机构研发或应用生成式人工智能技术但未向境内公众提供服务时，不适用《生成式人工智能服务管理暂行办法》？,zh,direct,phase2_5/cn_genai_interim_measures_2023.html,5e01bef4-aa13-57f4-b8c0-badcd3da319b,1415b941-a535-5833-80b4-f682dcc95158,网络数据安全管理条例,中华人民共和国国务院,CN,zh,phase2_5\cn_network_data_security_regulation_2024.html,https://app.www.gov.cn/govdata/gov/202409/30/520076/article.html,,网络数据安全管理条例,6,5,5,"施运营者提供服务，或者参与其他公共基础设施、公共服务系统建设、运行、维护的，应当依照法律、法规的规定和合同约定履行网络数据安全保护义务，提供安全、稳定、持续的服务。
+前款规定的网络数据处理者未经委托方同意，不得访问、获取、留存、使用、泄露或者向他人提供网络数据，不得对网络数据进行关联分析。
+第十七条
+为国家机关提供服务的信息系统应当参照电子政务系统的管理要求加强网络数据安全管理，保障网络数据安全。
+第十八条
+网络数据处理者使用自动化工具访问、收集网络数据，应当评估对网络服务带来的影响，不得非法侵入他人网络，不得干扰网络服务正常运行。
+第十九条
+提供生成式人工智能服务的网络数据处理者应当加强对训练数据和训练数据处理活动的安全管理，采取有效措施防范和处置网络数据安全风险。
+第二十条
+面向社会提供产品、服务的网络数据处理者应当接受社会监督，建立便捷的网络数据安全投诉、举报渠道，公布投诉、举报方式等信息，及时受理并处理网络数据安全投诉、举报。
+第三章　个人信息保护
+第二十一条
+网络数据处理者在处理个人信息前，通过制定个人信息处理规则的方式依法向个人告知的，个人信息处理规则应当集中公开展示、易于访问并置于醒目位置，内容明确具体、清晰易懂，包括但不限于下列内容：
+（一）网络数据处理者的名称或者姓名和联系方式；
+（二）处理个人信息的目的、方式、种类，处理敏感个人信息的必要性以及对个人权益的影响；
+（三）个人信息保存期限和到期后的处理方式，保存期限难以确定的，应当明确保存期限的确定方法；
+（四）个人查阅、复制、转移、更正、补充、删除、限制处理个人信息以及注销账号、撤回同意的方法和途径等。
+网络数据处理者按照前款规定向个人告知收集和向其他网络数据处理者提供个人信息的目的、方式、种类以及网络数据接收方信息的，应当以清单等形式予以列明。网络数据处理者处理不满十四周岁未成年人个人信息的，还应当制定专门的个人信息处理规则。
+第二十二条
+网络数据处理者基于个人同意处理个人信息的，应当遵守下列规定：
+（一）收集个人信息为提供产品或者服务所必需，不得超范围收集个人信息，不得通过误导、欺诈、胁迫等方式取得个人同意；
+（二）处理生物识别、宗教信仰、特定身份、医疗健康、金融账户、行踪轨迹等敏感个人信息的，应当取得个人的单独同意；
+（三）处理不满十四周岁未成年人个人信息的，应当取得未成年人的父母或者其他监护人的同意；
+（四）不得超出个人同意的个人信息处理目的、方式、种类、保存期限处理个人信息；
+（五）不得在个人明确表示不同意处理其个人信息后，频繁征求同意；
+（六）个人信息的处理目的、方式、种类发生变更的，应当重新取得个人同意。
+法律、行政法规规定处理敏感个人信息应当取得书面同意的，从其规定。
+第二十三条",2,核心证据：《网络数据安全管理条例》第19条直接要求生成式AI服务的数据处理者加强训练数据及训练数据处理活动的安全管理。,Q01|Q03|Q11
+Q01,哪些机构研发或应用生成式人工智能技术但未向境内公众提供服务时，不适用《生成式人工智能服务管理暂行办法》？,zh,direct,phase2_5/cn_genai_interim_measures_2023.html,7f6a69c9-bc49-5f8f-ab0e-efc9306a3c89,7bfce756-cb53-55d0-bb79-5aa128f1a796,生成式人工智能服务管理暂行办法,国家互联网信息办公室等七部门,CN,zh,phase2_5\cn_genai_interim_measures_2023.html,https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm,,生成式人工智能服务管理暂行办法_中央网络安全和信息化委员会办公室,1,4,2,"，监督指导标注人员规范开展标注工作。
+第三章 服务规范
+第九条
+提供者应当依法承担网络信息内容生产者责任，履行网络信息安全义务。涉及个人信息的，依法承担个人信息处理者责任，履行个人信息保护义务。
+提供者应当与注册其服务的生成式人工智能服务使用者（以下称使用者）签订服务协议，明确双方权利义务。
+第十条
+提供者应当明确并公开其服务的适用人群、场合、用途，指导使用者科学理性认识和依法使用生成式人工智能技术，采取有效措施防范未成年人用户过度依赖或者沉迷生成式人工智能服务。
+第十一条
+提供者对使用者的输入信息和使用记录应当依法履行保护义务，不得收集非必要个人信息，不得非法留存能够识别使用者身份的输入信息和使用记录，不得非法向他人提供使用者的输入信息和使用记录。
+提供者应当依法及时受理和处理个人关于查阅、复制、更正、补充、删除其个人信息等的请求。
+第十二条
+提供者应当按照《互联网信息服务深度合成管理规定》对图片、视频等生成内容进行标识。
+第十三条
+提供者应当在其服务过程中，提供安全、稳定、持续的服务，保障用户正常使用。
+第十四条
+提供者发现违法内容的，应当及时采取停止生成、停止传输、消除等处置措施，采取模型优化训练等措施进行整改，并向有关主管部门报告。
+提供者发现使用者利用生成式人工智能服务从事违法活动的，应当依法依约采取警示、限制功能、暂停或者终止向其提供服务等处置措施，保存有关记录，并向有关主管部门报告。
+第十五条
+提供者应当建立健全投诉、举报机制，设置便捷的投诉、举报入口，公布处理流程和反馈时限，及时受理、处理公众投诉举报并反馈处理结果。
+第四章 监督检查和法律责任
+第十六条
+网信、发展改革、教育、科技、工业和信息化、公安、广播电视、新闻出版等部门，依据各自职责依法加强对生成式人工智能服务的管理。
+国家有关主管部门针对生成式人工智能技术特点及其在有关行业和领域的服务应用，完善与创新发展相适应的科学监管方式，制定相应的分类分级监管规则或者指引。
+第十七条
+提供具有舆论属性或者社会动员能力的生成式人工智能服务的，应当按照国家有关规定开展安全评估，并按照《互联网信息服务算法推荐管理规定》履行算法备案和变更、注销备案手续。
+第十八条
+使用者发现生成式人工智能服务不符合法律、行政法规和本办法规定的，有权向有关主管部门投诉、举报。
+第十九条
+有关主管部门依据职责对生成式人工智能服务开展监督检查，提供者应当依法予以配合，按要求对训练数据来源、规模、类型、标注规则、算法机制机理等予以说明，并提供必要的技术、数据等支持和协助。
+参与生成式人工智能服务安全评估和监督检查的相关机构和人员对在履行职责中知悉的国家秘密、商业秘密、个人隐私和个人信息应当依法予以保密，不得泄露或者非法向他人提供。
+第二十条",2,核心证据：第19条要求生成式AI服务提供者向监管说明训练数据来源、规模、类型、标注规则及算法机制。,Q01|Q13
+Q21,Compare China’s interim rules for public generative-AI services with the EU AI Act’s obligations for general-purpose AI model providers.,en,comparative,phase2_5/cn_genai_interim_measures_2023.html|phase2_5/eu_ai_act_2024_en.pdf,9bc3cd1c-89d1-54a0-bafb-d3ad8335a476,e564bfe4-14df-59e7-8194-196f0b7042ed,Regulation (EU) 2024/1689 (Artificial Intelligence Act),European Parliament and Council of the European Union,EU,en,phase2_5\eu_ai_act_2024_en.pdf,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689,Page 28,,,9,,"of g eneral-pur pose AI models should be
+limit ed to that modifi cation or fine-tuning, f or exam ple by complementing the already existing t echnical
+documentation with inf or mation on the modifi cations, including new training data sources, as a means to com ply
+with the value ch ain oblig ations provided in this Regulation.
+(110) General-pur pose AI models could pose systemic r isks which include, but are not limit ed t o, any actual or reasonably
+f oreseeable nega tive effe cts in relation to major accidents, disr up tions of cr itical sectors and ser ious consequences to
+public health and saf ety ; any actual or reasonably f oreseeable negative effe cts on democratic processes, public and
+economic secur ity ; the dissemination of illega l, false, or discr iminat or y cont ent. Systemic r isks should be understood
+t o increase with model capabilities and model reach, can ar ise along the entire lifecy cle of the model, and are
+inf luenced by conditions of misuse, model reliability , model f air ness and model secur ity , the level of autonom y of
+EN
+OJ L, 12.7.2024
+28/144 ELI: http://data.europa.eu/eli/reg/2024/1689/oj",2,核心证据：模型修改或微调时，技术文档应补充包括新训练数据来源在内的信息，直接涉及训练数据来源追踪。,Q21
+Q21,Compare China’s interim rules for public generative-AI services with the EU AI Act’s obligations for general-purpose AI model providers.,en,comparative,phase2_5/cn_genai_interim_measures_2023.html|phase2_5/eu_ai_act_2024_en.pdf,b9eaacf4-1aff-5187-a0b2-0ad530b49332,e564bfe4-14df-59e7-8194-196f0b7042ed,Regulation (EU) 2024/1689 (Artificial Intelligence Act),European Parliament and Council of the European Union,EU,en,phase2_5\eu_ai_act_2024_en.pdf,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689,Page 28,,,3,5,"mining, under cer tain conditions. Und er these r ules, r ightsholders ma y choose to reser ve their r ights over their
+w ork s or other subject matter to prevent te xt and data mining, unless this is done f or the pur poses of scientific
+researc h. Where the r ights to op t out has been expressly reser ved in an appropr iate manner , provid ers of
+g eneral-pur pose AI models need to obtain an author isation from r ightsholders if the y want to car r y out t ext and
+data mining ove r suc h w ork s.
+(106) Provi ders that place g eneral-pur pose AI models on the Union market should ensure com pliance with the relevant
+oblig ations in this Regulation. T o that end, providers of g eneral-pur pose AI models should put in place a policy to
+com ply with Uni on law on cop yr ight and related r ights, in par ticular to identify and com ply with the reser vation of
+r ights expressed b y r ightsholders pursuant to Ar ticle 4(3) of Directive (EU) 2019/790. Any provider placing
+a g eneral-pur pose AI model on the Uni on market should comply with this obligation, regard less of the jur isdiction",2,核心证据：GPAI训练涉及文本和数据挖掘时须尊重权利人的权利保留，并建立符合欧盟版权法的政策。,Q21
+Q15,"What transparency, technical-documentation, and copyright-policy duties apply to providers of general-purpose AI models under the EU AI Act?",en,direct,phase2_5/eu_ai_act_2024_en.pdf,e7f886b6-2c3c-526c-abfa-6a93f0494610,e564bfe4-14df-59e7-8194-196f0b7042ed,Regulation (EU) 2024/1689 (Artificial Intelligence Act),European Parliament and Council of the European Union,EU,en,phase2_5\eu_ai_act_2024_en.pdf,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689,Page 28,,,10,,"2019/790. Any provider placing
+a g eneral-pur pose AI model on the Uni on market should comply with this obligation, regard less of the jur isdiction
+in which the cop yr ight-relevant acts under pinning the training of those general-pur pose AI models take place. This
+is necessar y to ensure a level pla ying fie ld among provider s of gene ral-pur pose AI models where no provider should
+be able t o g ain a comp etitive advantage in the Union market by applying lower cop yr ight standards than those
+pro vided in the Uni on.
+(107) In order to increase transparency on the data that is used in the pre-training and training of general-pur pose AI
+models, including text and data protect ed by cop yr ight law , it is adequate that provid ers of suc h models draw up and
+mak e publicly a vailable a sufficiently detailed summar y of the content used f or training the g eneral-pur pose AI
+model. While taking into due account the need to protect trade secrets and conf idential business inf or mation, this
+summar y should be g enerally comp rehensive in its scope instead of te ch nically detailed to facilitat e par ties with",2,核心证据：要求GPAI提供者公开足够详细的训练内容摘要，直接对应训练数据透明度。,Q15|Q21
+Q15,"What transparency, technical-documentation, and copyright-policy duties apply to providers of general-purpose AI models under the EU AI Act?",en,direct,phase2_5/eu_ai_act_2024_en.pdf,137b92d3-2948-5299-a63b-712e6c05cf49,e564bfe4-14df-59e7-8194-196f0b7042ed,Regulation (EU) 2024/1689 (Artificial Intelligence Act),European Parliament and Council of the European Union,EU,en,phase2_5\eu_ai_act_2024_en.pdf,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689,Page 27,,,5,9,"(101) Provi ders of general-purpo se AI models hav e a par ticular role and responsibility along the AI value chain, as the
+models the y provide ma y f or m the basis f or a rang e of downstream syste ms, of te n provided b y downstream
+pro viders that necessitate a good understanding of the models and their capabilities, both t o enable the integration of
+suc h models into their products, and to fulfil their obligations under this or other regulations. Theref ore,
+propor tionate transparency measures should be laid down, including the drawi ng up and keeping up to date of
+documentation, and the provision of inf or mation on the general-pur pose AI model f or its usage b y the downstream
+pro viders. T echnical documentation should be prepared and kep t up to dat e by the g eneral-pur pose AI model
+pro vider f or the pur pose of making it ava ilable, upon request, t o the AI Offi ce and the national compet ent
+author ities. The minimal set of elements to be included in such documentation should be set out in specific annexe s
+t o this Regulation. The Commission should be empo wered to amend those annexe s by means of delegat ed acts in
+light of evolving t echnological developments.",1,部分相关：说明GPAI模型文档与下游信息透明度的政策理由，但没有具体聚焦训练数据要求。,Q15
+Q10,"Which industrial software, digital-twin, supply-chain, and smart-manufacturing capabilities does China plan to strengthen?",en,cross-language,phase2_5/cn_intelligent_manufacturing_14th_fyp_2021.pdf,25ab446c-c2ea-5626-8192-9adcf751c720,e564bfe4-14df-59e7-8194-196f0b7042ed,Regulation (EU) 2024/1689 (Artificial Intelligence Act),European Parliament and Council of the European Union,EU,en,phase2_5\eu_ai_act_2024_en.pdf,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689,Page 50,,4,,7,"practice or the same interest being infr inged, and is occur r ing concur rently ,
+committ ed by the same operat or , in at least three Member States;
+(62) ‘cr itical infrastr ucture’ means cr itical infrastr ucture as def ined in Ar ticle 2, point (4), of Directive (EU) 2022/2557;
+(63) ‘g eneral-pur pose AI model’ means an AI model, including where suc h an AI model is trained with a larg e amount of
+data using self-super vision at scale, that displa ys significant g enerality and is capable of compet ently perfo r ming
+a wide rang e of distinct tasks regardless of the wa y the model is placed on the market and that can be integrat ed into
+a var iety of do wnstream systems or applications, ex cept AI models that are used f or research, development or
+prot otyping activities bef ore the y are placed on the mark et ;
+(64) ‘high-imp act capabilities ’ means capabilities that matc h or ex ceed the capabilities recorded in the most advanced
+g eneral-pur pose AI models;
+(65) ‘syst emic r isk’ means a r isk that is specif ic to the high-im pact capabilities of g eneral-pur pose AI models, having",1,部分相关：定义GPAI模型及其大规模数据训练特征，帮助界定监管对象，但不直接规定训练数据合规义务。,Q10
+Q01,哪些机构研发或应用生成式人工智能技术但未向境内公众提供服务时，不适用《生成式人工智能服务管理暂行办法》？,zh,direct,phase2_5/cn_genai_interim_measures_2023.html,40734300-f686-5c76-b64f-928d91e8f077,7bfce756-cb53-55d0-bb79-5aa128f1a796,生成式人工智能服务管理暂行办法,国家互联网信息办公室等七部门,CN,zh,phase2_5\cn_genai_interim_measures_2023.html,https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm,,生成式人工智能服务管理暂行办法_中央网络安全和信息化委员会办公室,2,1,1,"生成式人工智能服务管理暂行办法_中央网络安全和信息化委员会办公室
+设为首页
+加入收藏
+手机版
+繁体
+搜索
+首 页
+时政要闻
+网信政务
+互动服务
+热点专题
+当前位置：
+首页
+>
+正文
+首页
+时政要闻
+网信政务
+互动服务
+热点专题
+生成式人工智能服务管理暂行办法
+2023年07月13日 15:00
+来源：
+ 中国网信网
+【打印】
+【纠错】
+国家互联网信息办公室
+中华人民共和国国家发展和改革委员会
+中华人民共和国教育部
+中华人民共和国科学技术部
+中华人民共和国工业和信息化部
+中华人民共和国公安部
+国家广播电视总局
+令
+第15号
+《生成式人工智能服务管理暂行办法》已经2023年5月23日国家互联网信息办公室2023年第12次室务会会议审议通过，并经国家发展和改革委员会、教育部、科学技术部、工业和信息化部、公安部、国家广播电视总局同意，现予公布，自2023年8月15日起施行。
+国家互联网信息办公室主任 庄荣文
+国家发展和改革委员会主任 郑栅洁
+教育部部长 怀进鹏
+科学技术部部长 王志刚
+工业和信息化部部长 金壮龙
+公安部部长 王小洪
+国家广播电视总局局长 曹淑敏
+2023年7月10日
+生成式人工智能服务管理暂行办法
+第一章 总　则
+第一条
+为了促进生成式人工智能健康发展和规范应用，维护国家安全和社会公共利益，保护公民、法人和其他组织的合法权益，根据《中华人民共和国网络安全法》、《中华人民共和国数据安全法》、《中华人民共和国个人信息保护法》、《中华人民共和国科学技术进步法》等法律、行政法规，制定本办法。
+第二条
+利用生成式人工智能技术向中华人民共和国境内公众提供生成文本、图片、音频、视频等内容的服务（以下称生成式人工智能服务），适用本办法。
+国家对利用生成式人工智能服务从事新闻出版、影视制作、文艺创作等活动另有规定的，从其规定。
+行业组织、企业、教育和科研机构、公共文化机构、有关专业机构等研发、应用生成式人工智能技术，未向境内公众提供生成式人工智能服务的，不适用本办法的规定。
+第三条
+国家坚持发展和安全并重、促进创新和依法治理相结合的原则，采取有效措施鼓励生成式人工智能创新发展，对生成式人工智能服务实行包容审慎和分类分级监管。
+第四条
+提供和使用生成式人工智能服务，应当遵守法律、行政法规，尊重社会公德和伦理道德，遵守以下规定：
+（一）坚持社会主义核心价值观，不得生成煽动颠覆国家政权、推翻社会主义制度，危害国家安全和利益、损害国家形象，煽动分裂国家、破坏国家统一和社会稳定，宣扬恐怖主义、极端主义，宣扬民族仇恨、民族歧视，暴力、淫秽色情，以及虚假有害信息等法律、行政法规禁止的内容；
+（二）在算法设计、训练数据选择、模型生成和优化、提供服务等过程中，采取有效措施防止产生民族、信仰、国别、地域、性别、年龄、职业、健康等歧视；",1,部分相关：包含训练数据选择的反歧视要求及法规适用范围，但核心训练数据治理条款在其他chunk中更完整。,Q01|Q07|Q11
+Q01,哪些机构研发或应用生成式人工智能技术但未向境内公众提供服务时，不适用《生成式人工智能服务管理暂行办法》？,zh,direct,phase2_5/cn_genai_interim_measures_2023.html,4dfcc3ce-718b-5f6e-90be-5ebd8b0dfe4d,1415b941-a535-5833-80b4-f682dcc95158,网络数据安全管理条例,中华人民共和国国务院,CN,zh,phase2_5\cn_network_data_security_regulation_2024.html,https://app.www.gov.cn/govdata/gov/202409/30/520076/article.html,,网络数据安全管理条例,8,,9,"的同意；
+（四）不得超出个人同意的个人信息处理目的、方式、种类、保存期限处理个人信息；
+（五）不得在个人明确表示不同意处理其个人信息后，频繁征求同意；
+（六）个人信息的处理目的、方式、种类发生变更的，应当重新取得个人同意。
+法律、行政法规规定处理敏感个人信息应当取得书面同意的，从其规定。
+第二十三条
+个人请求查阅、复制、更正、补充、删除、限制处理其个人信息，或者个人注销账号、撤回同意的，网络数据处理者应当及时受理，并提供便捷的支持个人行使权利的方法和途径，不得设置不合理条件限制个人的合理请求。
+第二十四条
+因使用自动化采集技术等无法避免采集到非必要个人信息或者未依法取得个人同意的个人信息，以及个人注销账号的，网络数据处理者应当删除个人信息或者进行匿名化处理。法律、行政法规规定的保存期限未届满，或者删除、匿名化处理个人信息从技术上难以实现的，网络数据处理者应当停止除存储和采取必要的安全保护措施之外的处理。
+第二十五条
+对符合下列条件的个人信息转移请求，网络数据处理者应当为个人指定的其他网络数据处理者访问、获取有关个人信息提供途径：
+（一）能够验证请求人的真实身份；
+（二）请求转移的是本人同意提供的或者基于合同收集的个人信息；
+（三）转移个人信息具备技术可行性；
+（四）转移个人信息不损害他人合法权益。
+请求转移个人信息次数等明显超出合理范围的，网络数据处理者可以根据转移个人信息的成本收取必要费用。
+第二十六条
+中华人民共和国境外网络数据处理者处理境内自然人个人信息，依照《中华人民共和国个人信息保护法》第五十三条规定在境内设立专门机构或者指定代表的，应当将有关机构的名称或者代表的姓名、联系方式等报送所在地设区的市级网信部门；网信部门应当及时通报同级有关主管部门。
+第二十七条
+网络数据处理者应当定期自行或者委托专业机构对其处理个人信息遵守法律、行政法规的情况进行合规审计。
+第二十八条
+网络数据处理者处理1000万人以上个人信息的，还应当遵守本条例第三十条、第三十二条对处理重要数据的网络数据处理者（以下简称重要数据的处理者）作出的规定。
+第四章　重要数据安全
+第二十九条
+国家数据安全工作协调机制统筹协调有关部门制定重要数据目录，加强对重要数据的保护。各地区、各部门应当按照数据分类分级保护制度，确定本地区、本部门以及相关行业、领域的重要数据具体目录，对列入目录的网络数据进行重点保护。
+网络数据处理者应当按照国家有关规定识别、申报重要数据。对确认为重要数据的，相关地区、部门应当及时向网络数据处理者告知或者公开发布。网络数据处理者应当履行网络数据安全保护责任。
+国家鼓励网络数据处理者使用数据标签标识等技术和产品，提高重要数据安全管理水平。
+第三十条
+重要数据的处理者应当明确网络数据安全负责人和网络数据安全管理机构。网络数据安全管理机构应当履行下列网络数据安全保护责任：",1,部分相关：个人信息同意、删除/匿名化和合规审计可约束含个人信息的训练数据，但不是生成式AI专门规则。,Q01|Q03|Q11
+Q03,在境外处理中国境内自然人个人信息，哪些情况下《网络数据安全管理条例》适用？,zh,direct,phase2_5/cn_network_data_security_regulation_2024.html,51b4d749-6af7-589a-8e2d-d3cfdc83573e,1415b941-a535-5833-80b4-f682dcc95158,网络数据安全管理条例,中华人民共和国国务院,CN,zh,phase2_5\cn_network_data_security_regulation_2024.html,https://app.www.gov.cn/govdata/gov/202409/30/520076/article.html,,网络数据安全管理条例,4,8,5,"门应当及时向网络数据处理者告知或者公开发布。网络数据处理者应当履行网络数据安全保护责任。
+国家鼓励网络数据处理者使用数据标签标识等技术和产品，提高重要数据安全管理水平。
+第三十条
+重要数据的处理者应当明确网络数据安全负责人和网络数据安全管理机构。网络数据安全管理机构应当履行下列网络数据安全保护责任：
+（一）制定实施网络数据安全管理制度、操作规程和网络数据安全事件应急预案；
+（二）定期组织开展网络数据安全风险监测、风险评估、应急演练、宣传教育培训等活动，及时处置网络数据安全风险和事件；
+（三）受理并处理网络数据安全投诉、举报。
+网络数据安全负责人应当具备网络数据安全专业知识和相关管理工作经历，由网络数据处理者管理层成员担任，有权直接向有关主管部门报告网络数据安全情况。
+掌握有关主管部门规定的特定种类、规模的重要数据的网络数据处理者，应当对网络数据安全负责人和关键岗位的人员进行安全背景审查，加强相关人员培训。审查时，可以申请公安机关、国家安全机关协助。
+第三十一条
+重要数据的处理者提供、委托处理、共同处理重要数据前，应当进行风险评估，但是属于履行法定职责或者法定义务的除外。
+风险评估应当重点评估下列内容：
+（一）提供、委托处理、共同处理网络数据，以及网络数据接收方处理网络数据的目的、方式、范围等是否合法、正当、必要；
+（二）提供、委托处理、共同处理的网络数据遭到篡改、破坏、泄露或者非法获取、非法利用的风险，以及对国家安全、公共利益或者个人、组织合法权益带来的风险；
+（三）网络数据接收方的诚信、守法等情况；
+（四）与网络数据接收方订立或者拟订立的相关合同中关于网络数据安全的要求能否有效约束网络数据接收方履行网络数据安全保护义务；
+（五）采取或者拟采取的技术和管理措施等能否有效防范网络数据遭到篡改、破坏、泄露或者非法获取、非法利用等风险；
+（六）有关主管部门规定的其他评估内容。
+第三十二条
+重要数据的处理者因合并、分立、解散、破产等可能影响重要数据安全的，应当采取措施保障网络数据安全，并向省级以上有关主管部门报告重要数据处置方案、接收方的名称或者姓名和联系方式等；主管部门不明确的，应当向省级以上数据安全工作协调机制报告。
+第三十三条
+重要数据的处理者应当每年度对其网络数据处理活动开展风险评估，并向省级以上有关主管部门报送风险评估报告，有关主管部门应当及时通报同级网信部门、公安机关。
+风险评估报告应当包括下列内容：
+（一）网络数据处理者基本信息、网络数据安全管理机构信息、网络数据安全负责人姓名和联系方式等；
+（二）处理重要数据的目的、种类、数量、方式、范围、存储期限、存储地点等，开展网络数据处理活动的情况，不包括网络数据内容本身；
+（三）网络数据安全管理制度及实施情况，加密、备份、标签标识、访问控制、安全认证等技术措施和其他必要措施及其有效性；",1,部分相关：重要数据的风险评估和报告义务仅在训练数据构成重要数据时才直接关联本课题。,Q03
+Q15,"What transparency, technical-documentation, and copyright-policy duties apply to providers of general-purpose AI models under the EU AI Act?",en,direct,phase2_5/eu_ai_act_2024_en.pdf,647baac6-8032-5b23-9ef3-8e8664d17ed9,e564bfe4-14df-59e7-8194-196f0b7042ed,Regulation (EU) 2024/1689 (Artificial Intelligence Act),European Parliament and Council of the European Union,EU,en,phase2_5\eu_ai_act_2024_en.pdf,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689,Page 24,,,6,,"ed, and should provide
+b y wr itt en agreement this provid er with the necessar y inf or mation, capabilities, tec hnical access and other assistance
+based on the generally ackno wledged stat e of the ar t, in order to enable the provid er to fully comply with the
+oblig ations set out in this Regulation, without com promising their ow n intellect ual proper ty r ights or trade secrets.
+(89) Third par ties making accessible to the public too ls, ser vices, processes, or AI comp onents other than
+g eneral-pur pose AI models, should not be mandat ed to comp ly with requirements targ eting the responsibilities
+along the AI value ch ain, in par ticular to wards the provid er that has used or integrat ed them, when those t ools,
+ser vices, processes, or AI comp onents are made accessible under a free and open-source licence. Developers of free
+and open-source tools, ser vices, processes, or AI comp onents other than g eneral-pur pose AI models should be
+encourag ed t o im plement widely adop ted documentation practices, suc h as model cards and data sheets, as a wa y to",1,部分相关：涉及AI价值链中的信息提供、模型卡和数据表等文档实践，但不是训练数据合规的直接义务。,Q15
+Q15,"What transparency, technical-documentation, and copyright-policy duties apply to providers of general-purpose AI models under the EU AI Act?",en,direct,phase2_5/eu_ai_act_2024_en.pdf,6adb624e-b344-5329-891f-6c1b64b75101,e564bfe4-14df-59e7-8194-196f0b7042ed,Regulation (EU) 2024/1689 (Artificial Intelligence Act),European Parliament and Council of the European Union,EU,en,phase2_5\eu_ai_act_2024_en.pdf,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689,Page 85,,,3,5,"conf or mity t o the exte nt
+that those standards cover those obliga tions. Providers of g eneral-pur pose AI models who do not adhere to an approved
+code of practice or do not comply with a European har monised standard shall demonstrate alt er native adequat e means of
+complia nce f or assessment by the Commission.
+5. For the pur pose of facilitating compliance with Annex XI, in par ticular points 2 (d) and (e) thereof, the Commission is
+emp owered to adop t deleg ated acts in accordance with Ar ticle 97 to detail measurement and calculation methodologies
+with a view to allowing f or comp arable and ver ifi able documentation.
+6. The Commission is empo wered to adop t deleg ated acts in accordance with Ar ticle 97(2) to amend Annexes XI and XII
+in light of ev olving t echnological developments.
+7. Any inf or mation or documentation obtained pursuant to this Ar ticle, including trade secrets, shall be treate d in
+accordance with the conf identiality obliga tions set out in Ar ticle 78.
+Ar ticle 54
+Author ised represent ativ es of pro viders of general-pur pose AI models",1,部分相关：涉及Annex XI文档合规和替代合规方式，但没有直接列出训练数据来源或内容披露要求。,Q15
+Q15,"What transparency, technical-documentation, and copyright-policy duties apply to providers of general-purpose AI models under the EU AI Act?",en,direct,phase2_5/eu_ai_act_2024_en.pdf,75afad1a-2bf1-5a52-9fb1-a66f3aea2e62,e564bfe4-14df-59e7-8194-196f0b7042ed,Regulation (EU) 2024/1689 (Artificial Intelligence Act),European Parliament and Council of the European Union,EU,en,phase2_5\eu_ai_act_2024_en.pdf,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689,Page 85,,,2,4,"2. The obliga tions set out in paragraph 1, points (a) and (b), shall not apply to providers of AI models that are released
+under a free and open-source licence that allo ws f or the access, usage , modif ication, and distr ibution of the model, and
+whose paramet ers, including the weights, the inf or mation on the model archit ecture, and the inf or mation on model usage,
+are made publicly available . This ex ception shall not apply to g eneral-pur pose AI models with systemic r isks .
+3. Providers of g eneral-pur pose AI models shall cooperate as necessar y with the Commission and the national
+compet ent author ities in the ex ercise of their comp etences and powers pursuant to this Regulation.
+4. Providers of g eneral-pur pose AI models ma y rely on codes of practice within the meaning of Ar ticle 56 to
+demonstrate complia nce with the obliga tions set out in paragraph 1 of this Ar ticle, until a har monised standard is
+published. Compliance with European har monised standards grants providers the presump tion of conf or mity t o the exte nt
+that those standards cover those obliga tions. Providers of g eneral-pur pose AI models who do not adhere to an approved",1,部分相关：规定开源GPAI对部分第53条文档义务的例外范围，是透明度义务边界信息。,Q15|Q21
+Q03,在境外处理中国境内自然人个人信息，哪些情况下《网络数据安全管理条例》适用？,zh,direct,phase2_5/cn_network_data_security_regulation_2024.html,80d93810-79cd-5685-b12b-152d0197225b,1415b941-a535-5833-80b4-f682dcc95158,网络数据安全管理条例,中华人民共和国国务院,CN,zh,phase2_5\cn_network_data_security_regulation_2024.html,https://app.www.gov.cn/govdata/gov/202409/30/520076/article.html,,网络数据安全管理条例,7,6,7,"安全等级保护的基础上，加强网络数据安全防护，建立健全网络数据安全管理制度，采取加密、备份、访问控制、安全认证等技术措施和其他必要措施，保护网络数据免遭篡改、破坏、泄露或者非法获取、非法利用，处置网络数据安全事件，防范针对和利用网络数据实施的违法犯罪活动，并对所处理网络数据的安全承担主体责任。
+第十条
+网络数据处理者提供的网络产品、服务应当符合相关国家标准的强制性要求；发现网络产品、服务存在安全缺陷、漏洞等风险时，应当立即采取补救措施，按照规定及时告知用户并向有关主管部门报告；涉及危害国家安全、公共利益的，网络数据处理者还应当在24小时内向有关主管部门报告。
+第十一条
+网络数据处理者应当建立健全网络数据安全事件应急预案，发生网络数据安全事件时，应当立即启动预案，采取措施防止危害扩大，消除安全隐患，并按照规定向有关主管部门报告。
+网络数据安全事件对个人、组织合法权益造成危害的，网络数据处理者应当及时将安全事件和风险情况、危害后果、已经采取的补救措施等，以电话、短信、即时通信工具、电子邮件或者公告等方式通知利害关系人；法律、行政法规规定可以不通知的，从其规定。网络数据处理者在处置网络数据安全事件过程中发现涉嫌违法犯罪线索的，应当按照规定向公安机关、国家安全机关报案，并配合开展侦查、调查和处置工作。
+第十二条
+网络数据处理者向其他网络数据处理者提供、委托处理个人信息和重要数据的，应当通过合同等与网络数据接收方约定处理目的、方式、范围以及安全保护义务等，并对网络数据接收方履行义务的情况进行监督。向其他网络数据处理者提供、委托处理个人信息和重要数据的处理情况记录，应当至少保存3年。
+网络数据接收方应当履行网络数据安全保护义务，并按照约定的目的、方式、范围等处理个人信息和重要数据。
+两个以上的网络数据处理者共同决定个人信息和重要数据的处理目的和处理方式的，应当约定各自的权利和义务。
+第十三条
+网络数据处理者开展网络数据处理活动，影响或者可能影响国家安全的，应当按照国家有关规定进行国家安全审查。
+第十四条
+网络数据处理者因合并、分立、解散、破产等原因需要转移网络数据的，网络数据接收方应当继续履行网络数据安全保护义务。
+第十五条
+国家机关委托他人建设、运行、维护电子政务系统，存储、加工政务数据，应当按照国家有关规定经过严格的批准程序，明确受托方的网络数据处理权限、保护责任等，监督受托方履行网络数据安全保护义务。
+第十六条
+网络数据处理者为国家机关、关键信息基础设施运营者提供服务，或者参与其他公共基础设施、公共服务系统建设、运行、维护的，应当依照法律、法规的规定和合同约定履行网络数据安全保护义务，提供安全、稳定、持续的服务。
+前款规定的网络数据处理者未经委托方同意，不得访问、获取、留存、使用、泄露或者向他人提供网络数据，不得对网络数据进行关联分析。
+第十七条",1,部分相关：一般网络数据安全、委托处理与安全事件义务可构成训练数据处理的底层要求，但不是生成式AI专门规定。,Q03|Q07
+Q01,哪些机构研发或应用生成式人工智能技术但未向境内公众提供服务时，不适用《生成式人工智能服务管理暂行办法》？,zh,direct,phase2_5/cn_genai_interim_measures_2023.html,b8cf5439-dad1-5408-ae41-4f8aeeff9dc8,7bfce756-cb53-55d0-bb79-5aa128f1a796,生成式人工智能服务管理暂行办法,国家互联网信息办公室等七部门,CN,zh,phase2_5\cn_genai_interim_measures_2023.html,https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm,,生成式人工智能服务管理暂行办法_中央网络安全和信息化委员会办公室,3,2,3,"提供者应当依法予以配合，按要求对训练数据来源、规模、类型、标注规则、算法机制机理等予以说明，并提供必要的技术、数据等支持和协助。
+参与生成式人工智能服务安全评估和监督检查的相关机构和人员对在履行职责中知悉的国家秘密、商业秘密、个人隐私和个人信息应当依法予以保密，不得泄露或者非法向他人提供。
+第二十条
+对来源于中华人民共和国境外向境内提供生成式人工智能服务不符合法律、行政法规和本办法规定的，国家网信部门应当通知有关机构采取技术措施和其他必要措施予以处置。
+第二十一条
+提供者违反本办法规定的，由有关主管部门依照《中华人民共和国网络安全法》、《中华人民共和国数据安全法》、《中华人民共和国个人信息保护法》、《中华人民共和国科学技术进步法》等法律、行政法规的规定予以处罚；法律、行政法规没有规定的，由有关主管部门依据职责予以警告、通报批评，责令限期改正；拒不改正或者情节严重的，责令暂停提供相关服务。
+构成违反治安管理行为的，依法给予治安管理处罚；构成犯罪的，依法追究刑事责任。
+第五章 附　则
+第二十二条
+本办法下列用语的含义是：
+（一）生成式人工智能技术，是指具有文本、图片、音频、视频等内容生成能力的模型及相关技术。
+（二）生成式人工智能服务提供者，是指利用生成式人工智能技术提供生成式人工智能服务（包括通过提供可编程接口等方式提供生成式人工智能服务）的组织、个人。
+（三）生成式人工智能服务使用者，是指使用生成式人工智能服务生成内容的组织、个人。
+第二十三条
+法律、行政法规规定提供生成式人工智能服务应当取得相关行政许可的，提供者应当依法取得许可。
+外商投资生成式人工智能服务，应当符合外商投资相关法律、行政法规的规定。
+第二十四条
+本办法自2023年8月15日起施行。
+关闭
+中央网络安全和信息化委员会办公室
+中华人民共和国国家互联网信息办公室 © 版权所有
+联系我们
+承办：国家互联网应急中心　技术支持：长安通信科技有限责任公司
+京ICP备14042428号
+京公网安备11040102700108号
+学习强国
+◆
+◆
+微信
+◆
+◆
+返回顶部
+中央网络安全和信息化委员会办公室
+中华人民共和国国家互联网信息办公室 © 版权所有
+承办：国家互联网应急中心
+技术支持：长安通信科技有限责任公司
+京ICP备14042428号
+京公网安备11040102700108号
+PC版
+Produced By CMS 网站群内容管理系统 publishdate:2024/01/05 23:10:47",1,部分相关且与核心证据重叠：重复训练数据说明义务，后续主要为执法、责任和附则。,Q01
+Q02,"When does China's interim generative AI regulation not apply to research, institutional use, or internal development?",en,cross-language,phase2_5/cn_genai_interim_measures_2023.html,cac7f839-f312-5fe4-9e99-be8f29caa6fa,e564bfe4-14df-59e7-8194-196f0b7042ed,Regulation (EU) 2024/1689 (Artificial Intelligence Act),European Parliament and Council of the European Union,EU,en,phase2_5\eu_ai_act_2024_en.pdf,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689,Page 22,,8,,,"ated by the AI syste m.
+(76) Cybersecur ity pla ys a cr ucial role in ensur ing that AI syste ms are resilient aga inst attem pts to alt er their use,
+behavi our , perf or mance or comp romise their secur ity proper ties by malicious third par ties exploiting the syste m’s
+vulnerabilities. Cyberattacks ag ainst AI syste ms can leverage AI specific assets, suc h as training data sets (e.g. data
+poisoning) or trained models (e.g. adversar ial attacks or membership inf erence), or exploit vulnerabilities in the AI
+syste m’s digital assets or the underlying ICT infrastr ucture. T o ensure a level of cybersecur ity appropr iate t o the r isks ,
+suitable measures, suc h as secur ity controls, should theref ore be take n by the provid ers of high-r isk AI systems, also
+taking into account as appropr iate the underlying ICT infrastr ucture.
+(77) Without prejudice to the requirements related to robustness and accuracy set out in this Regulation, high-r isk AI
+syste ms which f all within the scope of a regulation of the European Parliament and of the Council on hor izontal
+cybersecur ity requirements f or products with digital elements, in accordance with that regulation ma y demonstrate",1,部分相关：训练数据投毒属于训练数据安全邻近问题，但该段针对高风险AI系统网络安全，而非GPAI训练数据透明度。,Q02|Q08

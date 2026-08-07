@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is an offline, source-traceable research prototype for Chinese and English policy and industry documents. It converts authorised local sources into provenance-preserving chunks, retrieves ranked evidence, and records reproducible synthetic evaluation artefacts for future grounded-analysis work.
+This project is an offline, source-traceable research prototype for Chinese and English policy documents. Its public demonstration corpus focuses on training-data compliance and transparency for generative and general-purpose AI models in China and the European Union. It converts authorised local sources into provenance-preserving chunks, retrieves ranked evidence, and records reproducible synthetic evaluation artefacts for future grounded-analysis work.
 
 ## Problem Statement
 
@@ -22,6 +22,8 @@ The intended users are strategy, policy, market-intelligence, and risk-analysis 
 ## Current Status
 
 **Phase 2 implements an offline ingestion and evidence-retrieval foundation.** It supports TXT, Markdown, HTML, and text-based PDF inputs; YAML metadata validation; deterministic identifiers; conservative bilingual normalization; deterministic chunking; persistent lexical and vector indexes; hybrid retrieval; metadata filters; source-traceable evidence output; and synthetic offline evaluation.
+
+The public Phase 2.5 corpus deliberately excludes geopolitical-security strategy documents. Its human-labelled topic evidence set contains 20 relevant unique chunks, including 9 core chunks. These labels are topic-level evidence judgements, not a query-level retrieval benchmark. See [the topic scope](data/phase2_5/TOPIC_SCOPE.md) and [the corpus guide](docs/phase2_5_corpus.md).
 
 Persistent lexical retrieval, optional local semantic retrieval, deterministic hybrid fusion, metadata filters, evidence output, and synthetic offline evaluation are available. LLM-generated answers, citation verification against generated claims, risk briefs, agents, MCP, web collection, OCR, and production deployment are not implemented.
 

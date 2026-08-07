@@ -29,3 +29,16 @@ python -m china_policy_rag.cli annotate export --index-dir data/indexes/phase2_5
 ```
 
 Candidate CSV files use UTF-8 with BOM and have blank `human_label` and `reviewer_note` fields. Human reviewers, rather than Codex or an LLM, must assign the relevance grades.
+
+For a focused research topic, materialize human topic-level labels into deduplicated evidence artefacts:
+
+```powershell
+python -m china_policy_rag.cli annotate materialize-topic `
+  --annotated-csv data/annotations/phase2_5_topic_annotated.csv `
+  --relevant-output data/annotations/phase2_5_topic_relevant.csv `
+  --core-output data/annotations/phase2_5_topic_core.csv `
+  --summary-output data/annotations/phase2_5_topic_summary.json `
+  --topic "Training-data compliance and transparency for generative AI models"
+```
+
+This validates that repeated chunk IDs have a consistent human label, requires reviewer notes for core evidence, and writes unique chunks only. The result is a topic evidence set, not a retrieval evaluation benchmark.

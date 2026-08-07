@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "annotation_type": "human_topic_level",
+  "topic": "Training-data compliance and transparency for generative AI models",
+  "input_rows": 251,
+  "unique_chunks": 169,
+  "unique_chunk_labels": {
+    "0": 149,
+    "1": 11,
+    "2": 9
+  },
+  "relevant_unique_chunks": 20,
+  "core_unique_chunks": 9,
+  "source_files_for_core_chunks": [
+    "phase2_5\\cn_genai_interim_measures_2023.html",
+    "phase2_5\\cn_network_data_security_regulation_2024.html",
+    "phase2_5\\eu_ai_act_2024_en.pdf"
+  ],
+  "limitations": [
+    "Labels are topic-level evidence judgements, not query-level relevance labels.",
+    "This artefact must not be used to report Recall@k, MRR, or other retrieval metrics."
+  ]
+}

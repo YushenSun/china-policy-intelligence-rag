@@ -5,7 +5,7 @@ import logging
 from collections.abc import Sequence
 from pathlib import Path
 
-from .annotation import export_candidates
+from .annotation import export_candidates, materialize_topic_annotations
 from .corpus import validate_corpus
 from .evaluation.runner import run_evaluation, write_evaluation
 from .ingestion.base import ChunkingConfig, IngestionError
@@ -99,6 +99,15 @@ def build_parser() -> argparse.ArgumentParser:
         default="deterministic",
     )
     export.add_argument("--embedding-model")
+    materialize = annotate_subparsers.add_parser(
+        "materialize-topic",
+        help="Validate human topic labels and write deduplicated evidence files",
+    )
+    materialize.add_argument("--annotated-csv", type=Path, required=True)
+    materialize.add_argument("--relevant-output", type=Path, required=True)
+    materialize.add_argument("--core-output", type=Path, required=True)
+    materialize.add_argument("--summary-output", type=Path, required=True)
+    materialize.add_argument("--topic", required=True)
     return parser
 
 
@@ -158,6 +167,19 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(f"Validated {report['valid_count']} source file(s).")
             return 0
         if arguments.command == "annotate":
+            if arguments.annotate_command == "materialize-topic":
+                counts = materialize_topic_annotations(
+                    arguments.annotated_csv,
+                    arguments.relevant_output,
+                    arguments.core_output,
+                    arguments.summary_output,
+                    arguments.topic,
+                )
+                print(
+                    "Materialized "
+                    f"{counts['relevant']} relevant and {counts['core']} core unique chunk(s)."
+                )
+                return 0
             provider = provider_for(arguments.embedding_provider, arguments.embedding_model)
             count = export_candidates(
                 RetrievalService(str(arguments.index_dir), provider),
