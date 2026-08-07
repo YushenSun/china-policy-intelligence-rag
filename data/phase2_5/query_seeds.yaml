@@ -102,30 +102,6 @@ queries:
   expected_files:
   - phase2_5/eu_chips_act_2023_en.pdf
   notes: Objectives and initiative pillars.
-- query_id: Q18
-  text: What are the main pillars of the European Economic Security Strategy, and which categories of risk does it identify?
-  language: en
-  query_type: direct
-  expected_files:
-  - phase2_5/eu_economic_security_strategy_2023_en.pdf
-  notes: Promote, protect, partner and the risk taxonomy.
-- query_id: Q19
-  text: 德国对华战略如何区分“去风险”与“脱钩”，并如何描述中国的伙伴、竞争者和制度性对手三重角色？
-  language: zh
-  query_type: parallel-document
-  expected_files:
-  - phase2_5/de_china_strategy_2023_zh.pdf
-  - phase2_5/de_china_strategy_2023_en.pdf
-  notes: Chinese query should preferably retrieve the official Chinese version; the English parallel text is also relevant.
-- query_id: Q20
-  text: How does Germany’s China Strategy define China as partner, competitor and systemic rival, and how does it distinguish
-    de-risking from decoupling?
-  language: en
-  query_type: parallel-document
-  expected_files:
-  - phase2_5/de_china_strategy_2023_en.pdf
-  - phase2_5/de_china_strategy_2023_zh.pdf
-  notes: English query should preferably retrieve the English version; the Chinese parallel text remains relevant.
 - query_id: Q21
   text: Compare China’s interim rules for public generative-AI services with the EU AI Act’s obligations for general-purpose
     AI model providers.
@@ -135,13 +111,3 @@ queries:
   - phase2_5/cn_genai_interim_measures_2023.html
   - phase2_5/eu_ai_act_2024_en.pdf
   notes: A valid answer requires evidence from both jurisdictions.
-- query_id: Q22
-  text: 比较中国智能制造与数字经济规划和欧盟经济安全、芯片政策在关键技术、供应链韧性与产业能力建设方面的重点。
-  language: zh
-  query_type: comparative
-  expected_files:
-  - phase2_5/cn_digital_economy_14th_fyp_2021.html
-  - phase2_5/cn_intelligent_manufacturing_14th_fyp_2021.pdf
-  - phase2_5/eu_economic_security_strategy_2023_en.pdf
-  - phase2_5/eu_chips_act_2023_en.pdf
-  notes: A valid answer requires evidence from both Chinese and EU sources.

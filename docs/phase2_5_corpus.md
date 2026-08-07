@@ -1,6 +1,6 @@
 # Phase 2.5 Authoritative Corpus
 
-The repository includes a fixed 12-source official allowlist in `data/phase2_5/source_catalog.yaml`. It is not a general scraper. Downloaded source files remain under ignored `data/raw/phase2_5`; metadata, query seeds, and annotation instructions are versioned separately.
+The repository includes a fixed 9-source public-portfolio allowlist in `data/phase2_5/source_catalog.yaml`. It covers general AI, data, industrial, and investment regulation; it excludes geopolitical-security strategy documents. It is not a general scraper. Downloaded source files remain under ignored `data/raw/phase2_5`; metadata, query seeds, and annotation instructions are versioned separately.
 
 Run the reviewed downloader in PowerShell:
 

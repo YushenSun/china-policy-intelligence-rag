@@ -43,7 +43,7 @@ Official translations may both be relevant. Prefer the version matching the quer
 
 ### Comparative queries
 
-A valid benchmark must include grade-2 evidence from **each required side** of the comparison. For Q21, this means China and the EU. For Q22, this means at least one Chinese policy source and at least one EU policy source.
+A valid benchmark must include grade-2 evidence from **each required side** of the comparison. For Q21, this means China and the EU.
 
 ## Annotation procedure
 
@@ -89,9 +89,9 @@ Also report:
 
 Before using results in a portfolio:
 
-- all 19 queries reviewed;
+- all 15 queries reviewed;
 - every direct query has at least one grade-2 chunk;
-- Q21 and Q22 have grade-2 evidence from both sides;
+- Q21 has grade-2 evidence from both sides;
 - no unresolved parser corruption in gold chunks;
 - benchmark file clearly marked as human-labelled;
 - results reproducible from a clean index build.

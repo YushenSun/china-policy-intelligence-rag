@@ -31,10 +31,7 @@ $Sources = @(
     @{ File = "cn_foreign_investment_action_plan_2025.html"; Url = "https://www.mofcom.gov.cn/zcfb/zgdwjjmywg/art/2025/art_4a3fe49da8854e60ba50b51950e1429d.html" },
     @{ File = "eu_ai_act_2024_en.pdf"; Url = "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng/pdf" },
     @{ File = "eu_data_act_2023_en.pdf"; Url = "https://eur-lex.europa.eu/eli/reg/2023/2854/oj/eng/pdf" },
-    @{ File = "eu_chips_act_2023_en.pdf"; Url = "https://eur-lex.europa.eu/eli/reg/2023/1781/oj/eng/pdf" },
-    @{ File = "eu_economic_security_strategy_2023_en.pdf"; Url = "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:52023JC0020" },
-    @{ File = "de_china_strategy_2023_en.pdf"; Url = "https://www.auswaertiges-amt.de/resource/blob/2608580/49d50fecc479304c3da2e2079c55e106/china-strategie-en-data.pdf" },
-    @{ File = "de_china_strategy_2023_zh.pdf"; Url = "https://www.auswaertiges-amt.de/resource/blob/2609698/0696f358622bc9bfa8fcf962a8444b41/230713china-stategie-chn-data.pdf" }
+    @{ File = "eu_chips_act_2023_en.pdf"; Url = "https://eur-lex.europa.eu/eli/reg/2023/1781/oj/eng/pdf" }
 )
 
 $Results = @()
