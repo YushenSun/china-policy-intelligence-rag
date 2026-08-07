@@ -5,6 +5,7 @@ import logging
 from collections.abc import Sequence
 from pathlib import Path
 
+from .annotation import export_candidates
 from .corpus import validate_corpus
 from .evaluation.runner import run_evaluation, write_evaluation
 from .ingestion.base import ChunkingConfig, IngestionError
@@ -81,6 +82,23 @@ def build_parser() -> argparse.ArgumentParser:
     validate.add_argument("--raw-dir", type=Path, required=True)
     validate.add_argument("--manifest", type=Path, required=True)
     validate.add_argument("--output", type=Path, required=True)
+    annotate = subparsers.add_parser(
+        "annotate", help="Export retrieval candidates for human labelling"
+    )
+    annotate_subparsers = annotate.add_subparsers(dest="annotate_command", required=True)
+    export = annotate_subparsers.add_parser(
+        "export", help="Write merged retrieval candidates as a BOM CSV"
+    )
+    export.add_argument("--index-dir", type=Path, required=True)
+    export.add_argument("--query-seeds", type=Path, required=True)
+    export.add_argument("--output", type=Path, required=True)
+    export.add_argument("--top-k", type=int, default=10)
+    export.add_argument(
+        "--embedding-provider",
+        choices=["deterministic", "sentence-transformers"],
+        default="deterministic",
+    )
+    export.add_argument("--embedding-model")
     return parser
 
 
@@ -138,6 +156,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         if arguments.command == "corpus":
             report = validate_corpus(arguments.raw_dir, arguments.manifest, arguments.output)
             print(f"Validated {report['valid_count']} source file(s).")
+            return 0
+        if arguments.command == "annotate":
+            provider = provider_for(arguments.embedding_provider, arguments.embedding_model)
+            count = export_candidates(
+                RetrievalService(str(arguments.index_dir), provider),
+                arguments.query_seeds,
+                arguments.output,
+                arguments.top_k,
+            )
+            print(f"Exported {count} candidate row(s) for human review.")
             return 0
         config = ChunkingConfig(
             max_chars=arguments.max_chars,

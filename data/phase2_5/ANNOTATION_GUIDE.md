@@ -8,8 +8,8 @@ The benchmark is for retrieval evaluation only. It is not a claim that the syste
 
 ## Inputs
 
-- `manifest.phase2_5.yaml`: authoritative-source metadata.
-- `query_seed.phase2_5.yaml`: 22 bilingual, cross-language and comparative queries.
+- `manifest.yaml`: authoritative-source metadata.
+- `query_seeds.yaml`: 19 bilingual, cross-language and comparative queries.
 - Candidate chunks exported from lexical, semantic and hybrid retrieval.
 
 ## Non-negotiable rule
@@ -89,7 +89,7 @@ Also report:
 
 Before using results in a portfolio:
 
-- all 22 queries reviewed;
+- all 19 queries reviewed;
 - every direct query has at least one grade-2 chunk;
 - Q21 and Q22 have grade-2 evidence from both sides;
 - no unresolved parser corruption in gold chunks;

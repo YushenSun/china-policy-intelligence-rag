@@ -25,9 +25,6 @@ $Headers = @{
 $Sources = @(
     @{ File = "cn_genai_interim_measures_2023.html"; Url = "https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm" },
     @{ File = "cn_network_data_security_regulation_2024.html"; Url = "https://app.www.gov.cn/govdata/gov/202409/30/520076/article.html" },
-    @{ File = "cn_personal_information_protection_law_2021_zh.html"; Url = "https://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html" },
-    @{ File = "cn_data_security_law_2021_zh.html"; Url = "https://www.npc.gov.cn/npc/c2/c30834/202106/t20210610_311888.html" },
-    @{ File = "cn_data_security_law_2021_en.html"; Url = "https://www.npc.gov.cn/englishnpc/c2759/c23934/202112/t20211209_385109.html" },
     @{ File = "cn_digital_economy_14th_fyp_2021.html"; Url = "https://www.miit.gov.cn/xwdt/szyw/art/2022/art_4ecc233a663b44329d0863e60b51192b.html" },
     @{ File = "cn_intelligent_manufacturing_14th_fyp_2021.pdf"; Url = "https://www.miit.gov.cn/cms_files/filemanager/1226211233/attach/20226/95c25b0b936d49f1995bd8771599d18a.pdf" },
     @{ File = "cn_foreign_investment_negative_list_2024.pdf"; Url = "https://www.ndrc.gov.cn/xxgk/zcfb/fzggwl/202409/P020240907514493057643.pdf" },

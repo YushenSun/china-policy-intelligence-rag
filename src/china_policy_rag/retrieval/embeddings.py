@@ -79,7 +79,7 @@ class SentenceTransformerEmbeddingProvider:
                     "sentence-transformers is optional; install with `.[semantic]` to use it"
                 ) from error
             self._model = sentence_transformers.SentenceTransformer(self.model_id, device="cpu")
-            self.dimension = int(self._model.get_sentence_embedding_dimension())
+            self.dimension = int(self._model.get_embedding_dimension())
         return self._model
 
     def embed_documents(self, texts: list[str]) -> NDArray[np.float64]:

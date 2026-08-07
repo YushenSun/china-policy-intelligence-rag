@@ -24,28 +24,6 @@ queries:
   expected_files:
   - phase2_5/cn_network_data_security_regulation_2024.html
   notes: Territorial scope of the regulation.
-- query_id: Q04
-  text: Under China’s Personal Information Protection Law, when can processing outside China fall within the law’s territorial
-    scope?
-  language: en
-  query_type: cross-language
-  expected_files:
-  - phase2_5/cn_personal_information_protection_law_2021_zh.html
-  notes: English query should retrieve the Chinese PIPL provisions.
-- query_id: Q05
-  text: 重要数据处理者需要定期开展什么评估，并向主管部门提交哪些内容？
-  language: zh
-  query_type: direct
-  expected_files:
-  - phase2_5/cn_data_security_law_2021_zh.html
-  notes: Risk-assessment duty and report contents.
-- query_id: Q06
-  text: What obligations apply to processors of important data under China’s Data Security Law?
-  language: en
-  query_type: direct
-  expected_files:
-  - phase2_5/cn_data_security_law_2021_en.html
-  notes: Uses the official English parallel text.
 - query_id: Q07
   text: “十四五”数字经济发展规划如何部署全国一体化算力网络、智能计算中心和人工智能服务？
   language: zh

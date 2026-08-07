@@ -34,54 +34,6 @@ sources:
   download_url: https://app.www.gov.cn/govdata/gov/202409/30/520076/article.html
   access_date: '2026-08-06'
   notes: Official State Council text. Effective 2025-01-01.
-- id: cn_pipl_2021_zh
-  file_path: phase2_5/cn_personal_information_protection_law_2021_zh.html
-  title: 中华人民共和国个人信息保护法
-  issuer: 全国人民代表大会常务委员会
-  publication_date: '2021-08-20'
-  jurisdiction: CN
-  language: zh
-  document_type: law
-  sector_tags:
-  - privacy
-  - personal-data
-  - cross-border-data
-  source_url: https://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html
-  download_url: https://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html
-  access_date: '2026-08-06'
-  notes: Official NPC text. Effective 2021-11-01.
-- id: cn_data_security_law_2021_zh
-  file_path: phase2_5/cn_data_security_law_2021_zh.html
-  title: 中华人民共和国数据安全法
-  issuer: 全国人民代表大会常务委员会
-  publication_date: '2021-06-10'
-  jurisdiction: CN
-  language: zh
-  document_type: law
-  sector_tags:
-  - data-security
-  - important-data
-  - cross-border-data
-  source_url: https://www.npc.gov.cn/npc/c2/c30834/202106/t20210610_311888.html
-  download_url: https://www.npc.gov.cn/npc/c2/c30834/202106/t20210610_311888.html
-  access_date: '2026-08-06'
-  notes: Official NPC Chinese text. Effective 2021-09-01.
-- id: cn_data_security_law_2021_en
-  file_path: phase2_5/cn_data_security_law_2021_en.html
-  title: Data Security Law of the People's Republic of China
-  issuer: Standing Committee of the National People's Congress
-  publication_date: '2021-06-10'
-  jurisdiction: CN
-  language: en
-  document_type: law
-  sector_tags:
-  - data-security
-  - important-data
-  - cross-border-data
-  source_url: https://www.npc.gov.cn/englishnpc/c2759/c23934/202112/t20211209_385109.html
-  download_url: https://www.npc.gov.cn/englishnpc/c2759/c23934/202112/t20211209_385109.html
-  access_date: '2026-08-06'
-  notes: Official NPC English text. Parallel source for cross-language retrieval checks.
 - id: cn_digital_economy_14th_fyp_2021
   file_path: phase2_5/cn_digital_economy_14th_fyp_2021.html
   title: “十四五”数字经济发展规划

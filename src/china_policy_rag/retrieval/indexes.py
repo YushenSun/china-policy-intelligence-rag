@@ -85,6 +85,8 @@ def load_indexes(
     NDArray[np.float64],
 ]:
     manifest = json.loads((index_dir / "index_manifest.json").read_text(encoding="utf-8"))
+    if provider.dimension == 0:
+        provider.embed_query("")
     if (
         manifest["embedding_model"] != provider.model_id
         or manifest["dimension"] != provider.dimension
