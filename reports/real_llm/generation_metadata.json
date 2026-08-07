@@ -1,0 +1,13 @@
+{
+  "gate": "REAL_LLM_GATE",
+  "status": "NOT_EXECUTED_NO_CREDENTIALS",
+  "provider": "openai",
+  "model_identifier": null,
+  "timestamp": "2026-08-07T20:43:43.6255233Z",
+  "evidence_set_version": "topic-evidence-cfb18f9d60f75190",
+  "evidence_chunks_supplied": 0,
+  "claim_count": 0,
+  "verification_status": "NOT_EXECUTED",
+  "usage": null,
+  "reason": "OPENAI_API_KEY was not available in the execution environment."
+}

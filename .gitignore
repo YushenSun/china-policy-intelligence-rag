@@ -5,6 +5,8 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.pytest-tmp-*/
+test-temp-*/
 .venv/
 venv/
 
@@ -19,3 +21,8 @@ data/processed/*
 data/indexes/*
 !data/indexes/.gitkeep
 data/evaluation/results.json
+
+# Runtime artefacts (generated locally, never canonical evidence)
+reports/traces/
+reports/agent_exports/
+reports/agent_evaluation.json

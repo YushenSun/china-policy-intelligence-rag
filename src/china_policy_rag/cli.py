@@ -5,7 +5,13 @@ import logging
 from collections.abc import Sequence
 from pathlib import Path
 
-from .analysis.evidence_store import TopicEvidenceStore
+from .agent.evaluation import (
+    evaluate_workflows,
+    load_workflow_cases,
+    write_workflow_evaluation,
+)
+from .agent.runtime import PolicyAgentRuntime
+from .agent.tools import DEFAULT_EVIDENCE_SET, DomainTools, load_topic_store
 from .analysis.generation import provider_for as analysis_provider_for
 from .analysis.models import GroundedAnalysis, TrainingDataRiskBrief
 from .analysis.rendering import (
@@ -141,6 +147,38 @@ def build_parser() -> argparse.ArgumentParser:
     verify = analysis_subparsers.add_parser("verify", help="Verify a saved analysis or brief JSON")
     verify.add_argument("--analysis-json", type=Path, required=True)
     verify.add_argument("--evidence-set", type=Path, required=True)
+    agent = subparsers.add_parser("agent", help="Run or evaluate the bounded policy agent")
+    agent_subparsers = agent.add_subparsers(dest="agent_command", required=True)
+    agent_run = agent_subparsers.add_parser("run", help="Run one verified agent workflow")
+    agent_run.add_argument("--question", required=True)
+    agent_run.add_argument("--evidence-set", type=Path, default=DEFAULT_EVIDENCE_SET)
+    agent_run.add_argument("--provider", choices=["fake", "openai"], default="fake")
+    agent_run.add_argument("--model")
+    agent_run.add_argument("--show-tools", action="store_true")
+    agent_run.add_argument("--trace-local", action="store_true")
+    agent_run.add_argument(
+        "--output", help="Approved plain file name written only under reports/agent_exports"
+    )
+    agent_run.add_argument("--approve-export", action="store_true")
+    agent_run.add_argument("--overwrite", action="store_true")
+    agent_scope = agent_subparsers.add_parser("scope", help="Show the exact supported scope")
+    agent_scope.add_argument("--evidence-set", type=Path, default=DEFAULT_EVIDENCE_SET)
+    agent_inspect = agent_subparsers.add_parser(
+        "inspect", help="Inspect one permitted evidence chunk"
+    )
+    agent_inspect.add_argument("--chunk-id", required=True)
+    agent_inspect.add_argument("--evidence-set", type=Path, default=DEFAULT_EVIDENCE_SET)
+    agent_evaluate = agent_subparsers.add_parser(
+        "evaluate", help="Run the offline Agent Workflow Evaluation"
+    )
+    agent_evaluate.add_argument("--cases", type=Path, required=True)
+    agent_evaluate.add_argument("--evidence-set", type=Path, default=DEFAULT_EVIDENCE_SET)
+    agent_evaluate.add_argument("--provider", choices=["fake"], default="fake")
+    agent_evaluate.add_argument("--output", type=Path, required=True)
+    mcp = subparsers.add_parser("mcp", help="Run the optional read-only policy MCP server")
+    mcp_subparsers = mcp.add_subparsers(dest="mcp_command", required=True)
+    mcp_serve = mcp_subparsers.add_parser("serve", help="Serve approved tools locally")
+    mcp_serve.add_argument("--transport", choices=["stdio"], default="stdio")
     return parser
 
 
@@ -225,6 +263,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
         if arguments.command == "analysis":
             return _run_analysis(arguments)
+        if arguments.command == "agent":
+            return _run_agent(arguments)
+        if arguments.command == "mcp":
+            from .mcp.server import create_server
+
+            create_server().run(transport=arguments.transport)
+            return 0
         config = ChunkingConfig(
             max_chars=arguments.max_chars,
             overlap_chars=arguments.overlap_chars,
@@ -253,7 +298,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 def _run_analysis(arguments: argparse.Namespace) -> int:
-    store = TopicEvidenceStore.load_csv(arguments.evidence_set)
+    store = load_topic_store(arguments.evidence_set)
     if arguments.analysis_command == "verify":
         path = arguments.analysis_json.resolve(strict=True)
         if path.stat().st_size > 2_000_000:
@@ -293,6 +338,44 @@ def _run_analysis(arguments: argparse.Namespace) -> int:
     verification_path.write_text(verification.model_dump_json(indent=2), encoding="utf-8")
     print(f"Wrote verified brief artefacts under {output.parent}.")
     return 0
+
+
+def _run_agent(arguments: argparse.Namespace) -> int:
+    store = load_topic_store(arguments.evidence_set)
+    if arguments.agent_command in {"scope", "inspect"}:
+        tools = DomainTools(store, analysis_provider_for("fake"))
+        tool_result = (
+            tools.get_topic_scope()
+            if arguments.agent_command == "scope"
+            else tools.inspect_evidence(arguments.chunk_id)
+        )
+        print(tool_result.model_dump_json(indent=2))
+        return 0 if tool_result.success else 2
+    provider = analysis_provider_for(arguments.provider, getattr(arguments, "model", None))
+    runtime = PolicyAgentRuntime(DomainTools(store, provider))
+    if arguments.agent_command == "evaluate":
+        evaluation = evaluate_workflows(runtime, load_workflow_cases(arguments.cases))
+        write_workflow_evaluation(arguments.output, evaluation)
+        print(evaluation.model_dump_json(indent=2))
+        return 0
+    run_result = runtime.run(
+        arguments.question,
+        trace_local=arguments.trace_local,
+        output_name=arguments.output,
+        approve_export=arguments.approve_export,
+        overwrite=arguments.overwrite,
+    )
+    if arguments.show_tools:
+        for call in run_result.tool_calls:
+            status = "OK" if call.success else call.error_code
+            print(f"[{call.sequence}] {call.tool_name}: {status}")
+    if run_result.output is not None:
+        print(render_analysis_markdown(GroundedAnalysis.model_validate(run_result.output), store))
+    else:
+        print(f"{run_result.status}: {run_result.message}")
+    if run_result.export is not None:
+        print(f"Exported approved report: {run_result.export.output_path}")
+    return 0 if run_result.status.value in {"COMPLETED", "REFUSED", "DEGRADED"} else 2
 
 
 if __name__ == "__main__":

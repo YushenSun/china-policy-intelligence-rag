@@ -2,7 +2,7 @@
 
 ## Implementation Status
 
-Phase 3 implements ingestion, persistent retrieval, human-curated topic evidence, bounded evidence selection, structured generation, deterministic claim-level citation verification, refusal/degradation, and a structured risk brief. Optional provider access remains isolated and is not required for offline operation.
+Phase 4 adds a bounded single orchestrator, typed domain tools, local tracing, approval-gated export, workflow evaluation, and optional read-only MCP. Existing deterministic evidence and verification services remain authoritative. Optional provider and SDK access remains isolated and is not required offline.
 
 ## Design Principles
 
@@ -32,7 +32,9 @@ Phase 3 implements ingestion, persistent retrieval, human-curated topic evidence
 | Citation verification | Implemented | Check citations, labels, provenance, jurisdiction, and support rules. |
 | Structured risk-brief generation | Implemented | Build a bounded China–EU training-data risk brief. |
 | Evaluation | Implemented | Run synthetic retrieval plumbing tests and offline grounding tests. |
-| Optional agent and MCP extensions | Planned | Add bounded orchestration only after core workflows are validated. |
+| Policy agent | Implemented | Orchestrate approved tools with deterministic routing and loop limits. |
+| Read-only MCP adapter | Implemented | Expose six allowlisted tools over optional local stdio. |
+| Agent Workflow Evaluation | Implemented | Measure routing, refusal, tool use, verification, and coverage offline. |
 
 ```mermaid
 flowchart LR
@@ -52,6 +54,6 @@ flowchart LR
     K -. contracts .-> I
 ```
 
-## Future Extension Notes
+## Phase 4 boundaries
 
-An optional agent or MCP layer may coordinate approved tools in a later phase, but it must not obscure evidence provenance or bypass citation verification. It should remain separate from the core domain and retrieval interfaces.
+The single-agent choice keeps control flow inspectable and avoids handoff ambiguity. Policy logic remains deterministic; direct tools and MCP are adapters over the same services. Human approval is required only when materialising a final report. See [the detailed agent architecture and security review](agent.md). Agent autonomy is deliberately constrained.

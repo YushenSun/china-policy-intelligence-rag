@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "china-policy-intelligence-rag"
-version = "0.4.0"
-description = "Grounded China-EU policy analysis with deterministic citation verification."
+version = "0.5.0"
+description = "Auditable China-EU policy agent with verified evidence tools and read-only MCP."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -29,6 +29,8 @@ dev = [
 
 semantic = ["sentence-transformers>=3,<6"]
 openai = ["openai>=1.66,<3"]
+agent = ["openai-agents>=0.19.4,<1"]
+mcp = ["mcp>=1.29,<2"]
 
 [project.scripts]
 china-policy-rag = "china_policy_rag.cli:main"

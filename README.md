@@ -22,15 +22,15 @@ The intended users are strategy, policy, market-intelligence, and risk-analysis 
 
 ## Current Status
 
-**Phase 3 implements a narrow grounded policy-analysis MVP.** It supports authoritative-source ingestion, bilingual lexical/vector retrieval, human-curated topic evidence, structured grounded analysis, deterministic claim-level citation validation, evidence sufficiency checks, explicit refusal/degradation, a China–EU comparison, and a structured training-data risk brief.
+**Phase 4 implements an auditable, bounded policy-agent workflow.** It preserves the Phase 3 grounding architecture while adding typed domain tools, deterministic guardrails, loop limits, approval-gated report export, privacy-minimising local traces, a reproducible Agent Workflow Evaluation, and an optional read-only local MCP interface.
 
 The public Phase 2.5 corpus deliberately excludes geopolitical-security strategy documents. Its human-labelled topic evidence set contains 20 relevant unique chunks, including 9 core chunks. These labels are topic-level evidence judgements, not a query-level retrieval benchmark. See [the topic scope](data/phase2_5/TOPIC_SCOPE.md) and [the corpus guide](docs/phase2_5_corpus.md).
 
-Generation is vendor-neutral. The deterministic fake provider supports offline tests and demonstrations but makes no semantic-quality claim. An optional OpenAI Responses adapter is available behind an environment-only API key. Autonomous agents, MCP, web collection, monitoring, OCR, legal advice, unrestricted chat, a production frontend, and cloud deployment are not implemented.
+Generation is vendor-neutral. The deterministic fake provider supports offline tests and demonstrations but makes no semantic-quality claim. An optional OpenAI Responses adapter is available behind an environment-only API key. Autonomous research, web collection, monitoring, OCR, legal advice, unrestricted chat, a production frontend, and cloud deployment are not implemented. The OpenAI Agents SDK and MCP SDK remain optional extras.
 
 Retrieval relevance and claim grounding are different controls. Retrieval ranks candidate passages for a question; grounding verification checks that each structured claim cites supplied, permitted evidence with matching provenance. Likewise, `human_label=2` means a reviewer judged a chunk to be core topic evidence. It is not model confidence, legal certainty, or proof of semantic entailment.
 
-## Planned Architecture
+## Architecture
 
 The architecture separates local document handling, metadata validation, retrieval, evidence selection, structured generation, citation verification, rendering, and evaluation. See [the architecture](docs/architecture.md), [analysis guide](docs/analysis.md), [ingestion guide](docs/ingestion.md), [retrieval guide](docs/retrieval.md), and [evaluation guide](docs/evaluation.md).
 
@@ -80,13 +80,32 @@ To apply formatting:
 python -m ruff format .
 ```
 
+## Agentic Policy Intelligence Workflow
+
+The single policy agent orchestrates deterministic scope, retrieval, generation, and verification tools. It cannot bypass the human evidence boundary, use label-0 chunks, or return unverified substantive analysis. Unsupported requests are refused or degraded. Read-only MCP consumers call the same domain-tool layer, while local traces record tool sequence and verification outcomes without raw prompts or secrets. See [the agent and MCP guide](docs/agent.md).
+
+```mermaid
+flowchart LR
+    U["User"] --> A["Policy Agent"]
+    A --> S["Scope Guard"]
+    S --> E["Evidence Search"]
+    E --> G["Grounded Analysis"]
+    G --> V["Citation Verifier"]
+    V --> O["Validated Output"]
+    M["Local MCP consumers"] --> T["Read-only domain tools"]
+    A --> T
+    T --> S
+    T --> E
+    T --> V
+```
+
 ## Roadmap
 
 1. **Phase 0:** repository foundation, configuration, and typed models.
 2. **Phase 1:** local ingestion, metadata validation, provenance-preserving text preparation, and deterministic chunking.
 3. **Phase 2:** persistent hybrid retrieval, metadata filtering, evidence bundles, and synthetic offline evaluation.
-4. **Phase 3 (current):** scoped structured analysis, citation verification, refusal, and a training-data risk brief.
-5. **Phase 4:** optional agent and MCP extensions, subject to explicit scope and security review.
+4. **Phase 3:** scoped structured analysis, citation verification, refusal, and a training-data risk brief.
+5. **Phase 4 (current):** bounded single-agent orchestration, read-only MCP, tracing, approval, and workflow evaluation.
 
 ## Limitations
 

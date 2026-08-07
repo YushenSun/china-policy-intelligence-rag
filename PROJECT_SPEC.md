@@ -8,13 +8,13 @@ Strategic analysts need a reliable way to examine multilingual policy and indust
 
 The final MVP is planned to accept Chinese and English documents, retain traceable source metadata, retrieve relevant evidence, produce source-grounded answers, and create structured risk briefs with explicit uncertainty and reproducible evaluation.
 
-Phase 3 adds a narrow China–EU training-data topic, human-curated evidence, structured generation, deterministic claim-level citation verification, evidence sufficiency checks, refusal/degradation, and a structured risk brief.
+Phase 4 adds auditable single-agent orchestration over the Phase 3 services, narrow domain tools, local traces, approval-gated export, read-only MCP, and reproducible workflow evaluation. It does not expand the evidence corpus or weaken citation verification.
 
 ## Current Non-Goals
 
-The MVP does not implement web scraping, OCR, autonomous agents, MCP servers, monitoring, legal advice, unrestricted chat, frontend work, deployment, or query-level benchmark claims from topic labels.
+The MVP does not implement web scraping, OCR, autonomous research agents, Internet-facing MCP, monitoring, legal advice, unrestricted chat, frontend work, deployment, or query-level benchmark claims from topic labels.
 
-## Functional Requirements for Later Phases
+## Functional Requirements
 
 - Ingest authorised Chinese and English policy and industry documents.
 - Validate and retain source metadata and provenance.
@@ -34,13 +34,13 @@ The MVP does not implement web scraping, OCR, autonomous agents, MCP servers, mo
 
 ## Success Criteria
 
-For Phase 1, the success criteria are a clean installable package, validated domain models, safe local metadata handling, deterministic processed artifacts, professional documentation, and passing offline tests, linting, formatting, and type checks.
+For Phase 4, success requires a clean installable package; mechanically bounded evidence; verified outputs; refusal, loop, path, and approval controls; a read-only MCP allowlist; privacy-minimising traces; reproducible offline workflow evaluation; and passing tests, linting, formatting, and type checks.
 
 For the planned MVP, success criteria will be defined with an approved evaluation set and include citation traceability, groundedness review, multilingual coverage, structured-output validity, and reproducible evaluation runs. No performance target is asserted before that evaluation is designed and conducted.
 
-## Planned Evaluation Approach
+## Evaluation Approach
 
-Future evaluation will use a documented, authorised held-out corpus with known source metadata. It should measure retrieval relevance, citation correctness and completeness, grounded answer quality, risk-brief structure validity, uncertainty calibration, and reproducibility. Human review criteria and automated checks will be versioned with the evaluation data. Results will be reported only after actual runs.
+Retrieval evaluation remains separate from the human-authored Agent Workflow Evaluation. Phase 4 measures scope routing, refusals, required/forbidden tool use, verification, citation validity, call counts, repeated calls, jurisdiction coverage, and workflow completion. These deterministic cases test behaviour rather than claiming general AI quality. Semantic and legal-quality review still requires qualified humans.
 
 ## Risk Register
 
@@ -59,4 +59,4 @@ Future evaluation will use a documented, authorised held-out corpus with known s
 2. **Phase 1:** build local ingestion, metadata validation, and provenance-preserving text preparation.
 3. **Phase 2:** introduce retrieval baselines and evaluation fixtures.
 4. **Phase 3:** add grounded answer and risk-brief workflows with citation checks.
-5. **Phase 4:** evaluate optional agent and MCP extensions after core workflows are validated.
+5. **Phase 4 (current):** add bounded orchestration, MCP interoperability, tracing, and tool-use evaluation.
