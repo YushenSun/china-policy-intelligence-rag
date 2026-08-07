@@ -8,11 +8,11 @@ Strategic analysts need a reliable way to examine multilingual policy and indust
 
 The final MVP is planned to accept Chinese and English documents, retain traceable source metadata, retrieve relevant evidence, produce source-grounded answers, and create structured risk briefs with explicit uncertainty and reproducible evaluation.
 
-Phase 1 adds local offline ingestion, metadata validation, normalization, provenance tracking, deterministic chunking, JSONL serialization, and a CLI.
+Phase 3 adds a narrow China–EU training-data topic, human-curated evidence, structured generation, deterministic claim-level citation verification, evidence sufficiency checks, refusal/degradation, and a structured risk brief.
 
-## Non-Goals
+## Current Non-Goals
 
-Phase 1 does not implement web scraping, OCR, embeddings, retrieval, reranking, LLM calls, RAG, agents, MCP servers, frontend work, deployment, or benchmark claims.
+The MVP does not implement web scraping, OCR, autonomous agents, MCP servers, monitoring, legal advice, unrestricted chat, frontend work, deployment, or query-level benchmark claims from topic labels.
 
 ## Functional Requirements for Later Phases
 

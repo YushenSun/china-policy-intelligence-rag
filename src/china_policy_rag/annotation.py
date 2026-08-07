@@ -35,7 +35,7 @@ _FIELDNAMES = [
     "reviewer_note",
 ]
 
-_TOPIC_FIELDNAMES = [*_FIELDNAMES, "origin_query_ids"]
+_TOPIC_FIELDNAMES = [*_FIELDNAMES, "publication_date", "origin_query_ids"]
 
 
 def export_candidates(
@@ -96,6 +96,7 @@ def materialize_topic_annotations(
     core_output: Path,
     summary_output: Path,
     topic: str,
+    manifest_path: Path | None = None,
 ) -> dict[str, int]:
     """Validate topic-level labels and write deduplicated evidence artefacts."""
     if not topic.strip():
@@ -108,6 +109,7 @@ def materialize_topic_annotations(
     if not rows:
         raise ValueError("Annotated CSV must contain at least one row")
 
+    publication_dates = _publication_dates(manifest_path)
     grouped: dict[str, list[dict[str, str]]] = {}
     for row in rows:
         label = row["human_label"].strip()
@@ -127,6 +129,10 @@ def materialize_topic_annotations(
         canonical = dict(group[0])
         canonical["human_label"] = label
         canonical["reviewer_note"] = " | ".join(sorted(notes))
+        source_path = canonical["local_file_path"].replace("\\", "/")
+        canonical["publication_date"] = publication_dates.get(source_path, "")
+        if not canonical["publication_date"]:
+            raise ValueError(f"Publication date is unavailable for {source_path}")
         canonical["origin_query_ids"] = "|".join(sorted({row["query_id"] for row in group}))
         unique_rows.append(canonical)
 
@@ -167,6 +173,19 @@ def _write_csv(path: Path, rows: list[dict[str, str]]) -> None:
         writer = csv.DictWriter(handle, fieldnames=_TOPIC_FIELDNAMES)
         writer.writeheader()
         writer.writerows(rows)
+
+
+def _publication_dates(manifest_path: Path | None) -> dict[str, str]:
+    if manifest_path is None:
+        raise ValueError("manifest_path is required to materialize complete provenance")
+    data: Any = yaml.safe_load(manifest_path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict) or not isinstance(data.get("sources"), list):
+        raise ValueError("Manifest must be a YAML mapping with a sources list")
+    return {
+        str(row["file_path"]).replace("\\", "/"): str(row["publication_date"])
+        for row in data["sources"]
+        if isinstance(row, dict) and "file_path" in row and "publication_date" in row
+    }
 
 
 def _load_seeds(path: Path) -> dict[str, list[dict[str, Any]]]:

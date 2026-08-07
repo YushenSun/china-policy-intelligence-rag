@@ -2,7 +2,7 @@
 
 ## Implementation Status
 
-The **domain models**, **configuration layer**, **local document ingestion**, **metadata validation**, **text normalization**, **chunking**, and **JSONL serialization** are implemented in Phase 1. Retrieval and generation components remain planned future work.
+Phase 3 implements ingestion, persistent retrieval, human-curated topic evidence, bounded evidence selection, structured generation, deterministic claim-level citation verification, refusal/degradation, and a structured risk brief. Optional provider access remains isolated and is not required for offline operation.
 
 ## Design Principles
 
@@ -22,14 +22,16 @@ The **domain models**, **configuration layer**, **local document ingestion**, **
 | Metadata validation | Implemented | Validate a YAML manifest and local paths before ingestion. |
 | Chunking | Implemented | Create deterministic paragraph-aware, evidence-addressable text segments. |
 | JSONL serialization | Implemented | Persist processed documents, chunks, and a machine-readable report locally. |
-| Storage | Planned | Add durable indexed storage beyond Phase 1 artifacts. |
-| Embedding provider | Planned | Generate embeddings through an isolated provider interface. |
-| Lexical and vector retrieval | Planned | Retrieve candidate evidence using complementary methods. |
+| Storage | Implemented | Persist local lexical/vector indexes and versioned evidence artefacts. |
+| Embedding provider | Implemented | Use deterministic tests or optional local sentence-transformers. |
+| Lexical and vector retrieval | Implemented | Retrieve candidate evidence using complementary methods. |
 | Reranking | Planned | Order retrieved evidence for a specific question. |
-| Grounded answer generation | Planned | Produce answers constrained by retrieved evidence. |
-| Citation verification | Planned | Check citation presence, source identity, and evidence location. |
-| Structured risk-brief generation | Planned | Build validated decision-support briefs. |
-| Evaluation | Planned | Run versioned, reproducible quality checks. |
+| Topic evidence store | Implemented | Load labels 1/2 with exact provenance and mechanically exclude label 0. |
+| Evidence selection and sufficiency | Implemented | Enforce evidence budgets, core preference, scope, and jurisdiction coverage. |
+| Grounded answer generation | Implemented | Produce validated structured data before rendering. |
+| Citation verification | Implemented | Check citations, labels, provenance, jurisdiction, and support rules. |
+| Structured risk-brief generation | Implemented | Build a bounded China–EU training-data risk brief. |
+| Evaluation | Implemented | Run synthetic retrieval plumbing tests and offline grounding tests. |
 | Optional agent and MCP extensions | Planned | Add bounded orchestration only after core workflows are validated. |
 
 ```mermaid
@@ -37,12 +39,13 @@ flowchart LR
     A["Authorised local documents"] --> B["Implemented: ingestion"]
     B --> C["Implemented: normalization and metadata validation"]
     C --> D["Implemented: chunking and JSONL artifacts"]
-    D --> E["Planned: lexical and vector retrieval"]
-    E --> F["Planned: reranking"]
-    F --> G["Planned: grounded answer generation"]
-    G --> H["Planned: citation verification"]
-    H --> I["Planned: structured risk brief"]
-    D --> J["Planned: evaluation"]
+    D --> E["Implemented: lexical and vector retrieval"]
+    E --> L["Implemented: human-curated topic evidence"]
+    L --> F["Implemented: bounded evidence selection"]
+    F --> G["Implemented: structured grounded generation"]
+    G --> H["Implemented: deterministic citation verification"]
+    H --> I["Implemented: structured risk brief and rendering"]
+    D --> J["Implemented: offline evaluation"]
     H --> J
     K["Implemented: configuration and domain models"] -. contracts .-> B
     K -. contracts .-> G

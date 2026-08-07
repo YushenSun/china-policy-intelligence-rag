@@ -5,6 +5,16 @@ import logging
 from collections.abc import Sequence
 from pathlib import Path
 
+from .analysis.evidence_store import TopicEvidenceStore
+from .analysis.generation import provider_for as analysis_provider_for
+from .analysis.models import GroundedAnalysis, TrainingDataRiskBrief
+from .analysis.rendering import (
+    evidence_packet_json,
+    render_analysis_markdown,
+    render_brief_markdown,
+)
+from .analysis.service import GroundedAnalysisService, GroundingFailure
+from .analysis.verification import verify_analysis, verify_brief
 from .annotation import export_candidates, materialize_topic_annotations
 from .corpus import validate_corpus
 from .evaluation.runner import run_evaluation, write_evaluation
@@ -108,6 +118,29 @@ def build_parser() -> argparse.ArgumentParser:
     materialize.add_argument("--core-output", type=Path, required=True)
     materialize.add_argument("--summary-output", type=Path, required=True)
     materialize.add_argument("--topic", required=True)
+    materialize.add_argument("--manifest", type=Path, default=Path("data/phase2_5/manifest.yaml"))
+    analysis = subparsers.add_parser(
+        "analysis", help="Generate and verify scoped grounded analysis"
+    )
+    analysis_subparsers = analysis.add_subparsers(dest="analysis_command", required=True)
+    ask = analysis_subparsers.add_parser(
+        "ask", help="Answer a scoped question from curated evidence"
+    )
+    ask.add_argument("--question", required=True)
+    ask.add_argument("--evidence-set", type=Path, required=True)
+    ask.add_argument("--provider", choices=["fake", "openai"], default="fake")
+    ask.add_argument("--model")
+    ask.add_argument("--format", choices=["json", "markdown"], default="markdown")
+    brief = analysis_subparsers.add_parser(
+        "brief", help="Generate the canonical China–EU risk brief"
+    )
+    brief.add_argument("--evidence-set", type=Path, required=True)
+    brief.add_argument("--provider", choices=["fake", "openai"], default="fake")
+    brief.add_argument("--model")
+    brief.add_argument("--output", type=Path, required=True)
+    verify = analysis_subparsers.add_parser("verify", help="Verify a saved analysis or brief JSON")
+    verify.add_argument("--analysis-json", type=Path, required=True)
+    verify.add_argument("--evidence-set", type=Path, required=True)
     return parser
 
 
@@ -174,6 +207,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     arguments.core_output,
                     arguments.summary_output,
                     arguments.topic,
+                    arguments.manifest,
                 )
                 print(
                     "Materialized "
@@ -189,6 +223,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
             print(f"Exported {count} candidate row(s) for human review.")
             return 0
+        if arguments.command == "analysis":
+            return _run_analysis(arguments)
         config = ChunkingConfig(
             max_chars=arguments.max_chars,
             overlap_chars=arguments.overlap_chars,
@@ -202,7 +238,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             overwrite=arguments.overwrite,
             report_path=arguments.report_path,
         )
-    except (IngestionError, OSError, ValueError) as error:
+    except (GroundingFailure, IngestionError, OSError, ValueError) as error:
         logging.error("%s", error)
         if getattr(arguments, "debug", False):
             raise
@@ -214,6 +250,49 @@ def main(argv: Sequence[str] | None = None) -> int:
         f"failed {result.report.documents_failed} document(s)."
     )
     return 1 if result.report.documents_failed else 0
+
+
+def _run_analysis(arguments: argparse.Namespace) -> int:
+    store = TopicEvidenceStore.load_csv(arguments.evidence_set)
+    if arguments.analysis_command == "verify":
+        path = arguments.analysis_json.resolve(strict=True)
+        if path.stat().st_size > 2_000_000:
+            raise ValueError("Analysis JSON exceeds the 2 MB safety limit")
+        payload = path.read_text(encoding="utf-8")
+        if '"risk_factors"' in payload:
+            result = verify_brief(TrainingDataRiskBrief.model_validate_json(payload), store)
+        else:
+            result = verify_analysis(GroundedAnalysis.model_validate_json(payload), store)
+        print(result.model_dump_json(indent=2))
+        return 0 if result.passed else 2
+
+    provider = analysis_provider_for(arguments.provider, arguments.model)
+    service = GroundedAnalysisService(store, provider)
+    if arguments.analysis_command == "ask":
+        analysis, _, _ = service.ask(arguments.question)
+        if arguments.format == "json":
+            print(analysis.model_dump_json(indent=2))
+        else:
+            print(render_analysis_markdown(analysis, store))
+        return 0
+
+    brief, verification, selected_ids = service.brief()
+    output = arguments.output
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(render_brief_markdown(brief, store), encoding="utf-8")
+    stem = output.stem
+    prefix = stem[:-6] if stem.endswith("_brief") else stem
+    json_path = output.with_suffix(".json")
+    evidence_path = output.with_name(f"{prefix}_evidence.json")
+    verification_path = output.with_name(f"{prefix}_verification.json")
+    json_path.write_text(brief.model_dump_json(indent=2), encoding="utf-8")
+    evidence_path.write_text(
+        evidence_packet_json([store.require(chunk_id) for chunk_id in selected_ids]),
+        encoding="utf-8",
+    )
+    verification_path.write_text(verification.model_dump_json(indent=2), encoding="utf-8")
+    print(f"Wrote verified brief artefacts under {output.parent}.")
+    return 0
 
 
 if __name__ == "__main__":

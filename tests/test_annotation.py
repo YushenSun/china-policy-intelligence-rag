@@ -53,8 +53,15 @@ def test_materialize_topic_annotations_deduplicates_and_validates(tmp_path: Path
     relevant = tmp_path / "relevant.csv"
     core = tmp_path / "core.csv"
     summary = tmp_path / "summary.json"
+    manifest = tmp_path / "manifest.yaml"
+    manifest.write_text(
+        "sources:\n  - file_path: ''\n    publication_date: 2025-01-01\n",
+        encoding="utf-8",
+    )
 
-    counts = materialize_topic_annotations(source, relevant, core, summary, "Focused policy topic")
+    counts = materialize_topic_annotations(
+        source, relevant, core, summary, "Focused policy topic", manifest
+    )
 
     assert counts == {"relevant": 2, "core": 1}
     assert len(list(csv.DictReader(relevant.open(encoding="utf-8-sig", newline="")))) == 2

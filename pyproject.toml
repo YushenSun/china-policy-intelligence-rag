@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "china-policy-intelligence-rag"
-version = "0.3.0"
-description = "Offline ingestion and retrieval foundation for source-grounded policy analysis."
+version = "0.4.0"
+description = "Grounded China-EU policy analysis with deterministic citation verification."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -28,6 +28,7 @@ dev = [
 ]
 
 semantic = ["sentence-transformers>=3,<6"]
+openai = ["openai>=1.66,<3"]
 
 [project.scripts]
 china-policy-rag = "china_policy_rag.cli:main"

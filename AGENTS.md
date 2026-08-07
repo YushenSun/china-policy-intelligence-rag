@@ -2,11 +2,11 @@
 
 ## Purpose
 
-This repository is the Phase 0 foundation for the China Policy Intelligence RAG Prototype. The long-term project is intended to support evidence-based analysis of Chinese and English policy and industry documents.
+This repository is the Phase 3 China Policy Intelligence RAG Prototype. Its public MVP supports evidence-based analysis of a narrow China–EU training-data policy topic.
 
 ## Current Status
 
-Phase 1 implements local TXT, Markdown, HTML, and text-based PDF ingestion; YAML metadata validation; conservative normalization; deterministic chunking; JSONL serialization; and an offline CLI. Retrieval, RAG, agents, MCP integration, evaluation, and risk-brief generation remain roadmap items.
+Phase 3 implements ingestion, retrieval, human-curated topic evidence, structured grounded analysis, deterministic citation verification, refusal/degradation, and a structured risk brief. Agents, MCP, monitoring, legal advice, frontend work, and deployment remain out of scope.
 
 ## Development Commands
 
@@ -17,6 +17,7 @@ python -m ruff check .
 python -m ruff format --check .
 python -m mypy src
 python -m china_policy_rag.cli ingest --input-dir data/raw --manifest data/raw/manifest.yaml --output-dir data/processed
+python -m china_policy_rag.cli analysis ask --question "What training-data transparency is required?" --evidence-set data/annotations/phase2_5_topic_relevant.csv --provider fake --format markdown
 ```
 
 Use `python -m ruff format .` to apply formatting.
@@ -34,6 +35,7 @@ Use `python -m ruff format .` to apply formatting.
 - Never fabricate source documents, citations, API responses, credentials, benchmark results, or evaluation outcomes.
 - Never commit secrets. Use environment variables and `.env.example` placeholders only.
 - Keep future external services behind clear interfaces so local tests remain offline.
-- Do not download sources, implement OCR, or add retrieval/model dependencies during Phase 1 work.
+- Keep topic analysis mechanically limited to human labels 1 and 2; never supply label 0.
+- Do not begin Phase 4 or add agents, MCP, monitoring, frontend, or deployment without an explicit request.
 - State assumptions, limitations, and unimplemented work plainly.
 - Complete only the phase and scope requested; do not begin a later phase without an explicit request.

@@ -1,0 +1,252 @@
+{
+  "title": "China–EU Training Data Compliance and Transparency: Implications for Generative AI Model Providers",
+  "executive_summary": "The human-curated evidence identifies obligations concerning lawful sourcing, personal information, data quality, annotation, security, copyright, technical documentation, and training-content transparency.",
+  "scope": "Training-data compliance and transparency in the curated China–EU evidence.",
+  "china_findings": [
+    {
+      "claim_id": "C01",
+      "claim_text": "核心证据：中国生成式AI规则直接规定训练数据的合法来源、知识产权、个人信息合法基础、数据质量及数据标注要求。",
+      "claim_type": "personal_data_requirement",
+      "jurisdiction": "CN",
+      "citation_chunk_ids": [
+        "0d6d53f6-4019-5489-892f-573094e945fc"
+      ],
+      "confidence": 0.9,
+      "qualification": null,
+      "inference_level": "DIRECT"
+    },
+    {
+      "claim_id": "C02",
+      "claim_text": "核心证据：《网络数据安全管理条例》第19条直接要求生成式AI服务的数据处理者加强训练数据及训练数据处理活动的安全管理。",
+      "claim_type": "personal_data_requirement",
+      "jurisdiction": "CN",
+      "citation_chunk_ids": [
+        "5e01bef4-aa13-57f4-b8c0-badcd3da319b"
+      ],
+      "confidence": 0.9,
+      "qualification": null,
+      "inference_level": "DIRECT"
+    },
+    {
+      "claim_id": "C03",
+      "claim_text": "核心证据：第19条要求生成式AI服务提供者向监管说明训练数据来源、规模、类型、标注规则及算法机制。",
+      "claim_type": "personal_data_requirement",
+      "jurisdiction": "CN",
+      "citation_chunk_ids": [
+        "7f6a69c9-bc49-5f8f-ab0e-efc9306a3c89"
+      ],
+      "confidence": 0.9,
+      "qualification": null,
+      "inference_level": "DIRECT"
+    }
+  ],
+  "eu_findings": [
+    {
+      "claim_id": "C04",
+      "claim_text": "核心证据：AI Act明确训练内容摘要与版权合规政策的重要性，并直接讨论大型生成式/GPAI模型训练使用受版权保护内容。",
+      "claim_type": "copyright_requirement",
+      "jurisdiction": "EU",
+      "citation_chunk_ids": [
+        "4d62ef0c-b6e0-5a56-ab9d-36f5717de13e"
+      ],
+      "confidence": 0.9,
+      "qualification": null,
+      "inference_level": "DIRECT"
+    },
+    {
+      "claim_id": "C05",
+      "claim_text": "核心证据：要求GPAI提供者公开足够详细的训练内容摘要，直接对应训练数据透明度。",
+      "claim_type": "transparency_requirement",
+      "jurisdiction": "EU",
+      "citation_chunk_ids": [
+        "e7f886b6-2c3c-526c-abfa-6a93f0494610"
+      ],
+      "confidence": 0.9,
+      "qualification": null,
+      "inference_level": "DIRECT"
+    },
+    {
+      "claim_id": "C06",
+      "claim_text": "核心证据：模型修改或微调时，技术文档应补充包括新训练数据来源在内的信息，直接涉及训练数据来源追踪。",
+      "claim_type": "documentation_requirement",
+      "jurisdiction": "EU",
+      "citation_chunk_ids": [
+        "9bc3cd1c-89d1-54a0-bafb-d3ad8335a476"
+      ],
+      "confidence": 0.9,
+      "qualification": null,
+      "inference_level": "DIRECT"
+    }
+  ],
+  "comparative_findings": [
+    {
+      "claim_id": "C07",
+      "claim_text": "The current evidence establishes jurisdiction-specific obligations, does not establish that an unmentioned equivalent requirement is absent.",
+      "claim_type": "comparison",
+      "jurisdiction": "CN-EU",
+      "citation_chunk_ids": [
+        "0d6d53f6-4019-5489-892f-573094e945fc",
+        "4d62ef0c-b6e0-5a56-ab9d-36f5717de13e"
+      ],
+      "confidence": 0.7,
+      "qualification": "Comparison is limited to the curated evidence.",
+      "inference_level": "SYNTHESIS"
+    }
+  ],
+  "risk_factors": [
+    {
+      "risk_id": "R01",
+      "category": "personal_data_requirement",
+      "jurisdiction": "CN",
+      "description": "核心证据：中国生成式AI规则直接规定训练数据的合法来源、知识产权、个人信息合法基础、数据质量及数据标注要求。",
+      "business_relevance": "Operational controls should be able to evidence this requirement.",
+      "severity": "UNKNOWN",
+      "evidence_chunk_ids": [
+        "0d6d53f6-4019-5489-892f-573094e945fc"
+      ],
+      "mitigation_question": "Can the lawful basis for personal information in training data be documented?",
+      "inference_level": "DIRECT",
+      "high_severity_justification": null
+    },
+    {
+      "risk_id": "R02",
+      "category": "personal_data_requirement",
+      "jurisdiction": "CN",
+      "description": "核心证据：《网络数据安全管理条例》第19条直接要求生成式AI服务的数据处理者加强训练数据及训练数据处理活动的安全管理。",
+      "business_relevance": "Operational controls should be able to evidence this requirement.",
+      "severity": "UNKNOWN",
+      "evidence_chunk_ids": [
+        "5e01bef4-aa13-57f4-b8c0-badcd3da319b"
+      ],
+      "mitigation_question": "Can the lawful basis for personal information in training data be documented?",
+      "inference_level": "DIRECT",
+      "high_severity_justification": null
+    },
+    {
+      "risk_id": "R03",
+      "category": "personal_data_requirement",
+      "jurisdiction": "CN",
+      "description": "核心证据：第19条要求生成式AI服务提供者向监管说明训练数据来源、规模、类型、标注规则及算法机制。",
+      "business_relevance": "Operational controls should be able to evidence this requirement.",
+      "severity": "UNKNOWN",
+      "evidence_chunk_ids": [
+        "7f6a69c9-bc49-5f8f-ab0e-efc9306a3c89"
+      ],
+      "mitigation_question": "Can the lawful basis for personal information in training data be documented?",
+      "inference_level": "DIRECT",
+      "high_severity_justification": null
+    },
+    {
+      "risk_id": "R04",
+      "category": "copyright_requirement",
+      "jurisdiction": "EU",
+      "description": "核心证据：AI Act明确训练内容摘要与版权合规政策的重要性，并直接讨论大型生成式/GPAI模型训练使用受版权保护内容。",
+      "business_relevance": "Operational controls should be able to evidence this requirement.",
+      "severity": "UNKNOWN",
+      "evidence_chunk_ids": [
+        "4d62ef0c-b6e0-5a56-ab9d-36f5717de13e"
+      ],
+      "mitigation_question": "Can copyright restrictions and rights reservations be identified and documented?",
+      "inference_level": "DIRECT",
+      "high_severity_justification": null
+    },
+    {
+      "risk_id": "R05",
+      "category": "transparency_requirement",
+      "jurisdiction": "EU",
+      "description": "核心证据：要求GPAI提供者公开足够详细的训练内容摘要，直接对应训练数据透明度。",
+      "business_relevance": "Operational controls should be able to evidence this requirement.",
+      "severity": "UNKNOWN",
+      "evidence_chunk_ids": [
+        "e7f886b6-2c3c-526c-abfa-6a93f0494610"
+      ],
+      "mitigation_question": "Can the required training-content information be disclosed in sufficient detail?",
+      "inference_level": "DIRECT",
+      "high_severity_justification": null
+    },
+    {
+      "risk_id": "R06",
+      "category": "documentation_requirement",
+      "jurisdiction": "EU",
+      "description": "核心证据：模型修改或微调时，技术文档应补充包括新训练数据来源在内的信息，直接涉及训练数据来源追踪。",
+      "business_relevance": "Operational controls should be able to evidence this requirement.",
+      "severity": "UNKNOWN",
+      "evidence_chunk_ids": [
+        "9bc3cd1c-89d1-54a0-bafb-d3ad8335a476"
+      ],
+      "mitigation_question": "Is model and training-process documentation complete and current?",
+      "inference_level": "DIRECT",
+      "high_severity_justification": null
+    }
+  ],
+  "recommended_due_diligence_questions": [
+    {
+      "question_id": "D01",
+      "question": "Can the lawful basis for personal information in training data be documented?",
+      "jurisdiction": "CN",
+      "evidence_chunk_ids": [
+        "0d6d53f6-4019-5489-892f-573094e945fc"
+      ]
+    },
+    {
+      "question_id": "D02",
+      "question": "Can the lawful basis for personal information in training data be documented?",
+      "jurisdiction": "CN",
+      "evidence_chunk_ids": [
+        "5e01bef4-aa13-57f4-b8c0-badcd3da319b"
+      ]
+    },
+    {
+      "question_id": "D03",
+      "question": "Can the lawful basis for personal information in training data be documented?",
+      "jurisdiction": "CN",
+      "evidence_chunk_ids": [
+        "7f6a69c9-bc49-5f8f-ab0e-efc9306a3c89"
+      ]
+    },
+    {
+      "question_id": "D04",
+      "question": "Can copyright restrictions and rights reservations be identified and documented?",
+      "jurisdiction": "EU",
+      "evidence_chunk_ids": [
+        "4d62ef0c-b6e0-5a56-ab9d-36f5717de13e"
+      ]
+    },
+    {
+      "question_id": "D05",
+      "question": "Can the required training-content information be disclosed in sufficient detail?",
+      "jurisdiction": "EU",
+      "evidence_chunk_ids": [
+        "e7f886b6-2c3c-526c-abfa-6a93f0494610"
+      ]
+    },
+    {
+      "question_id": "D06",
+      "question": "Is model and training-process documentation complete and current?",
+      "jurisdiction": "EU",
+      "evidence_chunk_ids": [
+        "9bc3cd1c-89d1-54a0-bafb-d3ad8335a476"
+      ]
+    }
+  ],
+  "evidence_gaps": [
+    "No equivalent requirement is established where the current evidence is silent.",
+    "This topic-level evidence set is not a query-level retrieval benchmark."
+  ],
+  "uncertainties": [
+    "Severity is left UNKNOWN by the deterministic fake provider.",
+    "A qualified analyst should review the source text before decision use."
+  ],
+  "citations": [
+    "0d6d53f6-4019-5489-892f-573094e945fc",
+    "5e01bef4-aa13-57f4-b8c0-badcd3da319b",
+    "7f6a69c9-bc49-5f8f-ab0e-efc9306a3c89",
+    "4d62ef0c-b6e0-5a56-ab9d-36f5717de13e",
+    "e7f886b6-2c3c-526c-abfa-6a93f0494610",
+    "9bc3cd1c-89d1-54a0-bafb-d3ad8335a476"
+  ],
+  "generated_at": "2026-08-07T19:47:56.823087Z",
+  "evidence_set_version": "topic-evidence-cfb18f9d60f75190",
+  "model_identifier": "deterministic-fake-v1",
+  "disclaimer": "Analytical prioritisation only; not legal advice."
+}
