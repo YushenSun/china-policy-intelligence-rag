@@ -137,6 +137,11 @@ def build_parser() -> argparse.ArgumentParser:
     ask.add_argument("--provider", choices=["fake", "openai", "deepseek"], default="fake")
     ask.add_argument("--model")
     ask.add_argument("--format", choices=["json", "markdown"], default="markdown")
+    ask.add_argument(
+        "--output",
+        type=Path,
+        help="Optional UTF-8 result file. The result is also printed to the terminal.",
+    )
     brief = analysis_subparsers.add_parser(
         "brief", help="Generate the canonical China–EU risk brief"
     )
@@ -314,11 +319,20 @@ def _run_analysis(arguments: argparse.Namespace) -> int:
     provider = analysis_provider_for(arguments.provider, arguments.model)
     service = GroundedAnalysisService(store, provider)
     if arguments.analysis_command == "ask":
+        logging.info(
+            "Generating verified analysis with provider=%s; this may take up to 90 seconds.",
+            arguments.provider,
+        )
         analysis, _, _ = service.ask(arguments.question)
         if arguments.format == "json":
-            print(analysis.model_dump_json(indent=2))
+            rendered = analysis.model_dump_json(indent=2)
         else:
-            print(render_analysis_markdown(analysis, store))
+            rendered = render_analysis_markdown(analysis, store)
+        if arguments.output is not None:
+            arguments.output.parent.mkdir(parents=True, exist_ok=True)
+            arguments.output.write_text(f"{rendered}\n", encoding="utf-8")
+            logging.info("Saved UTF-8 analysis to %s", arguments.output.resolve())
+        print(rendered)
         return 0
 
     brief, verification, selected_ids = service.brief()

@@ -279,6 +279,7 @@ class DeepSeekProvider:
             api_key=api_key,
             base_url=DEEPSEEK_BASE_URL,
             max_retries=2,
+            timeout=90.0,
         )
         self.model_identifier = model
         self.temperature = temperature
@@ -326,17 +327,30 @@ class DeepSeekProvider:
             f"{SYSTEM_PROMPT}\nReturn exactly one JSON object matching this JSON Schema. "
             f"Do not use Markdown fences. JSON Schema:\n{schema_json}"
         )
-        response = self._client.chat.completions.create(
-            model=self.model_identifier,
-            messages=[
-                {"role": "system", "content": json_instructions},
-                {"role": "user", "content": prompt},
-            ],
-            response_format={"type": "json_object"},
-            temperature=self.temperature,
-            max_tokens=8_192,
-            extra_body={"thinking": {"type": "disabled"}},
-        )
+        try:
+            response = self._client.chat.completions.create(
+                model=self.model_identifier,
+                messages=[
+                    {"role": "system", "content": json_instructions},
+                    {"role": "user", "content": prompt},
+                ],
+                response_format={"type": "json_object"},
+                temperature=self.temperature,
+                max_tokens=8_192,
+                extra_body={"thinking": {"type": "disabled"}},
+            )
+        except Exception as error:
+            status_code = getattr(error, "status_code", None)
+            if status_code == 401:
+                message = (
+                    "DeepSeek authentication failed (HTTP 401). "
+                    "Create a valid API key and reload DEEPSEEK_API_KEY."
+                )
+            elif status_code == 429:
+                message = "DeepSeek rate limit or account balance error (HTTP 429)."
+            else:
+                message = f"DeepSeek API request failed ({type(error).__name__})."
+            raise RuntimeError(message) from error
         if not response.choices:
             raise ValueError("DeepSeek provider returned no completion choices")
         content = response.choices[0].message.content

@@ -354,6 +354,30 @@ def test_cli_analysis_help_fake_outputs_and_verification(
     )
     payload = json.loads(capsys.readouterr().out)
     assert payload["claims"]
+    ask_output = tmp_path / "analysis.md"
+    assert (
+        main(
+            [
+                "analysis",
+                "ask",
+                "--question",
+                "What copyright obligations apply to EU GPAI training data?",
+                "--evidence-set",
+                str(EVIDENCE_PATH),
+                "--provider",
+                "fake",
+                "--format",
+                "markdown",
+                "--output",
+                str(ask_output),
+            ]
+        )
+        == 0
+    )
+    terminal_output = capsys.readouterr().out
+    saved_output = ask_output.read_text(encoding="utf-8")
+    assert saved_output == terminal_output
+    assert "# Grounded policy analysis" in saved_output
     output = tmp_path / "china_eu_training_data_brief.md"
     assert (
         main(
@@ -509,6 +533,7 @@ def test_deepseek_provider_uses_mocked_json_output(
         "api_key": "test-deepseek-key",
         "base_url": generation.DEEPSEEK_BASE_URL,
         "max_retries": 2,
+        "timeout": 90.0,
     }
     assert request_arguments["model"] == generation.DEFAULT_DEEPSEEK_MODEL
     assert request_arguments["response_format"] == {"type": "json_object"}
@@ -540,6 +565,31 @@ def test_deepseek_provider_rejects_empty_json_output(
     provider = generation.DeepSeekProvider()
     with pytest.raises(ValueError, match="empty JSON"):
         provider._parse("mock prompt", GroundedAnalysis)
+
+
+def test_deepseek_provider_sanitizes_authentication_errors(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from china_policy_rag.analysis import generation
+
+    class FakeAuthenticationError(Exception):
+        status_code = 401
+
+    class FailingCompletions:
+        def create(self, **_: object) -> SimpleNamespace:
+            raise FakeAuthenticationError("invalid credential ending in secret-suffix")
+
+    fake_client = SimpleNamespace(chat=SimpleNamespace(completions=FailingCompletions()))
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "test-deepseek-key")
+    monkeypatch.setattr(
+        generation,
+        "import_module",
+        lambda _: SimpleNamespace(OpenAI=lambda **__: fake_client),
+    )
+    provider = generation.DeepSeekProvider()
+    with pytest.raises(RuntimeError, match="authentication failed") as error_info:
+        provider._parse("mock prompt", GroundedAnalysis)
+    assert "secret-suffix" not in str(error_info.value)
 
 
 def test_deepseek_cli_reports_missing_key_without_traceback(

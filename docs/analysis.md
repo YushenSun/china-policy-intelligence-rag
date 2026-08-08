@@ -42,7 +42,10 @@ python -m china_policy_rag.cli analysis ask `
   --evidence-set data/annotations/phase2_5_topic_relevant.csv `
   --provider deepseek `
   --model deepseek-v4-flash `
-  --format markdown
+  --format markdown `
+  --output reports/deepseek_test.md
 ```
 
 The JSON model is canonical. Markdown is rendered only after deterministic verification.
+
+`analysis ask --output` writes the same UTF-8 output to a local file and still prints it to the terminal. Real-provider runs log their start before the request; DeepSeek requests time out after 90 seconds.

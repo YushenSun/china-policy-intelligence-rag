@@ -89,8 +89,12 @@ python -m china_policy_rag.cli analysis ask `
   --evidence-set data/annotations/phase2_5_topic_relevant.csv `
   --provider deepseek `
   --model deepseek-v4-flash `
-  --format markdown
+  --format markdown `
+  --output reports/deepseek_test.md
 ```
+
+`analysis ask` 的 `--output` 会以 UTF-8 保存同一份结果，同时继续显示在终端；不需要使用 PowerShell 管道。真实 provider 会先显示调用状态，DeepSeek 请求最长等待 90 秒。<br>
+The `--output` option for `analysis ask` saves the same result as UTF-8 while continuing to display it in the terminal; no PowerShell pipeline is needed. Real providers print a call status first, and DeepSeek requests wait for at most 90 seconds.
 
 使用 OpenAI 时安装 `openai` extra、设置 `OPENAI_API_KEY`，并显式指定模型。<br>
 For OpenAI, install the `openai` extra, set `OPENAI_API_KEY`, and provide an explicit model.
