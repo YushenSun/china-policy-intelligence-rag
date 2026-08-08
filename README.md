@@ -27,6 +27,45 @@ Real DeepSeek runs validate both the analysis and agent paths end to end. The fi
 这些数字是一次真实端到端工程 gate 的结果，用于证明 provider abstraction、grounding、验证、编排、trace 和导出链路可以协同运行；它们不是模型质量、法律准确性或检索效果 benchmark。<br>
 These figures are the result of a real end-to-end engineering gate demonstrating that provider abstraction, grounding, verification, orchestration, tracing, and export work together. They are not a benchmark of model quality, legal accuracy, or retrieval performance.
 
+## 真实 DeepSeek 示例 / Real DeepSeek Example
+
+以下摘录来自实际成功的 `deepseek-v4-flash` agent run（run ID `6ef7c572-8606-4ba8-974e-6fc54de8c590`），并且是经过确定性声明验证后才获准导出的最终输出，而不是手写示例。公开仓库保留了对应的 [agent gate metadata](reports/real_llm/agent_workflow_metadata.json)；完整报告和隐私最小化 trace 按设计仅保存在本地。<br>
+The excerpt below comes from the successful `deepseek-v4-flash` agent run (run ID `6ef7c572-8606-4ba8-974e-6fc54de8c590`) and shows final output released only after deterministic claim verification, not a hand-written example. The repository retains the corresponding [agent gate metadata](reports/real_llm/agent_workflow_metadata.json); the full report and privacy-minimising trace remain local by design.
+
+**问题 / Question**
+
+> 中欧在训练数据透明度方面有哪些主要差异？
+
+**实际执行序列 / Actual execution sequence**
+
+```text
+assess_question
+→ search_topic_evidence
+→ grounded_analysis
+→ export_validated_report
+```
+
+**真实中文回答摘录 / Actual Chinese answer excerpt**
+
+> 中国与欧盟在训练数据透明度方面的主要差异体现在：中国要求提供者向监管部门说明训练数据来源、规模、类型、标注规则及算法机制（内部监管透明度），并强调训练数据质量与合法来源；欧盟则要求通用人工智能模型提供者公开足够详细的训练内容摘要，并制定版权合规政策（面向公众的透明度），同时开源模型例外不适用于摘要和版权政策义务。
+
+**README 英文展示译文 / English presentation translation**
+
+> The principal difference is that China requires providers to explain training-data sources, scale, types, labelling rules, and algorithmic mechanisms to regulators—an internal regulatory-transparency model—while also emphasising data quality and lawful sourcing. The EU requires general-purpose AI model providers to publish a sufficiently detailed summary of training content and adopt a copyright-compliance policy—a public-facing transparency model—and the open-source exception does not remove the summary and copyright-policy duties.
+
+该输出随后被拆分为带类型和法域的声明。例如，中国监管披露要求被标记为 `C02 · DIRECT · CN` 并引用 `[CN-3]`，欧盟公开训练内容摘要要求被标记为 `C04 · DIRECT · EU` 并引用 `[EU-3]`，中欧差异则被标记为 `C06 · SYNTHESIS · CN-EU` 并同时引用 `[CN-3] [EU-3]`。<br>
+The answer is then decomposed into typed, jurisdiction-aware claims. The Chinese regulatory-disclosure requirement is recorded as `C02 · DIRECT · CN` with `[CN-3]`; the EU public training-content-summary requirement as `C04 · DIRECT · EU` with `[EU-3]`; and the comparison as `C06 · SYNTHESIS · CN-EU` with both `[CN-3] [EU-3]`.
+
+**与普通 RAG 回答的区别 / What distinguishes this from a conventional RAG answer**
+
+- 每条实质性声明都必须携带允许的 chunk 引文、法域和推理级别 / Every substantive claim must carry permitted chunk citations, a jurisdiction, and an inference level
+- 单边比较、仅由 label-1 支撑的强声明以及未知或未供应的引用会被确定性拦截 / One-sided comparisons, strong claims supported only by label-1 evidence, and unknown or unsupplied citations are deterministically blocked
+- 证据缺口被明确保留，而不会由模型用外部知识补全 / Evidence gaps remain explicit instead of being filled from model knowledge
+- 只有通过验证的 artifact 才能进入需审批的导出步骤，并留下不含密钥或原始问题的本地 trace / Only a verifier-passed artifact can reach approval-gated export, with a local trace that excludes credentials and the raw question
+
+本次真实运行结果为 `COMPLETED`、`PASSED`、8 个已选择证据 chunk、7 条通过验证的声明、4 turns 和 4 次工具调用。这证明的是受约束工作流能够在真实 provider 下端到端运行，而不是声称模型回答已经获得完整语义蕴含或法律正确性证明。<br>
+This real run completed with `COMPLETED`, `PASSED`, eight selected evidence chunks, seven verified claims, four turns, and four tool calls. It demonstrates that the constrained workflow operates end to end with a real provider; it does not claim complete semantic entailment or legal correctness.
+
 ## 工程质量 / Engineering Quality
 
 离线质量门在 Python 3.11 环境中全部通过；真实 provider 不参与离线测试，因此测试结果可重复且不会产生 API 成本。<br>
