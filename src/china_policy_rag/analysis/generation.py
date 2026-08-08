@@ -95,9 +95,7 @@ class DeterministicFakeLLM:
             ),
             claims=claims,
             evidence_gaps=sufficiency.missing_aspects,
-            uncertainties=[
-                "The fake provider validates offline workflow behaviour, not semantic quality."
-            ],
+            uncertainties=[],
             evidence_set_version=evidence_set_version,
             model_identifier=self.model_identifier,
         )
@@ -180,10 +178,7 @@ class DeterministicFakeLLM:
                 "No equivalent requirement is established where the current evidence is silent.",
                 "This topic-level evidence set is not a query-level retrieval benchmark.",
             ],
-            uncertainties=[
-                "Severity is left UNKNOWN by the deterministic fake provider.",
-                "A qualified analyst should review the source text before decision use.",
-            ],
+            uncertainties=[],
             citations=[item.chunk_id for item in core],
             evidence_set_version=evidence_set_version,
             model_identifier=self.model_identifier,

@@ -35,7 +35,7 @@ def refusal_analysis(
         short_answer=answer,
         claims=[],
         evidence_gaps=sufficiency.missing_aspects,
-        uncertainties=[sufficiency.explanation],
+        uncertainties=[],
         evidence_set_version=evidence_set_version,
         model_identifier=model_identifier,
     )

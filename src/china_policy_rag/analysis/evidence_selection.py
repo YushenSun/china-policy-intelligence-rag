@@ -44,6 +44,16 @@ _TOPIC_TERMS = {
     "微调",
 }
 _AI_TERMS = {"ai", "artificial intelligence", "model", "generative", "人工智能", "模型"}
+_BROAD_GPAI_TERMS = {
+    "general-purpose ai",
+    "general purpose ai",
+    "gpai",
+    "all ai models",
+    "all general-purpose models",
+    "通用人工智能模型",
+    "通用ai模型",
+}
+_CHINA_TERMS = {"china", "chinese", "中国", "中欧"}
 _OUT_OF_SCOPE_TERMS = {
     "semiconductor subsidy",
     "gpu",
@@ -99,6 +109,19 @@ def assess_scope(question: str) -> ScopeAssessment:
         )
     matches = sorted(term for term in _TOPIC_TERMS if term in normalized)
     if matches:
+        if any(term in normalized for term in _BROAD_GPAI_TERMS) and any(
+            term in normalized for term in _CHINA_TERMS
+        ):
+            return ScopeAssessment(
+                status=ScopeStatus.PARTIALLY_IN_SCOPE,
+                explanation=(
+                    "The supplied China evidence concerns generative-AI services offered to "
+                    "the domestic public and expressly excludes non-public research or "
+                    "application. It does not establish requirements for all general-purpose "
+                    "AI models."
+                ),
+                matched_topics=matches,
+            )
         return ScopeAssessment(
             status=ScopeStatus.IN_SCOPE,
             explanation="The question directly concerns the curated training-data topic.",

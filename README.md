@@ -1,9 +1,43 @@
-# 中国政策智能 RAG 原型 / China Policy Intelligence RAG Prototype
+# 中欧政策智能 RAG / China–EU Policy Intelligence RAG
 
 ## 项目概述 / Overview
 
-本项目是一个离线优先、来源可追溯的中英文政策研究原型。公开演示语料聚焦中欧生成式及通用人工智能模型的训练数据合规与透明度，并将授权的本地文档转换为保留来源信息的分块、可检索证据和可验证分析。<br>
-This project is an offline-first, source-traceable research prototype for Chinese and English policy documents. Its public corpus focuses on China–EU training-data compliance and transparency for generative and general-purpose AI models, converting authorised local documents into provenance-preserving chunks, retrievable evidence, and verifiable analysis.
+本项目是一个可审计的中英双语政策智能原型，围绕中欧生成式及通用人工智能模型的训练数据合规与透明度，将权威来源摄取、混合检索、人工精选证据、grounded LLM 生成、确定性的声明级引文验证、受约束的 agent 工作流、只读 MCP 工具和本地审计 trace 连接为一条完整工程链路。<br>
+This project is an auditable bilingual China–EU policy-intelligence prototype combining authoritative-source ingestion, hybrid retrieval, human-curated evidence, grounded LLM generation, deterministic claim-level citation verification, constrained agent workflows, read-only MCP tools, and local audit tracing.
+
+系统采用受约束的确定性 agent 编排，在人工精选政策证据上结合真实 DeepSeek grounded generation、有限工具执行和需审批的报告导出；它不是自主研究 agent，也不允许模型绕过证据边界或确定性验证。<br>
+The system uses constrained deterministic agent orchestration over human-curated policy evidence, combining real DeepSeek grounded generation, bounded tool execution, and approval-gated report export. It is not an autonomous research agent and cannot bypass the evidence boundary or deterministic verification.
+
+## 真实 LLM 验证 / Real LLM Validation
+
+真实 DeepSeek 运行已验证分析与 agent 两条端到端路径。最终 agent 工作流在 4 turns、4 次工具调用内完成，使用 8 个已选择证据 chunk 形成 7 条通过验证的声明，并成功导出经审批报告。最小审计记录见 [analysis gate metadata](reports/real_llm/generation_metadata.json) 和 [agent gate metadata](reports/real_llm/agent_workflow_metadata.json)。<br>
+Real DeepSeek runs validate both the analysis and agent paths end to end. The final agent workflow completed in four turns and four tool calls, selected eight evidence chunks, produced seven verified claims, and exported an approved report. Minimal audit records are available in the [analysis gate metadata](reports/real_llm/generation_metadata.json) and [agent gate metadata](reports/real_llm/agent_workflow_metadata.json).
+
+| 指标 / Metric | 已验证结果 / Validated result |
+| --- | --- |
+| Provider / 提供方 | DeepSeek |
+| Model / 模型 | `deepseek-v4-flash` |
+| Workflow / 工作流 | `COMPLETED` |
+| Verification / 验证 | `PASSED` |
+| Evidence chunks / 证据分块 | 8 |
+| Verified claims / 已验证声明 | 7 |
+| Agent turns / Agent 轮次 | 4 |
+| Tool calls / 工具调用 | 4 |
+
+这些数字是一次真实端到端工程 gate 的结果，用于证明 provider abstraction、grounding、验证、编排、trace 和导出链路可以协同运行；它们不是模型质量、法律准确性或检索效果 benchmark。<br>
+These figures are the result of a real end-to-end engineering gate demonstrating that provider abstraction, grounding, verification, orchestration, tracing, and export work together. They are not a benchmark of model quality, legal accuracy, or retrieval performance.
+
+## 工程质量 / Engineering Quality
+
+离线质量门在 Python 3.11 环境中全部通过；真实 provider 不参与离线测试，因此测试结果可重复且不会产生 API 成本。<br>
+All offline quality gates pass under Python 3.11. Real providers are excluded from the offline suite, keeping the checks reproducible and free of API cost.
+
+| 质量门 / Quality gate | 结果 / Result |
+| --- | --- |
+| `pytest` | 99 passed |
+| `ruff check` | passed |
+| `ruff format --check` | passed |
+| `mypy src` | passed |
 
 ## 问题定义 / Problem Statement
 
@@ -36,6 +70,9 @@ The generation layer supports multiple providers. Offline tests default to the d
 
 检索相关性与声明 grounding 是两个不同控制层：检索负责排序候选段落，grounding 验证负责检查每个结构化声明是否引用了已提供、允许且法域一致的证据。`human_label=2` 仅表示人工审阅者认为该 chunk 是核心主题证据，不代表模型置信度、法律确定性或语义蕴含证明。<br>
 Retrieval relevance and claim grounding are separate controls: retrieval ranks candidate passages, while grounding verification checks that each structured claim cites supplied, permitted, jurisdiction-consistent evidence. `human_label=2` means only that a reviewer judged a chunk to be core topic evidence; it is not model confidence, legal certainty, or proof of semantic entailment.
+
+系统将证据范围限制、证据缺口和法律不确定性分别处理：范围限制由确定性 scope guard 明示；证据缺口不被推断为法律不确定性；每项法律不确定性必须引用已提供的 chunk。系统拒绝引入未在证据中明确出现的后续指南、判例或外部监管建议。<br>
+The system treats evidence-scope limitations, evidence gaps, and legal uncertainties separately: the deterministic scope guard states scope limitations; evidence gaps are not inferred into legal uncertainty; and every legal uncertainty must cite supplied chunks. It rejects later guidance, case-law, or external-regulator recommendations not explicitly present in the evidence.
 
 ## LLM Provider 支持 / LLM Provider Support
 

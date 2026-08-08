@@ -26,3 +26,5 @@ data/evaluation/results.json
 reports/traces/
 reports/agent_exports/
 reports/agent_evaluation.json
+reports/deepseek_test.md
+reports/real_llm/deepseek_analysis_gate*.json

@@ -4,12 +4,12 @@ import html
 from uuid import UUID
 
 from .evidence_store import TopicEvidenceStore
-from .models import GroundedAnalysis, TopicEvidence, TrainingDataRiskBrief
+from .models import GroundedAnalysis, GroundedUncertainty, TopicEvidence, TrainingDataRiskBrief
 from .verification import all_cited_chunk_ids
 
 
 def render_analysis_markdown(analysis: GroundedAnalysis, store: TopicEvidenceStore) -> str:
-    cited = all_cited_chunk_ids(analysis.claims)
+    cited = all_cited_chunk_ids(analysis.claims) | _uncertainty_citation_ids(analysis.uncertainties)
     aliases = _aliases(cited, store)
     blocks = [
         "# Grounded policy analysis",
@@ -35,7 +35,8 @@ def render_analysis_markdown(analysis: GroundedAnalysis, store: TopicEvidenceSto
         )
     if analysis.uncertainties:
         blocks.append(
-            "## Uncertainties\n\n" + "\n".join(f"- {_escape(x)}" for x in analysis.uncertainties)
+            "## Legal uncertainties\n\n"
+            + "\n".join(_render_uncertainty(item, aliases) for item in analysis.uncertainties)
         )
     if cited:
         blocks.append(_references(cited, aliases, store))
@@ -44,7 +45,7 @@ def render_analysis_markdown(analysis: GroundedAnalysis, store: TopicEvidenceSto
 
 
 def render_brief_markdown(brief: TrainingDataRiskBrief, store: TopicEvidenceStore) -> str:
-    cited = set(brief.citations)
+    cited = set(brief.citations) | _uncertainty_citation_ids(brief.uncertainties)
     aliases = _aliases(cited, store)
     blocks = [
         f"# {_escape(brief.title)}",
@@ -89,7 +90,8 @@ def render_brief_markdown(brief: TrainingDataRiskBrief, store: TopicEvidenceStor
         "## Evidence gaps\n\n" + "\n".join(f"- {_escape(x)}" for x in brief.evidence_gaps)
     )
     blocks.append(
-        "## Uncertainties\n\n" + "\n".join(f"- {_escape(x)}" for x in brief.uncertainties)
+        "## Legal uncertainties\n\n"
+        + "\n".join(_render_uncertainty(item, aliases) for item in brief.uncertainties)
     )
     blocks.append(_references(cited, aliases, store))
     blocks.append(f"> {_escape(brief.disclaimer)}")
@@ -112,6 +114,15 @@ def _aliases(chunk_ids: set[UUID], store: TopicEvidenceStore) -> dict[UUID, str]
         counters[prefix] = counters.get(prefix, 0) + 1
         aliases[item.chunk_id] = f"{prefix}-{counters[prefix]}"
     return aliases
+
+
+def _uncertainty_citation_ids(uncertainties: list[GroundedUncertainty]) -> set[UUID]:
+    return {chunk_id for item in uncertainties for chunk_id in item.citation_chunk_ids}
+
+
+def _render_uncertainty(uncertainty: GroundedUncertainty, aliases: dict[UUID, str]) -> str:
+    citations = " ".join(f"[{aliases[chunk_id]}]" for chunk_id in uncertainty.citation_chunk_ids)
+    return f"- **{uncertainty.uncertainty_type}:** {_escape(uncertainty.statement)} {citations}."
 
 
 def _references(chunk_ids: set[UUID], aliases: dict[UUID, str], store: TopicEvidenceStore) -> str:

@@ -1,21 +1,32 @@
 {
-  "gate": "REAL_LLM_GATE",
+  "gate": "PHASE_4_REAL_AGENT_GATE",
   "status": "PASSED",
   "provider": "deepseek",
   "model_identifier": "deepseek-v4-flash",
-  "timestamp": "2026-08-08T14:02:23.396561Z",
+  "run_id": "6ef7c572-8606-4ba8-974e-6fc54de8c590",
+  "timestamp": "2026-08-08T14:19:15.777482Z",
   "evidence_set_version": "topic-evidence-cfb18f9d60f75190",
   "selected_chunk_ids": [
     "0d6d53f6-4019-5489-892f-573094e945fc",
     "2a37cca7-d621-5a12-962b-71fa36db494c",
     "4d62ef0c-b6e0-5a56-ab9d-36f5717de13e",
+    "4dfcc3ce-718b-5f6e-90be-5ebd8b0dfe4d",
+    "51b4d749-6af7-589a-8e2d-d3cfdc83573e",
     "5e01bef4-aa13-57f4-b8c0-badcd3da319b",
     "7f6a69c9-bc49-5f8f-ab0e-efc9306a3c89",
     "e7f886b6-2c3c-526c-abfa-6a93f0494610"
   ],
-  "evidence_chunks_supplied": 6,
-  "claim_count": 9,
+  "claim_count": 7,
   "verification_status": "PASSED",
+  "workflow_status": "COMPLETED",
+  "turn_count": 4,
+  "tool_call_count": 4,
+  "tool_sequence": [
+    "assess_question",
+    "search_topic_evidence",
+    "grounded_analysis",
+    "export_validated_report"
+  ],
   "usage": null,
   "usage_note": "Token usage was not exposed by the DeepSeek adapter for this run."
 }

@@ -19,6 +19,8 @@ Providers return validated Pydantic models rather than Markdown. Source text is 
 
 Every claim is checked independently of the provider. Verification rejects unknown, excluded, unsupplied, missing, excessive, or jurisdiction-mismatched citations; one-sided comparison claims; and strong claims supported only by label-1 evidence. Interpretive claims require a written qualification. This is structural grounding validation, not semantic-entailment or legal-correctness verification.
 
+Evidence-scope limitations, evidence gaps, and legal uncertainties are distinct. The deterministic scope guard reports when a question exceeds the application scope represented in the curated evidence; an evidence gap must not be restated as a legal uncertainty. Each legal uncertainty is a structured object with at least one supplied chunk citation, and verification rejects unsupported recommendations to consult later guidance, case law, regulators, or other external sources. These are deterministic provenance rules, not LLM-based entailment verification.
+
 ## Commands
 
 ```powershell

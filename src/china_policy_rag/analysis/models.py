@@ -40,6 +40,12 @@ class InferenceLevel(StrEnum):
     INTERPRETIVE = "INTERPRETIVE"
 
 
+class UncertaintyType(StrEnum):
+    """Categories reserved for evidence-grounded uncertainty statements."""
+
+    LEGAL_UNCERTAINTY = "LEGAL_UNCERTAINTY"
+
+
 class RiskSeverity(StrEnum):
     LOW = "LOW"
     MEDIUM = "MEDIUM"
@@ -128,6 +134,23 @@ class AnalysisClaim(BaseModel):
         return self
 
 
+class GroundedUncertainty(BaseModel):
+    """A legal uncertainty tied to one or more supplied evidence chunks."""
+
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    statement: str = Field(min_length=1)
+    uncertainty_type: UncertaintyType = UncertaintyType.LEGAL_UNCERTAINTY
+    citation_chunk_ids: list[UUID] = Field(min_length=1)
+
+    @field_validator("citation_chunk_ids")
+    @classmethod
+    def reject_duplicate_citations(cls, value: list[UUID]) -> list[UUID]:
+        if len(value) != len(set(value)):
+            raise ValueError("citation_chunk_ids must not contain duplicates")
+        return value
+
+
 class GroundedAnalysis(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
 
@@ -138,7 +161,7 @@ class GroundedAnalysis(BaseModel):
     short_answer: str = Field(min_length=1)
     claims: list[AnalysisClaim] = Field(default_factory=list)
     evidence_gaps: list[str] = Field(default_factory=list)
-    uncertainties: list[str] = Field(default_factory=list)
+    uncertainties: list[GroundedUncertainty] = Field(default_factory=list)
     generated_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
     evidence_set_version: str = Field(min_length=1)
     model_identifier: str = Field(min_length=1)
@@ -198,7 +221,7 @@ class TrainingDataRiskBrief(BaseModel):
     risk_factors: list[TrainingDataRiskFactor] = Field(default_factory=list)
     recommended_due_diligence_questions: list[DueDiligenceQuestion] = Field(default_factory=list)
     evidence_gaps: list[str] = Field(default_factory=list)
-    uncertainties: list[str] = Field(default_factory=list)
+    uncertainties: list[GroundedUncertainty] = Field(default_factory=list)
     citations: list[UUID] = Field(default_factory=list)
     generated_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
     evidence_set_version: str = Field(min_length=1)

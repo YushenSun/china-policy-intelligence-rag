@@ -8,8 +8,10 @@ from .models import (
     AnalysisClaim,
     ClaimType,
     GroundedAnalysis,
+    GroundedUncertainty,
     InferenceLevel,
     RiskSeverity,
+    ScopeStatus,
     TrainingDataRiskBrief,
     VerificationIssue,
     VerificationResult,
@@ -26,6 +28,69 @@ _STRONG_TYPES = {
     ClaimType.SECURITY_REQUIREMENT,
     ClaimType.COMPARISON,
 }
+_EXTERNAL_RECOMMENDATION_PHRASES = (
+    "consult later guidance",
+    "using later guidance",
+    "later guidance should be consulted",
+    "consult guidelines",
+    "look to case law",
+    "consult regulators",
+    "consult authorities",
+    "结合后续指南",
+    "参考后续指南",
+    "咨询监管机构",
+)
+_BROAD_MODEL_SCOPE_PHRASES = (
+    "all general-purpose ai models",
+    "all gpai models",
+    "apply to all gpai",
+    "apply to all general-purpose",
+    "所有通用人工智能模型",
+    "适用于所有通用人工智能模型",
+)
+_EVIDENCE_GAP_AS_UNCERTAINTY_PHRASES = (
+    "does not specify",
+    "not specified",
+    "not expressly stated",
+    "unclear whether",
+    "absence of a public-disclosure",
+    "未明确",
+    "未说明",
+    "未规定",
+    "未在提供的证据",
+    "存在解释空间",
+)
+
+
+def is_evidence_gap_statement(statement: str) -> bool:
+    """Identify explicit absence-language that cannot be a legal uncertainty."""
+
+    lowered = statement.lower()
+    return any(phrase in lowered for phrase in _EVIDENCE_GAP_AS_UNCERTAINTY_PHRASES)
+
+
+def is_structurally_unsupported_claim(
+    claim: AnalysisClaim,
+    store: TopicEvidenceStore,
+    allowed_chunk_ids: set[UUID],
+) -> bool:
+    """Identify safe-to-omit claims that fail only known evidence-structure rules."""
+
+    if not claim.citation_chunk_ids:
+        return False
+    evidence = []
+    for chunk_id in claim.citation_chunk_ids:
+        if (
+            chunk_id not in allowed_chunk_ids
+            or store.is_excluded(chunk_id)
+            or (item := store.get(chunk_id)) is None
+        ):
+            return False
+        evidence.append(item)
+    if claim.claim_type in _STRONG_TYPES and not any(item.human_label == 2 for item in evidence):
+        return True
+    jurisdictions = {item.jurisdiction for item in evidence}
+    return claim.claim_type is ClaimType.COMPARISON and not {"CN", "EU"}.issubset(jurisdictions)
 
 
 def verify_analysis(
@@ -53,6 +118,14 @@ def verify_analysis(
                     claim_id=claim.claim_id,
                 )
             )
+    for uncertainty in analysis.uncertainties:
+        uncertainty_errors = _verify_uncertainty(uncertainty, store, allowed_chunk_ids)
+        if uncertainty_errors:
+            errors.extend(uncertainty_errors)
+        else:
+            cited.update(uncertainty.citation_chunk_ids)
+    errors.extend(_verify_scope_limitation_classification(analysis))
+    errors.extend(_verify_no_external_recommendations(analysis, store, allowed_chunk_ids))
     denominator = len(allowed_chunk_ids or cited)
     coverage = len(cited) / denominator if denominator else 0.0
     return VerificationResult(
@@ -98,6 +171,9 @@ def verify_brief(brief: TrainingDataRiskBrief, store: TopicEvidenceStore) -> Ver
                     message=f"Risk {risk.risk_id} cites another jurisdiction.",
                 )
             )
+    for uncertainty in brief.uncertainties:
+        errors.extend(_verify_uncertainty(uncertainty, store, None))
+    errors.extend(_verify_no_external_recommendations(brief, store, None))
     cited = set(brief.citations)
     unknown = [chunk_id for chunk_id in cited if not store.contains(chunk_id)]
     for chunk_id in unknown:
@@ -179,6 +255,128 @@ def _verify_claim(
             _issue("UNQUALIFIED_INTERPRETATION", "Interpretive claim lacks qualification.", claim)
         )
     return errors
+
+
+def _verify_uncertainty(
+    uncertainty: GroundedUncertainty,
+    store: TopicEvidenceStore,
+    allowed_chunk_ids: set[UUID] | None,
+) -> list[VerificationIssue]:
+    errors: list[VerificationIssue] = []
+    if is_evidence_gap_statement(uncertainty.statement):
+        errors.append(
+            VerificationIssue(
+                code="EVIDENCE_GAP_MISCLASSIFIED_AS_LEGAL_UNCERTAINTY",
+                message=(
+                    "Evidence silence or an unspecified detail must be recorded as an "
+                    "evidence gap, not a legal uncertainty."
+                ),
+            )
+        )
+    if len(uncertainty.citation_chunk_ids) > 6:
+        errors.append(
+            VerificationIssue(
+                code="UNCERTAINTY_CITATION_BUDGET_EXCEEDED",
+                message="Legal uncertainty has too many citations.",
+            )
+        )
+    for chunk_id in uncertainty.citation_chunk_ids:
+        if store.is_excluded(chunk_id):
+            errors.append(
+                VerificationIssue(
+                    code="LABEL_ZERO_UNCERTAINTY_CITATION",
+                    message=f"Excluded chunk cited by legal uncertainty: {chunk_id}",
+                )
+            )
+            continue
+        item = store.get(chunk_id)
+        if item is None:
+            errors.append(
+                VerificationIssue(
+                    code="UNKNOWN_UNCERTAINTY_CITATION",
+                    message=f"Unknown legal-uncertainty citation: {chunk_id}",
+                )
+            )
+            continue
+        if allowed_chunk_ids is not None and chunk_id not in allowed_chunk_ids:
+            errors.append(
+                VerificationIssue(
+                    code="UNSUPPLIED_UNCERTAINTY_CITATION",
+                    message=f"Legal uncertainty cites an unsupplied chunk: {chunk_id}",
+                )
+            )
+        if not item.text:
+            errors.append(
+                VerificationIssue(
+                    code="MISSING_UNCERTAINTY_SOURCE_TEXT",
+                    message=f"Legal-uncertainty source text unavailable: {chunk_id}",
+                )
+            )
+    return errors
+
+
+def _verify_no_external_recommendations(
+    output: GroundedAnalysis | TrainingDataRiskBrief,
+    store: TopicEvidenceStore,
+    allowed_chunk_ids: set[UUID] | None,
+) -> list[VerificationIssue]:
+    supplied_ids = allowed_chunk_ids or {item.chunk_id for item in store.evidence}
+    supplied_text = " ".join(
+        store.require(chunk_id).text.lower()
+        for chunk_id in supplied_ids
+        if store.contains(chunk_id)
+    )
+    output_text = " ".join(
+        [
+            output.short_answer
+            if isinstance(output, GroundedAnalysis)
+            else output.executive_summary,
+            *(claim.claim_text for claim in _output_claims(output)),
+            *(claim.qualification or "" for claim in _output_claims(output)),
+            *output.evidence_gaps,
+            *(item.statement for item in output.uncertainties),
+        ]
+    ).lower()
+    errors: list[VerificationIssue] = []
+    for phrase in _EXTERNAL_RECOMMENDATION_PHRASES:
+        if phrase in output_text and phrase not in supplied_text:
+            errors.append(
+                VerificationIssue(
+                    code="UNSUPPORTED_EXTERNAL_RECOMMENDATION",
+                    message=(
+                        "Output recommends an external source not present in supplied evidence: "
+                        f"{phrase}"
+                    ),
+                )
+            )
+    return errors
+
+
+def _verify_scope_limitation_classification(
+    analysis: GroundedAnalysis,
+) -> list[VerificationIssue]:
+    if analysis.scope_status is not ScopeStatus.PARTIALLY_IN_SCOPE:
+        return []
+    errors: list[VerificationIssue] = []
+    for uncertainty in analysis.uncertainties:
+        statement = uncertainty.statement.lower()
+        if any(phrase in statement for phrase in _BROAD_MODEL_SCOPE_PHRASES):
+            errors.append(
+                VerificationIssue(
+                    code="SCOPE_LIMITATION_MISCLASSIFIED_AS_LEGAL_UNCERTAINTY",
+                    message=(
+                        "A broad-model application limit belongs in the deterministic scope "
+                        "explanation, not a legal uncertainty."
+                    ),
+                )
+            )
+    return errors
+
+
+def _output_claims(output: GroundedAnalysis | TrainingDataRiskBrief) -> list[AnalysisClaim]:
+    if isinstance(output, GroundedAnalysis):
+        return output.claims
+    return [*output.china_findings, *output.eu_findings, *output.comparative_findings]
 
 
 def all_cited_chunk_ids(claims: Iterable[AnalysisClaim]) -> set[UUID]:
