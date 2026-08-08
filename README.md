@@ -2,7 +2,7 @@
 
 ## 项目概述 / Overview
 
-本项目是一个可审计的中英双语政策智能原型，围绕中欧生成式及通用人工智能模型的训练数据合规与透明度，将权威来源摄取、混合检索、人工精选证据、grounded LLM 生成、确定性的声明级引文验证、受约束的 agent 工作流、只读 MCP 工具和本地审计 trace 连接为一条完整工程链路。<br>
+本项目是一个可审计的汉英双语政策智能原型，围绕中欧生成式及通用人工智能模型的训练数据合规与透明度，将权威来源摄取、混合检索、人工精选证据、grounded LLM 生成、确定性的声明级引文验证、受约束的 agent 工作流、只读 MCP 工具和本地审计 trace 连接为一条完整工程链路。<br>
 This project is an auditable bilingual China–EU policy-intelligence prototype combining authoritative-source ingestion, hybrid retrieval, human-curated evidence, grounded LLM generation, deterministic claim-level citation verification, constrained agent workflows, read-only MCP tools, and local audit tracing.
 
 系统采用受约束的确定性 agent 编排，在人工精选政策证据上结合真实 DeepSeek grounded generation、有限工具执行和需审批的报告导出；它不是自主研究 agent，也不允许模型绕过证据边界或确定性验证。<br>
